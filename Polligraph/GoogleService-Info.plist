@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>129886433544-tm0gjoka6mhbg7f3jddb046dotn462pv.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.129886433544-tm0gjoka6mhbg7f3jddb046dotn462pv</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAy2UHfu-R9IDl_mndQ8Rcf5RofKkMYhLk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>129886433544</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.roypark.Polligraph</string>
+	<key>PROJECT_ID</key>
+	<string>polligraph-10ac5</string>
+	<key>STORAGE_BUCKET</key>
+	<string>polligraph-10ac5.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:129886433544:ios:c77e6cd0a9557413093cbd</string>
+</dict>
+</plist>
