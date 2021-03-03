@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		136265ACCA984952CDA7C8C8 /* Pods_Polligraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439A5B197B65A2DAB1D0D5B3 /* Pods_Polligraph.framework */; };
+		979E083925EF26C700609D4C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E083825EF26C700609D4C /* Helper.swift */; };
+		979E083C25EF27C300609D4C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E083B25EF27C300609D4C /* Extensions.swift */; };
 		97DB1B9525EDEC41008955BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DB1B9425EDEC41008955BC /* AppDelegate.swift */; };
 		97DB1B9725EDEC41008955BC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DB1B9625EDEC41008955BC /* SceneDelegate.swift */; };
 		97DB1B9925EDEC41008955BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DB1B9825EDEC41008955BC /* ViewController.swift */; };
@@ -19,6 +21,8 @@
 
 /* Begin PBXFileReference section */
 		439A5B197B65A2DAB1D0D5B3 /* Pods_Polligraph.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Polligraph.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		979E083825EF26C700609D4C /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		979E083B25EF27C300609D4C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		97DB1B9125EDEC41008955BC /* Polligraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Polligraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97DB1B9425EDEC41008955BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97DB1B9625EDEC41008955BC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +95,8 @@
 				97DB1B9D25EDEC42008955BC /* Assets.xcassets */,
 				97DB1BA225EDEC42008955BC /* Info.plist */,
 				97DB1BB225EE01B5008955BC /* Support */,
+				979E083825EF26C700609D4C /* Helper.swift */,
+				979E083B25EF27C300609D4C /* Extensions.swift */,
 			);
 			path = Polligraph;
 			sourceTree = "<group>";
@@ -241,9 +247,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				979E083C25EF27C300609D4C /* Extensions.swift in Sources */,
 				97DB1B9925EDEC41008955BC /* ViewController.swift in Sources */,
 				97DB1B9525EDEC41008955BC /* AppDelegate.swift in Sources */,
 				97DB1B9725EDEC41008955BC /* SceneDelegate.swift in Sources */,
+				979E083925EF26C700609D4C /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
