@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct UIViewController {
+extension UIViewController {
     // create the loading effect
     static func displayLoading(withView: UIView) -> UIView {
         
