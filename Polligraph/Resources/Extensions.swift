@@ -26,13 +26,43 @@ extension UIView {
         return left + width
     }
     
-    public var top: CGRect {
+    public var top: CGFloat {
         return frame.origin.y
     }
     
-    public var bottom: CGRect {
+    public var bottom: CGFloat {
         return top + height
     }
     
+}
+
+extension UIViewController {
+    // create the loading effect
+    static func displayLoading(withView: UIView) -> UIView {
+        
+        let spinnerView = UIView.init(frame: withView.bounds)
+        // we want this spinner background view to be invisible
+        spinnerView.backgroundColor = UIColor.clear
+        
+        let activityIndicator = UIActivityIndicatorView.init(style: .medium)
+        
+        activityIndicator.startAnimating()
+        activityIndicator.center = spinnerView.center
+        
+        DispatchQueue.main.async {
+            spinnerView.addSubview(activityIndicator)
+            withView.addSubview(spinnerView)
+        }
+        
+        return spinnerView
+    }
+    
+    // remove the loading effect
+    static func removeLoading(spinner: UIView) {
+        
+        DispatchQueue.main.async {
+            spinner.removeFromSuperview()
+        }
+    }
 }
 
