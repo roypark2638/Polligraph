@@ -94,9 +94,6 @@
                                 <state key="normal" title="Sign In">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <connections>
-                                    <action selector="signinButtonPressed:" destination="al8-xH-sEZ" eventType="touchUpInside" id="84A-T7-D4h"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8gd-aR-uV0">
                                 <rect key="frame" x="40" y="623" width="334" height="57"/>
@@ -106,9 +103,6 @@
                                 <state key="normal" title="Forgot Password">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <connections>
-                                    <action selector="forgotPasswordButtonPressed:" destination="al8-xH-sEZ" eventType="touchUpInside" id="B6D-Mo-gPv"/>
-                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ndb-g3-DOw">
                                 <rect key="frame" x="40" y="396" width="334" height="46"/>
@@ -129,19 +123,15 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="fe9-Qu-lXm"/>
-                    <connections>
-                        <outlet property="emailTextField" destination="Ndb-g3-DOw" id="sMI-CP-vdb"/>
-                        <outlet property="passwordTextField" destination="5s9-WD-elA" id="RHI-EI-IgZ"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D2y-OP-VD3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="786" y="469"/>
+            <point key="canvasLocation" x="786" y="464"/>
         </scene>
-        <!--Sign Up View Controller-->
+        <!--Registration View Controller-->
         <scene sceneID="n96-f9-7Mq">
             <objects>
-                <viewController storyboardIdentifier="Signup" id="CMQ-xE-kSO" customClass="SignUpViewController" customModule="Polligraph" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Signup" id="CMQ-xE-kSO" customClass="RegistrationViewController" customModule="Polligraph" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wO4-M3-Va7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
