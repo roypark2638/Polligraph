@@ -17,6 +17,7 @@
 		977F239C25F33645002145BB /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239B25F33645002145BB /* HapticsManager.swift */; };
 		977F239F25F3365A002145BB /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239E25F3365A002145BB /* UserProfile.swift */; };
 		977F23A225F33680002145BB /* PollPostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F23A125F33680002145BB /* PollPostList.swift */; };
+		977F23A525F33852002145BB /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F23A425F33852002145BB /* TabBarViewController.swift */; };
 		979E083925EF26C700609D4C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E083825EF26C700609D4C /* Helper.swift */; };
 		979E083C25EF27C300609D4C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E083B25EF27C300609D4C /* Extensions.swift */; };
 		979E085B25EF533F00609D4C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E085A25EF533F00609D4C /* SignInViewController.swift */; };
@@ -52,6 +53,7 @@
 		977F239B25F33645002145BB /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		977F239E25F3365A002145BB /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		977F23A125F33680002145BB /* PollPostList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollPostList.swift; sourceTree = "<group>"; };
+		977F23A425F33852002145BB /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		979E083825EF26C700609D4C /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		979E083B25EF27C300609D4C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		979E085A25EF533F00609D4C /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +141,12 @@
 		977F238C25F335E9002145BB /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				977F23A425F33852002145BB /* TabBarViewController.swift */,
+				979E087525EF8BCD00609D4C /* HomeViewController.swift */,
+				979E088E25EF906400609D4C /* SearchViewController.swift */,
+				979E089425EF908C00609D4C /* NewPostViewController.swift */,
+				979E088A25EF905800609D4C /* NotificationViewController.swift */,
+				979E089125EF906E00609D4C /* ProfileViewController.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -150,7 +158,6 @@
 				97DB1B9825EDEC41008955BC /* OnboardingViewController.swift */,
 				979E085A25EF533F00609D4C /* SignInViewController.swift */,
 				979E085D25EF535000609D4C /* SignUpViewController.swift */,
-				979E089125EF906E00609D4C /* ProfileViewController.swift */,
 				979E08A225EF92AE00609D4C /* PollPostViewController.swift */,
 				977F238E25F33613002145BB /* SettingsViewController.swift */,
 			);
@@ -223,10 +230,6 @@
 			children = (
 				977F238D25F335EC002145BB /* Other */,
 				977F238C25F335E9002145BB /* Core */,
-				979E087525EF8BCD00609D4C /* HomeViewController.swift */,
-				979E088E25EF906400609D4C /* SearchViewController.swift */,
-				979E089425EF908C00609D4C /* NewPostViewController.swift */,
-				979E088A25EF905800609D4C /* NotificationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 			files = (
 				979E088B25EF905800609D4C /* NotificationViewController.swift in Sources */,
 				979E089525EF908C00609D4C /* NewPostViewController.swift in Sources */,
+				977F23A525F33852002145BB /* TabBarViewController.swift in Sources */,
 				979E088F25EF906400609D4C /* SearchViewController.swift in Sources */,
 				979E085B25EF533F00609D4C /* SignInViewController.swift in Sources */,
 				977F239325F33628002145BB /* AuthViewController.swift in Sources */,
