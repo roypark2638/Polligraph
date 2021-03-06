@@ -6,14 +6,26 @@
 //
 
 import UIKit
+import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        FirebaseApp.configure()
         
+        if Auth.auth().currentUser == nil {
+            Helper.login()
+        }
+        else {
+            let onboardingStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let onboardingViewController = onboardingStoryboard.instantiateViewController(identifier: "Onboarding") as! OnboardingViewController
+            
+            window?.rootViewController = onboardingViewController
+        }
         
         return true
     }
