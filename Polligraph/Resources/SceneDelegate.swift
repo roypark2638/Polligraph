@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Firebase
+//import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -15,18 +15,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        FirebaseApp.configure()
-                
-        if Auth.auth().currentUser == nil {
-            Helper.login()
-        }
-        
-        else {
-            let onboardingStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let onboardingViewController = onboardingStoryboard.instantiateViewController(identifier: "Onboarding") as! OnboardingViewController
-            
-            window?.rootViewController = onboardingViewController
-        }
+//        FirebaseApp.configure()
+//
+//        if Auth.auth().currentUser == nil {
+//            AuthManager.shared.signIn()
+//        }
+//
+//        else {
+//            let onboardingStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//            let onboardingViewController = onboardingStoryboard.instantiateViewController(identifier: "Onboarding") as! OnboardingViewController
+//
+//            window?.rootViewController = onboardingViewController
+//        }
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
