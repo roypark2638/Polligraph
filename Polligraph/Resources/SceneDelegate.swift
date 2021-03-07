@@ -13,20 +13,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
         
 //        FirebaseApp.configure()
-//
-//        if Auth.auth().currentUser == nil {
-//            AuthManager.shared.signIn()
-//        }
-//
-//        else {
-//            let onboardingStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//            let onboardingViewController = onboardingStoryboard.instantiateViewController(identifier: "Onboarding") as! OnboardingViewController
-//
-//            window?.rootViewController = onboardingViewController
-//        }
+        let window = UIWindow(windowScene: windowScene)
+        
+        if !AuthManager.shared.isSignedIn { // Not Sign In
+            // show onboarding page
+            window.rootViewController = TabBarViewController()
+        }
+        else { // Sign In
+            let navVC = UINavigationController(rootViewController: OnboardingViewController())
+            navVC.navigationBar.prefersLargeTitles = true
+            window.rootViewController = navVC
+            
+        }
+        window.makeKeyAndVisible()
+        self.window = window
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -11,27 +11,25 @@ import Firebase
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-//    var window: UIWindow?
+    var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
+        let window = UIWindow(frame: UIScreen.main.bounds)
         
-//        if Auth.auth().currentUser == nil {
-//            // show onboarding page
-//            let signinVC = SignInViewController()
-//            signinVC.modalPresentationStyle = .fullScreen
-//            window?.rootViewController = signinVC
-////            (signinVC, animated: false)
-////            AuthManager.shared.signIn()
-//        }
-//        else {
-//            let onboardingStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//            let onboardingViewController = onboardingStoryboard.instantiateViewController(identifier: "Onboarding") as! OnboardingViewController
-//            
-//            window?.rootViewController = onboardingViewController
-//        }
-//        
+        if !AuthManager.shared.isSignedIn { // Not Sign In
+            // show onboarding page
+            window.rootViewController = TabBarViewController()
+        }
+        else { // Sign In
+            let navVC = UINavigationController(rootViewController: OnboardingViewController())
+            navVC.navigationBar.prefersLargeTitles = true
+            window.rootViewController = navVC
+        }
+        window.makeKeyAndVisible()
+        self.window = window
+        
         return true
     }
 
