@@ -10,13 +10,14 @@ import FirebaseAuth
 public class AuthManager {
     static let shared = AuthManager()
     
+    private let tabBarDelegate = TabBarDelegate()
     //MARK:- Public
-    
+        
     public func registerNewUser(email: String, password: String, confirmPassword: String) {
         
     }
     
-    public func signInUser(email: String?, password: String, confirmPassword: String) {
+    public func signInUser(email: String, password: String, confirmPassword: String) {
         
     }
 }

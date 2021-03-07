@@ -264,6 +264,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
+                    <connections>
+                        <segue destination="YaW-gf-Ayc" kind="relationship" relationship="viewControllers" id="MxC-GK-KV2"/>
+                        <segue destination="hXj-XF-vEu" kind="relationship" relationship="viewControllers" id="4tY-on-n6h"/>
+                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bfd-rh-Ws5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

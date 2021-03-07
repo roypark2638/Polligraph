@@ -6,12 +6,9 @@
 //
 
 import UIKit
-import FirebaseAuth
+//import FirebaseAuth
 
 class SignInViewController: UIViewController {
-    
-//    @IBOutlet weak var emailTextField: UITextField!
-//    @IBOutlet weak var passwordTextField: UITextField!
     
     private let emailTextField: UITextField = {
         return UITextField()
@@ -46,14 +43,24 @@ class SignInViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.backItem?.title = ""
+//        self.navigationController?.navigationBar.backItem?.title = ""
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        addSubviews()
-        view.backgroundColor = .systemBackground
-        
+//        addSubviews()
+        title = "Sign In Page"
+        view.backgroundColor = .red
     }
+    
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        
+//        // assign frames
+//        headerView.frame = CGRect(x: 0,
+//                                  y: view.safeAreaInsets.top,
+//                                  width: view.width,
+//                                  height: 200)
+//    }
     
     private func addSubviews() {
         view.addSubview(emailTextField)

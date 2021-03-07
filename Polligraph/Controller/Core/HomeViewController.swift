@@ -20,22 +20,10 @@ class HomeViewController: UIViewController {
         
         
         // check auth status
-        handleNotAuthenticated()
+//        handleNotAuthenticated()
     }
     
-    private func handleNotAuthenticated() {
-        if Auth.auth().currentUser == nil {
-            // show singin page
-            let signinVC = SignInViewController()
-            // set the signinVC fullscreen so that user can't swipe the page away
-            signinVC.modalPresentationStyle = .fullScreen
-            
-            present(signinVC, animated: true, completion: nil)
-        }
-        else {
-            
-        }
-    }
+    
     
 
 
