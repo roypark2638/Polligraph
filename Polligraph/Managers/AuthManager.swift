@@ -12,6 +12,15 @@ public class AuthManager {
     
     private let tabBarDelegate = TabBarDelegate()
     //MARK:- Public
+    
+    public var isSignedIn: Bool {
+        if Auth.auth().currentUser == nil {
+            return false
+        }
+        else {
+            return true
+        }
+    }
         
     public func registerNewUser(email: String, password: String, confirmPassword: String) {
         
