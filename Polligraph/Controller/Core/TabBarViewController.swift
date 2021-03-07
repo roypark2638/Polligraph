@@ -19,8 +19,9 @@ class TabBarViewController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        createTabBar()
         // Check user auth status
-        handleNotAuthenticated()
+//        handleNotAuthenticated()
     }
     
     private func handleNotAuthenticated() {
@@ -57,6 +58,12 @@ class TabBarViewController: UITabBarController {
         let newPostNav = UINavigationController(rootViewController: newPostVC)
         let notificationNav = UINavigationController(rootViewController: notificationVC)
         let profileNav = UINavigationController(rootViewController: profileVC)
+        
+        homeNav.navigationBar.prefersLargeTitles = true
+        searchNav.navigationBar.prefersLargeTitles = true
+        newPostNav.navigationBar.prefersLargeTitles = true
+        notificationNav.navigationBar.prefersLargeTitles = true
+        profileNav.navigationBar.prefersLargeTitles = true
         
         setViewControllers(viewControllers, animated: false)
         
