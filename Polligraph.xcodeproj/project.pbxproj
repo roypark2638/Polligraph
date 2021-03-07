@@ -154,6 +154,7 @@
 				979E088E25EF906400609D4C /* SearchViewController.swift */,
 				979E089425EF908C00609D4C /* NewPostViewController.swift */,
 				979E088A25EF905800609D4C /* NotificationViewController.swift */,
+				979E089125EF906E00609D4C /* ProfileViewController.swift */,
 				97BC9F0E25F42D26004EDB60 /* TabBarViewController.swift */,
 			);
 			path = Core;
@@ -182,7 +183,6 @@
 		97BC9EED25F375B7004EDB60 /* General */ = {
 			isa = PBXGroup;
 			children = (
-				979E089125EF906E00609D4C /* ProfileViewController.swift */,
 				979E08A225EF92AE00609D4C /* PollPostViewController.swift */,
 				977F238E25F33613002145BB /* SettingsViewController.swift */,
 			);
