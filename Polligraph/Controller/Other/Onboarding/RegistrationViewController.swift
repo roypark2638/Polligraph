@@ -15,6 +15,17 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var createAccountButton: UIButton!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+//        let backButtonImage = UIImage(systemName: "arrow.backward")
+//        let backButton = UIButton(type: .custom)
+//        backButton.setImage(backButtonImage, for: .normal)
+//        backButton.setTitleColor(.blue, for: .normal)
+//        backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
+//        nav.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+    }
+    
     @IBAction func createAccountButtonPressed(_ sender: UIButton) {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }

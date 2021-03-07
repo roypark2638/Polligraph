@@ -1,5 +1,5 @@
 //
-//  SearchViewController.swift
+//  ProfileViewController.swift
 //  Polligraph
 //
 //  Created by Roy Park on 3/3/21.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,5 +16,6 @@ class SearchViewController: UIViewController {
     }
     
 
+ 
 
 }
