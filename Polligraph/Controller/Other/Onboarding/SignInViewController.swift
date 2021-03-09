@@ -39,9 +39,9 @@ class SignInViewController: UIViewController {
         return label
     }()
     
-    private let emailAddressField: UITextField = {
+    private let usernameEmailField: UITextField = {
         let field = UITextField()
-        field.placeholder = "Email Address"
+        field.placeholder = "Email Address / Username"
         field.returnKeyType = .next
         field.leftViewMode = .always
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
@@ -123,7 +123,7 @@ class SignInViewController: UIViewController {
             width: view.width - 140,
             height: 35)
         
-        emailAddressField.frame = CGRect(
+        usernameEmailField.frame = CGRect(
             x: 35,
             y: subTitle.bottom + 120,
             width: view.width - 70,
@@ -131,7 +131,7 @@ class SignInViewController: UIViewController {
         
         passwordField.frame = CGRect(
             x: 35,
-            y: emailAddressField.bottom + 20,
+            y: usernameEmailField.bottom + 20,
             width: view.width - 70,
             height: 46)
 
@@ -152,7 +152,7 @@ class SignInViewController: UIViewController {
     private func addSubviews() {
         view.addSubview(mainTitle)
         view.addSubview(subTitle)
-        view.addSubview(emailAddressField)
+        view.addSubview(usernameEmailField)
         view.addSubview(passwordField)
         view.addSubview(signInButton)
         view.addSubview(forgotPasswordButton)
@@ -168,12 +168,52 @@ class SignInViewController: UIViewController {
     }
     
     @objc private func didTapSignIn() {
-        let vc = RegistrationViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        nav.navigationBar.prefersLargeTitles = true
-        vc.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: createBackButton())
-        present(nav, animated: true, completion: nil)
+        usernameEmailField.resignFirstResponder()
+        passwordField.resignFirstResponder()
+        
+        guard let usernameEmail = usernameEmailField.text, !usernameEmail.isEmpty else { return }
+        guard let password = passwordField.text, !password.isEmpty, password.count >= 8 else { return }
+        
+        // signin functionality
+        
+        // find out if user put either email or username to sign-in
+        // I will improve this later
+        
+        var username: String?
+        var email: String?
+        
+        if usernameEmail.contains("@"), usernameEmail.contains(".") {
+            email = usernameEmail
+        } else {
+            username = usernameEmail
+        }
+        
+        AuthManager.shared.signInUser(username: username, email: email, password: password) { (signin) in
+            // this closure is background thread, and we want to update UI on the main thread.
+            DispatchQueue.main.async {
+                if signin {
+                    let vc = TabBarViewController()
+//                    let nav = UINavigationController(rootViewController: vc)
+//                    vc.modalPresentationStyle = .fullScreen
+//                    nav.navigationBar.prefersLargeTitles = true
+//                    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.createBackButton())
+                    self.present(vc, animated: true, completion: nil)
+                }
+                else {
+                    // error
+                    print("error")
+                    let alert = UIAlertController(title: "Log In Error",
+                                                  message: "Something went wrong.",
+                                                  preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Dismiss",
+                                                  style: .cancel,
+                                                  handler: nil))
+                    self.present(alert, animated: true)
+                }
+            }
+        }
+        
+
     }
     
     
