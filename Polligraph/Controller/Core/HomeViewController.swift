@@ -18,9 +18,28 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        
+        do {
+            try Auth.auth().signOut()
+        }
+        catch {
+            print("failed to sign out")
+        }
         // check auth status
-//        handleNotAuthenticated()
+        handleNotAuthenticated()
+    }
+    
+    private func handleNotAuthenticated() {
+        if Auth.auth().currentUser == nil {
+            // show onboarding in page
+            let onboardingVC = OnboardingViewController()
+            // set the onboardingVC fullScreen so that user can't swipe the page away
+            onboardingVC.modalPresentationStyle = .fullScreen
+            
+            present(onboardingVC, animated: false)
+        }
+        else {
+            
+        }
     }
     
     
