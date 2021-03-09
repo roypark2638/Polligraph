@@ -16,18 +16,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
 //        FirebaseApp.configure()
-        let window = UIWindow(windowScene: windowScene)
         
-        if !AuthManager.shared.isSignedIn { // Not Sign In
-            // show onboarding page
-            window.rootViewController = TabBarViewController()
-        }
-        else { // Sign In
-            let navVC = UINavigationController(rootViewController: OnboardingViewController())
-            navVC.navigationBar.prefersLargeTitles = true
-            window.rootViewController = navVC
-            
-        }
+        let window = UIWindow(windowScene: windowScene)
+        window.rootViewController = TabBarViewController()
+
+        
+//        if !AuthManager.shared.isSignedIn { // Not Sign In
+//            // show onboarding page
+//            window.rootViewController = TabBarViewController()
+//        }
+//        else { // Sign In
+//            let navVC = UINavigationController(rootViewController: OnboardingViewController())
+//            navVC.navigationBar.prefersLargeTitles = true
+//            window.rootViewController = navVC
+//
+//        }
         window.makeKeyAndVisible()
         self.window = window
     }

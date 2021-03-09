@@ -18,15 +18,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         let window = UIWindow(frame: UIScreen.main.bounds)
         
-        if !AuthManager.shared.isSignedIn { // Not Sign In
-            // show onboarding page
-            window.rootViewController = TabBarViewController()
-        }
-        else { // Sign In
-            let navVC = UINavigationController(rootViewController: OnboardingViewController())
-            navVC.navigationBar.prefersLargeTitles = true
-            window.rootViewController = navVC
-        }
+        window.rootViewController = TabBarViewController()
+        
+//        if Auth.auth().currentUser == nil {
+//            
+//        }
+
+        
+//        if !AuthManager.shared.isSignedIn { // Not Sign In
+//            // show onboarding page
+//            window.rootViewController = TabBarViewController()
+//        }
+//        else { // Sign In
+//            let navVC = UINavigationController(rootViewController: OnboardingViewController())
+//            navVC.navigationBar.prefersLargeTitles = true
+//            window.rootViewController = navVC
+//        }
         window.makeKeyAndVisible()
         self.window = window
         
