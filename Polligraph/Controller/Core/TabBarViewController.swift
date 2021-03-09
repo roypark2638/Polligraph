@@ -14,15 +14,20 @@ class TabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        createTabBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        createTabBar()
         // Check user auth status
-//        handleNotAuthenticated()
+        handleNotAuthenticated()
+//        createTabBar()
     }
+    
+//    override func viewDidLayoutSubviews() {
+//        createTabBar()
+//    }
     
     private func handleNotAuthenticated() {
         if Auth.auth().currentUser == nil {
@@ -36,12 +41,13 @@ class TabBarViewController: UITabBarController {
         else {
             // show TabBarVC
             createTabBar()
-            let tabBarVC = TabBarViewController()
+//            let tabBarVC = TabBarViewController()
+//            
+//            // dismiss the signin view(?) and set tabvarVC fullscreen
+//            tabBarVC.modalPresentationStyle = .fullScreen
+//            
+//            present(tabBarVC, animated: true, completion: nil)
             
-            // dismiss the signin view(?) and set tabvarVC fullscreen
-            tabBarVC.modalPresentationStyle = .fullScreen
-            
-            present(tabBarVC, animated: true, completion: nil)
         }
     }
     
