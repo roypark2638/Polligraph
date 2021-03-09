@@ -72,8 +72,8 @@ class SignInViewController: UIViewController {
     private let signInButton: UIButton = {
         let button = UIButton()
         button.setTitle("Sign In", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .black
+        button.setTitleColor(.systemBackground, for: .normal)
+        button.backgroundColor = .label
         button.layer.cornerRadius = Constants.cornerRaius
         return button
     }()
@@ -81,7 +81,7 @@ class SignInViewController: UIViewController {
     private let forgotPasswordButton: UIButton = {
         let button = UIButton()
         button.setTitle("Forgot Password", for: .normal)
-        button.setTitleColor(.black , for: .normal)
+        button.setTitleColor(.label , for: .normal)
         button.backgroundColor = .systemBackground
         button.layer.cornerRadius = Constants.cornerRaius
         return button
@@ -93,6 +93,8 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        usernameEmailField.delegate = self
+        passwordField.delegate = self
         view.backgroundColor = .systemBackground
         
         signInButton.addTarget(
@@ -162,7 +164,7 @@ class SignInViewController: UIViewController {
         let backButtonImage = UIImage(systemName: "arrow.backward")
         let backButton = UIButton(type: .custom)
         backButton.setImage(backButtonImage, for: .normal)
-        backButton.tintColor = .black
+        backButton.tintColor = .label
         backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
         return backButton
     }
@@ -188,16 +190,20 @@ class SignInViewController: UIViewController {
             username = usernameEmail
         }
         
-        AuthManager.shared.signInUser(username: username, email: email, password: password) { (signin) in
+        AuthManager.shared.signInUser(username: username, email: email, password: password) { [weak self] (signin) in
             // this closure is background thread, and we want to update UI on the main thread.
             DispatchQueue.main.async {
                 if signin {
-                    let vc = TabBarViewController()
+                    self?.dismiss(animated: true, completion: nil)
+//                    self?.navigationController?.
+                    
+                    
+//                    let vc = TabBarViewController()
 //                    let nav = UINavigationController(rootViewController: vc)
 //                    vc.modalPresentationStyle = .fullScreen
 //                    nav.navigationBar.prefersLargeTitles = true
 //                    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.createBackButton())
-                    self.present(vc, animated: true, completion: nil)
+//                    self.present(vc, animated: true, completion: nil)
                 }
                 else {
                     // error
@@ -208,12 +214,10 @@ class SignInViewController: UIViewController {
                     alert.addAction(UIAlertAction(title: "Dismiss",
                                                   style: .cancel,
                                                   handler: nil))
-                    self.present(alert, animated: true)
+                    self?.present(alert, animated: true)
                 }
             }
         }
-        
-
     }
     
     
@@ -229,6 +233,17 @@ class SignInViewController: UIViewController {
     
     @objc private func backAction() {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension SignInViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == usernameEmailField {
+            passwordField.becomeFirstResponder()
+        } else if textField == passwordField {
+            didTapSignIn()
+        }
+        return true
     }
 }
     
