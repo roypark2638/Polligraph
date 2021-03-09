@@ -13,19 +13,6 @@ class RegistrationViewController: UIViewController {
     struct Constants {
         static let cornerRadius = CGFloat(8.0)
     }
-
-//    private let mainTitle: UILabel = {
-//        let label = UILabel()
-//        label.text = "Let's Get Started!"
-//        label.font = label.font.withSize(30)
-//        label.textAlignment = .left
-//        label.backgroundColor = .systemBlue
-//        label.textColor = .black
-//        label.sizeToFit()
-//        label.numberOfLines = 1
-//        label.adjustsFontSizeToFitWidth = true
-//        return label
-//    }()
     
     private let emailAddressField: UITextField = {
         let field = UITextField()
@@ -35,6 +22,20 @@ class RegistrationViewController: UIViewController {
         field.autocorrectionType = .no
         field.autocapitalizationType = .none
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))        
+        field.backgroundColor = .secondarySystemBackground
+        field.textColor = .black
+        field.layer.cornerRadius = Constants.cornerRadius
+        return field
+    }()
+    
+    private let usernameField: UITextField = {
+        let field = UITextField()
+        field.placeholder = "Username"
+        field.returnKeyType = .next
+        field.leftViewMode = .always
+        field.autocorrectionType = .no
+        field.autocapitalizationType = .none
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         field.backgroundColor = .secondarySystemBackground
         field.textColor = .black
         field.layer.cornerRadius = Constants.cornerRadius
@@ -117,17 +118,15 @@ class RegistrationViewController: UIViewController {
         view.backgroundColor = .systemBackground
         title = "Let's Get Started!"
         
+        emailAddressField.delegate = self
+        usernameField.delegate = self
+        passwordField.delegate = self
+                
         addSubviews()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-//        mainTitle.frame = CGRect(
-//            x: 35,
-//            y: view.safeAreaInsets.top,
-//            width: view.width - 70,
-//            height: 30)
         
         emailAddressField.frame = CGRect(
             x: 35,
@@ -135,27 +134,27 @@ class RegistrationViewController: UIViewController {
             width: view.width - 70,
             height: 46)
         
-        passwordField.frame = CGRect(
+        usernameField.frame = CGRect(
             x: 35,
             y: emailAddressField.bottom + 20,
             width: view.width - 70,
             height: 46)
         
-        confirmPasswordField.frame = CGRect(
+        passwordField.frame = CGRect(
             x: 35,
-            y: passwordField.bottom + 20,
+            y: usernameField.bottom + 20,
             width: view.width - 70,
             height: 46)
         
         acceptButton.frame = CGRect(
             x: 35,
-            y: confirmPasswordField.bottom + 30,
+            y: passwordField.bottom + 30,
             width: 23,
             height: 23)
         
         acceptLabel.frame = CGRect(
             x: acceptButton.right + 18,
-            y: confirmPasswordField.bottom + 20,
+            y: passwordField.bottom + 20,
             width: view.width - 112,
             height: 40)
         
@@ -173,15 +172,51 @@ class RegistrationViewController: UIViewController {
     }
     
     private func addSubviews() {
-//        view.addSubview(mainTitle)
         view.addSubview(emailAddressField)
+        view.addSubview(usernameField)
         view.addSubview(passwordField)
-        view.addSubview(confirmPasswordField)
         view.addSubview(acceptButton)
         view.addSubview(acceptLabel)
         view.addSubview(createAccount)
         view.addSubview(orCreateAccountWith)
     }
+    
+//    private func createBackButton() -> UIButton {
+//        let backButtonImage = UIImage(systemName: "arrow.backward")
+//        let backButton = UIButton(type: .custom)
+//        backButton.setImage(backButtonImage, for: .normal)
+//        backButton.tintColor = .black
+//        backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
+//        return backButton
+//    }
+    
+    @objc private func didTapCreateAccount() {
+        emailAddressField.resignFirstResponder()
+        usernameField.resignFirstResponder()
+        passwordField.resignFirstResponder()
+        
+        guard let emailAddress = emailAddressField.text, !emailAddress.isEmpty,
+              let username = usernameField.text, !username.isEmpty,
+              let password = passwordField.text, password.count >= 8 else {
+            return
+        }
+        
+        AuthManager.shared.registerNewUser(username: username, email: emailAddress, password: password) { (registered) in
+            // we are going to update our UI so use DispatchQueue
+            DispatchQueue.main.async {
+                // success to register an account
+                if registered {
+                    return
+                }
+                // fail to register an account
+                else {
+                    return
+                }
+            }
+        }
+    }
+    
+    
     
 //    @IBAction func createAccountButtonPressed(_ sender: UIButton) {
 //        guard let email = emailTextField.text else { return }
@@ -217,10 +252,21 @@ class RegistrationViewController: UIViewController {
 //            }
 //        }
 //    }
-    
-    
-    
-    
 
+}
 
+extension RegistrationViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailAddressField {
+            usernameField.becomeFirstResponder()
+        }
+        else if textField == usernameField {
+            passwordField.becomeFirstResponder()
+        }
+        else if textField == passwordField {
+            didTapCreateAccount()
+        }
+        
+        return true
+    }
 }
