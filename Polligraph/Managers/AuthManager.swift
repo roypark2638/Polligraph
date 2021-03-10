@@ -22,6 +22,12 @@ public class AuthManager {
         }
     }
         
+    /// Attempt to register New User to Firebase
+    /// - parameters
+    ///     username: String representing username
+    ///     email: String representing email
+    ///     password: String representing password
+    ///     completion: Async callback to check if Firebase successfully create and insert the account
     public func registerNewUser(username: String, email: String, password: String, completion: @escaping (Bool) -> Void) {
         /*
          - Check if username is available
@@ -63,6 +69,12 @@ public class AuthManager {
         }
     }
     
+    /// Attempt to sign in user to Firebase. It will take only one of username or email to sign in
+    /// - parameters
+    ///     username: optional String representing username
+    ///     email: optional String representing email
+    ///     password: String representing password
+    ///     completion: Async callback to check if Firebase successfully sign in the user
     public func signInUser(username: String?, email: String?, password: String, completion: @escaping (Bool) -> Void) {
         // reason why using @escaping is we use completion inside of another closure and make it possible to escape the code with completion
         // if user put the email
@@ -88,6 +100,23 @@ public class AuthManager {
                 // user successfully signin
                 completion(true)
             }
+        }
+    }
+    
+    /// Attempt to sign out the user
+    /// - parameters
+    ///     completion: Async callback to check if Firebase successfully sign out the user
+    public func signOutUser(completion: (Bool) -> Void) {
+        do {
+            try Auth.auth().signOut()
+            completion(true)
+            return
+        }
+        catch {
+            print("unable to signout the user")
+            print(error)
+            completion(false)
+            return
         }
         
     }
