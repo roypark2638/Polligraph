@@ -18,12 +18,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         let window = UIWindow(frame: UIScreen.main.bounds)
         
-        window.rootViewController = TabBarViewController()
+        if Auth.auth().currentUser == nil {
+            let navVC = UINavigationController(rootViewController: OnboardingViewController())
+            navVC.navigationBar.prefersLargeTitles = true
+            navVC.viewControllers.first?.navigationItem.largeTitleDisplayMode = .always
+            
+            window.rootViewController = navVC
+        } else {
+            window.rootViewController = TabBarViewController()
+        }
+        window.makeKeyAndVisible()
+        self.window = window
         
-//        if Auth.auth().currentUser == nil {
-//            
-//        }
-
+        return true
         
 //        if !AuthManager.shared.isSignedIn { // Not Sign In
 //            // show onboarding page
@@ -34,10 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            navVC.navigationBar.prefersLargeTitles = true
 //            window.rootViewController = navVC
 //        }
-        window.makeKeyAndVisible()
-        self.window = window
-        
-        return true
+
     }
 
     // MARK: UISceneSession Lifecycle

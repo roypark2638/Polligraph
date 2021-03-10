@@ -6,7 +6,7 @@
 //
 
 import UIKit
-//import Firebase
+import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -18,9 +18,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        FirebaseApp.configure()
         
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = TabBarViewController()
-
-        
+        if Auth.auth().currentUser == nil {
+            let navVC = UINavigationController(rootViewController: OnboardingViewController())
+            navVC.navigationBar.prefersLargeTitles = true
+            navVC.viewControllers.first?.navigationItem.largeTitleDisplayMode = .always
+            
+            window.rootViewController = navVC
+        } else {
+            window.rootViewController = TabBarViewController()
+        }
 //        if !AuthManager.shared.isSignedIn { // Not Sign In
 //            // show onboarding page
 //            window.rootViewController = TabBarViewController()
