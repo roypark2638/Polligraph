@@ -24,19 +24,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             navVC.viewControllers.first?.navigationItem.largeTitleDisplayMode = .always
             
             window.rootViewController = navVC
+        } else if Auth.auth().currentUser!.isEmailVerified == false {
+            let navVC = UINavigationController(rootViewController: OnboardingViewController())
+            navVC.navigationBar.prefersLargeTitles = true
+            navVC.viewControllers.first?.navigationItem.largeTitleDisplayMode = .always
+            
+            window.rootViewController = navVC
         } else {
             window.rootViewController = TabBarViewController()
         }
-//        if !AuthManager.shared.isSignedIn { // Not Sign In
-//            // show onboarding page
-//            window.rootViewController = TabBarViewController()
-//        }
-//        else { // Sign In
-//            let navVC = UINavigationController(rootViewController: OnboardingViewController())
-//            navVC.navigationBar.prefersLargeTitles = true
-//            window.rootViewController = navVC
-//
-//        }
+
         window.makeKeyAndVisible()
         self.window = window
     }
