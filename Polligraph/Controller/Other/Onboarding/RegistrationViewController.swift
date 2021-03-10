@@ -241,16 +241,31 @@ class RegistrationViewController: UIViewController {
             DispatchQueue.main.async {
                 // success to register an account
                 if registered {
-                    AuthManager.shared.sendEmailVerification() { _ in
-                        return
+                    AuthManager.shared.sendEmailVerification() { sentEmail in
+                        // successfully sent the email to the link
+//                        if sentEmail {
+//
+//                        }
+//                        else {
+//                            // error to send an email
+//                            let alert = Helper.errorAlert(title: "Error Email Verification!", message: "Something went wrong with email verification link. Please try again.")
+//                            self.present(alert, animated: true, completion: nil)
+//                        }
+                        
                     }
+                    let alert = Helper.errorAlert(title: "Verification Link Sent!", message: "Please check your email inbox associated with \(emailAddress) for the verification link.")
+                    self.present(alert, animated: true, completion: nil)
                     UIViewController.removeLoading(spinner: spinner)
-                    self.dismiss(animated: true, completion: nil)
+//                    self.dismiss(animated: true, completion: nil)
                     return
                 }
                 // fail to register an account
                 else {
-                    return
+                    // error to create an account
+                    // TODO: databaseManager to check if the user can create account with email and username
+                    UIViewController.removeLoading(spinner: spinner)
+                    let alert = Helper.errorAlert(title: "Temp Error Duplicate", message: "Email or username are already taken (Temp).")
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
         }
