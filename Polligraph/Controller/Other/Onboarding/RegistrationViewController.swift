@@ -202,10 +202,13 @@ class RegistrationViewController: UIViewController {
         }
         
         AuthManager.shared.registerNewUser(username: username, email: emailAddress, password: password) { (registered) in
+            let spinner = UIViewController.displayLoading(withView: self.view)
             // we are going to update our UI so use DispatchQueue
             DispatchQueue.main.async {
                 // success to register an account
                 if registered {
+                    UIViewController.removeLoading(spinner: spinner)
+                    self.dismiss(animated: true, completion: nil)
                     return
                 }
                 // fail to register an account
