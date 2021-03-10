@@ -12,15 +12,6 @@ public class AuthManager {
     
     private let tabBarDelegate = TabBarDelegate()
     //MARK:- Public
-    
-    public var isSignedIn: Bool {
-        if Auth.auth().currentUser == nil {
-            return false
-        }
-        else {
-            return true
-        }
-    }
         
     /// Attempt to register New User to Firebase
     /// - parameters
@@ -31,7 +22,7 @@ public class AuthManager {
     public func registerNewUser(username: String, email: String, password: String, completion: @escaping (Bool) -> Void) {
         /*
          - Check if username is available
-         - Check if emial is available
+         - Check if email is available
          */
         DatabaseManager.shared.canCreateNewUser(with: email, username: username) { (canCreate) in
             if canCreate {
@@ -63,8 +54,48 @@ public class AuthManager {
                 }
             }
             else {
-                // either username or emial does not exist
+                // either username or email does not exist
                 completion(false)
+            }
+        }
+    }
+    
+    
+    /// Send a email verification to the user
+    /// - Parameter
+    /// completion: async callback to send the email to the user
+    public func sendEmailVerification(completion: @escaping (Bool) -> Void) {
+        Auth.auth().currentUser?.sendEmailVerification(completion: { (error) in
+            if error == nil {
+                // success to send the email
+                completion(true)
+                return
+            }
+            else {
+                // error occurs to send the email
+                completion(false)
+                return
+            }
+        })
+    }
+    
+    
+    /// Check if user verify the email address
+    /// - Parameter completion: Async callback to check if user verify the email
+    public func userVerification(completion: @escaping (Bool) -> Void) {
+//        let user = Auth.auth().currentUser
+        
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            if let user = user {
+                Auth.auth().currentUser?.reload()
+                if user.isEmailVerified {
+                    completion(true)
+                    return
+                }
+                else {
+                    completion(false)
+                    return
+                }
             }
         }
     }
@@ -86,7 +117,7 @@ public class AuthManager {
                     return
                 }
             }
-            // user successfully signin
+            // user successfully sign in
             completion(true)
         }
         
@@ -97,7 +128,7 @@ public class AuthManager {
                     completion(false)
                     return
                 }
-                // user successfully signin
+                // user successfully sign in
                 completion(true)
             }
         }
@@ -113,7 +144,7 @@ public class AuthManager {
             return
         }
         catch {
-            print("unable to signout the user")
+            print("unable to sign out the user")
             print(error)
             completion(false)
             return
