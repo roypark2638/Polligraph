@@ -176,7 +176,7 @@ class SignInViewController: UIViewController {
         guard let usernameEmail = usernameEmailField.text, !usernameEmail.isEmpty else { return }
         guard let password = passwordField.text, !password.isEmpty, password.count >= 8 else { return }
         
-        // signin functionality
+        // sign in functionality
         
         // find out if user put either email or username to sign-in
         // I will improve this later
@@ -190,11 +190,15 @@ class SignInViewController: UIViewController {
             username = usernameEmail
         }
         
-        AuthManager.shared.signInUser(username: username, email: email, password: password) { [weak self] (signin) in
+        AuthManager.shared.signInUser(username: username, email: email, password: password) { [weak self] (signIn) in
+            let spinner = UIViewController.displayLoading(withView: (self?.view)!)
             // this closure is background thread, and we want to update UI on the main thread.
             DispatchQueue.main.async {
-                if signin {
-                    self?.dismiss(animated: true, completion: nil)
+                
+                if signIn {
+                    UIViewController.removeLoading(spinner: spinner)
+                    
+//                    self?.dismiss(animated: true, completion: nil)
 //                    self?.navigationController?.
                     
                     
@@ -204,6 +208,17 @@ class SignInViewController: UIViewController {
 //                    nav.navigationBar.prefersLargeTitles = true
 //                    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.createBackButton())
 //                    self.present(vc, animated: true, completion: nil)
+                    AuthManager.shared.userVerification { (verified) in
+                        if verified {
+                            self?.dismiss(animated: true, completion: nil)
+                            self?.view.window?.rootViewController = TabBarViewController()
+                            self?.view.window?.makeKeyAndVisible()
+                        }
+                        else {
+                            let alert = Helper.errorAlert(title: "Email Verification", message: "Please verify your email")
+                            self?.present(alert, animated: true, completion: nil)
+                        }
+                    }
                 }
                 else {
                     // error
