@@ -223,8 +223,9 @@ class SignInViewController: UIViewController {
                 else {
                     // error
                     print("error")
-                    let alert = UIAlertController(title: "Log In Error",
-                                                  message: "Something went wrong.",
+                    UIViewController.removeLoading(spinner: spinner)
+                    let alert = UIAlertController(title: "Sign In Error",
+                                                  message: "Check your email or password.",
                                                   preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Dismiss",
                                                   style: .cancel,
