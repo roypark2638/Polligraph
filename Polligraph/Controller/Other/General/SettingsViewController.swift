@@ -10,7 +10,7 @@ import UIKit
 
 
 // no other class can subclass this "final" class
-/// View Contorller to show user settings menu
+/// View Controller to show user settings menu
 final class SettingsViewController: UIViewController {
     
     private let tableView: UITableView = {
@@ -59,7 +59,7 @@ final class SettingsViewController: UIViewController {
             AuthManager.shared.signOutUser { (signedOut) in
                 if signedOut {
                     DispatchQueue.main.async {
-                        let vc = SignInViewController()
+                        let vc = OnboardingViewController()
                         vc.modalPresentationStyle = .fullScreen
                         // on completion, we should take away the settings and switch back to the main tab
                         // that way, when the user sign in again, they're back to the home tab rahter than a settings.
