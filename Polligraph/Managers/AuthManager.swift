@@ -84,18 +84,19 @@ public class AuthManager {
     /// - Parameter completion: Async callback to check if user verify the email
     public func userVerification(completion: @escaping (Bool) -> Void) {
 //        let user = Auth.auth().currentUser
-        
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
-                Auth.auth().currentUser?.reload()
-                if user.isEmailVerified {
-                    completion(true)
-                    return
+                user.reload() { error in
+                    if user.isEmailVerified {
+                        completion(true)
+                        return
+                    }
+                    else {
+                        completion(false)
+                        return
+                    }
                 }
-                else {
-                    completion(false)
-                    return
-                }
+                
             }
         }
     }
