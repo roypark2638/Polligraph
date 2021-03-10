@@ -190,11 +190,45 @@ class RegistrationViewController: UIViewController {
 //        return backButton
 //    }
     
+
+    
+    private func validateFields() -> String? {
+        
+        // Check all fields are checked in
+        if emailAddressField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            usernameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            passwordField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""
+        {
+            return "Please fill in all fields."
+        }
+        
+        if ((emailAddressField.text?.contains("@")) == nil), ((emailAddressField.text?.contains(".")) == nil) {
+            return "Please check the email address"
+        }
+        
+        // Check if the password is matched with the rules.
+        let cleanedPassword = passwordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if !Helper.isPasswordValid(password: cleanedPassword) {
+            return "Please make sure your password is at least 8 characters, contains a special character and a number."
+        }
+        
+        return nil
+    }
+    
     @objc private func didTapCreateAccount() {
         emailAddressField.resignFirstResponder()
         usernameField.resignFirstResponder()
         passwordField.resignFirstResponder()
         
+        let errorMessage = validateFields()
+        
+        if errorMessage != nil {
+            let alert = Helper.errorAlert(title: "Error", message: errorMessage!)
+            self.present(alert, animated: true, completion: nil)
+        }
+        else {
+            
         guard let emailAddress = emailAddressField.text, !emailAddress.isEmpty,
               let username = usernameField.text, !username.isEmpty,
               let password = passwordField.text, password.count >= 8 else {
@@ -207,6 +241,9 @@ class RegistrationViewController: UIViewController {
             DispatchQueue.main.async {
                 // success to register an account
                 if registered {
+                    AuthManager.shared.sendEmailVerification() { _ in
+                        return
+                    }
                     UIViewController.removeLoading(spinner: spinner)
                     self.dismiss(animated: true, completion: nil)
                     return
@@ -216,6 +253,7 @@ class RegistrationViewController: UIViewController {
                     return
                 }
             }
+        }
         }
     }
     
