@@ -21,5 +21,18 @@ struct Helper {
         return alert
     }
     
+    static func isPasswordValid(password: String) -> Bool {
+        /*
+         ^                 - Start Anchor.
+         (?=.*[a-z])       - Ensure string has one character.
+         (?=.[$@$#!%?&])   - Ensure string has one special character.
+         {8,}              - Ensure password length is 8.
+         $                 - End Anchor.
+         */
+        let passwordTest = NSPredicate(
+            format: "SELF MATCHES %@",
+            "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}") // regular expression
+        return passwordTest.evaluate(with: password)
+    }
     
 }
