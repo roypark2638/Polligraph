@@ -17,6 +17,10 @@
 		977F239C25F33645002145BB /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239B25F33645002145BB /* HapticsManager.swift */; };
 		977F239F25F3365A002145BB /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239E25F3365A002145BB /* UserProfile.swift */; };
 		977F23A225F33680002145BB /* PollPostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F23A125F33680002145BB /* PollPostList.swift */; };
+		9791A70D25F96A4C0088BDAC /* SettingsCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9791A70C25F96A4C0088BDAC /* SettingsCellModel.swift */; };
+		9791A71925F9E30C0088BDAC /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9791A71825F9E30C0088BDAC /* Roboto-Bold.ttf */; };
+		9791A71D25F9E3240088BDAC /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9791A71B25F9E3240088BDAC /* Roboto-Medium.ttf */; };
+		9791A71E25F9E3240088BDAC /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9791A71C25F9E3240088BDAC /* Roboto-Regular.ttf */; };
 		979E083925EF26C700609D4C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E083825EF26C700609D4C /* Helper.swift */; };
 		979E085B25EF533F00609D4C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E085A25EF533F00609D4C /* SignInViewController.swift */; };
 		979E085E25EF535000609D4C /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E085D25EF535000609D4C /* RegistrationViewController.swift */; };
@@ -55,6 +59,10 @@
 		977F239B25F33645002145BB /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		977F239E25F3365A002145BB /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		977F23A125F33680002145BB /* PollPostList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollPostList.swift; sourceTree = "<group>"; };
+		9791A70C25F96A4C0088BDAC /* SettingsCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellModel.swift; sourceTree = "<group>"; };
+		9791A71825F9E30C0088BDAC /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		9791A71B25F9E3240088BDAC /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		9791A71C25F9E3240088BDAC /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		979E083825EF26C700609D4C /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		979E085A25EF533F00609D4C /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		979E085D25EF535000609D4C /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +177,16 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		9791A71725F9E2A30088BDAC /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				9791A71B25F9E3240088BDAC /* Roboto-Medium.ttf */,
+				9791A71C25F9E3240088BDAC /* Roboto-Regular.ttf */,
+				9791A71825F9E30C0088BDAC /* Roboto-Bold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		97BC9EEC25F375AD004EDB60 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,6 +237,7 @@
 				97DB1BAC25EDED1E008955BC /* Controller */,
 				97DB1BAB25EDED19008955BC /* Views */,
 				97DB1BB225EE01B5008955BC /* Support */,
+				9791A71725F9E2A30088BDAC /* Fonts */,
 			);
 			path = Polligraph;
 			sourceTree = "<group>";
@@ -228,6 +247,7 @@
 			children = (
 				977F239E25F3365A002145BB /* UserProfile.swift */,
 				977F23A125F33680002145BB /* PollPostList.swift */,
+				9791A70C25F96A4C0088BDAC /* SettingsCellModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -326,10 +346,13 @@
 				979E087C25EF8C0E00609D4C /* Home.storyboard in Resources */,
 				979E089B25EF90D300609D4C /* Profile.storyboard in Resources */,
 				979E08A625EF92B900609D4C /* PollPost.storyboard in Resources */,
+				9791A71925F9E30C0088BDAC /* Roboto-Bold.ttf in Resources */,
 				979E089E25EF90E500609D4C /* Search.storyboard in Resources */,
 				979E089825EF90B600609D4C /* NewPost.storyboard in Resources */,
 				97DB1B9E25EDEC42008955BC /* Assets.xcassets in Resources */,
+				9791A71D25F9E3240088BDAC /* Roboto-Medium.ttf in Resources */,
 				97CDAA2E25F75E4600476262 /* GoogleService-Info.plist in Resources */,
+				9791A71E25F9E3240088BDAC /* Roboto-Regular.ttf in Resources */,
 				97DB1B9C25EDEC41008955BC /* Main.storyboard in Resources */,
 				9707A80825F1BC4B0099089A /* Notification.storyboard in Resources */,
 			);
@@ -386,6 +409,7 @@
 			files = (
 				979E088B25EF905800609D4C /* NotificationViewController.swift in Sources */,
 				979E089525EF908C00609D4C /* NewPostViewController.swift in Sources */,
+				9791A70D25F96A4C0088BDAC /* SettingsCellModel.swift in Sources */,
 				979E088F25EF906400609D4C /* SearchViewController.swift in Sources */,
 				979E085B25EF533F00609D4C /* SignInViewController.swift in Sources */,
 				977F239325F33628002145BB /* AuthViewController.swift in Sources */,
