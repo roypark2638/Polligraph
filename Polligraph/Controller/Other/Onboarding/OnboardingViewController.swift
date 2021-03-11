@@ -10,50 +10,40 @@ import UIKit
 class OnboardingViewController: UIViewController {
     
     struct Constants {
-        static let cornerRaius = CGFloat(10.0)
+        static let cornerRadius = CGFloat(20.0)
     }
     
-    // Create aumonyous closures
-    private let mainTitle: UILabel = {
-        let label = UILabel()
-        label.text = "polligraph"
-        label.font = label.font.withSize(62)
-        label.adjustsFontSizeToFitWidth = true
-        label.numberOfLines = 1
-        label.textAlignment = .center
-        label.sizeToFit()
-        label.backgroundColor = .red
-        return label
+    // Create anonymous closures
+    private let imageContainerView: UIView = {
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        return containerView
     }()
-
-    private let subTitle: UILabel = {
-        let label = UILabel()
-        label.text = "Pick your side."
-        label.font = label.font.withSize(24)
-        label.adjustsFontSizeToFitWidth = true
-        label.numberOfLines = 1
-        label.textAlignment = .right
-        label.backgroundColor = .blue
-        
-        return label
+    
+    private let titleView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "Polligraph Main"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
-        
     
     private let createAccountButton: UIButton = {
         let button = UIButton()
         button.setTitle("Create an Account", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .black
-        button.layer.cornerRadius = Constants.cornerRaius
+        button.setTitleColor(.systemBackground, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
+        button.backgroundColor = .label
+        button.layer.cornerRadius = Constants.cornerRadius
         return button
     }()
     
-    private let signinButton: UIButton = {
+    private let signInButton: UIButton = {
         let button = UIButton()
         button.setTitle("Sign In", for: .normal)
         button.setTitleColor(.black , for: .normal)
+        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         button.backgroundColor = .secondarySystemBackground
-        button.layer.cornerRadius = Constants.cornerRaius
+        button.layer.cornerRadius = Constants.cornerRadius
         return button
     }()
     
@@ -64,54 +54,63 @@ class OnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        
-        createAccountButton.addTarget(
-            self,
-            action: #selector(didTapCreatAccount),
-            for: .touchUpInside)
-        
-        signinButton.addTarget(
-            self,
-            action: #selector(didTapSignIn),
-            for: .touchUpInside)
-        
+        setupButtonActions()
         addSubviews()
+        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        mainTitle.frame = CGRect(
-            x: 70,
-            y: view.safeAreaInsets.top + 80,
-            width: view.width - 140,
-            height: 80)
+        setupLayout()
+    }
+    
+    
+    private func addSubviews() {
+        view.addSubview(imageContainerView)
+        view.addSubview(createAccountButton)
+        view.addSubview(signInButton)
+    }
+    
+    private func setupButtonActions() {
+        createAccountButton.addTarget(
+            self,
+            action: #selector(didTapCreateAccount),
+            for: .touchUpInside)
         
-        subTitle.frame = CGRect(
-            x: 70,
-            y: mainTitle.bottom + 10,
-            width: view.width - 140,
-            height: 35)
+        signInButton.addTarget(
+            self,
+            action: #selector(didTapSignIn),
+            for: .touchUpInside)
+    }
+    
+    private func setupLayout() {
+        NSLayoutConstraint.activate([
+            imageContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
+            imageContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            imageContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            imageContainerView.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
+        imageContainerView.addSubview(titleView)
+        
+        NSLayoutConstraint.activate([
+            titleView.centerXAnchor.constraint(equalTo: imageContainerView.centerXAnchor),
+            titleView.centerYAnchor.constraint(equalTo: imageContainerView.centerYAnchor),
+            titleView.widthAnchor.constraint(equalTo: imageContainerView.widthAnchor, multiplier: 0.7)
+        ])
 
         createAccountButton.frame = CGRect(
             x: 50,
-            y: view.height - view.safeAreaInsets.bottom - 350,
+            y: view.height - view.safeAreaInsets.bottom - 250,
             width: view.width - 100,
             height: 46)
 
-        signinButton.frame = CGRect(
+        signInButton.frame = CGRect(
             x: 50,
             y: createAccountButton.bottom + 20,
             width: view.width - 100,
             height: 46)
         
-    }
-    
-    private func addSubviews() {
-        view.addSubview(mainTitle)
-        view.addSubview(subTitle)
-        view.addSubview(createAccountButton)
-        view.addSubview(signinButton)
     }
     
     private func createBackButton() -> UIButton {
@@ -123,11 +122,11 @@ class OnboardingViewController: UIViewController {
         return backButton
     }
     
-    @objc private func didTapCreatAccount() {
+    @objc private func didTapCreateAccount() {
         let vc = RegistrationViewController()
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
-        nav.navigationBar.prefersLargeTitles = true
+        nav.navigationBar.prefersLargeTitles = true        
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: createBackButton())
         present(nav, animated: true, completion: nil)
     }
@@ -147,3 +146,16 @@ class OnboardingViewController: UIViewController {
 
 }
 
+
+extension UIView {
+    func addConstrains(withFormat: String, views: UIView...) {
+        var viewsDictionary = [String: UIView]()
+        for (index, view) in views.enumerated() {
+            let key = "v\(index)"
+            viewsDictionary[key] = view
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: withFormat, options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: viewsDictionary))
+    }
+}
