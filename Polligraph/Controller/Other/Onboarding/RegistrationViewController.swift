@@ -10,18 +10,33 @@ import FirebaseAuth
 
 class RegistrationViewController: UIViewController {
     
+    var isUserAcceptAgreement = false
+    
     struct Constants {
-        static let cornerRadius = CGFloat(8.0)
+        static let cornerRadius = CGFloat(20.0)
     }
+    
+    private let headingLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Let's Get Started!"
+        label.numberOfLines = 1
+        label.font = UIFont(name: "Roboto-Bold", size: 28)
+        label.textAlignment = .left
+        label.textColor = .label
+        label.sizeToFit()
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
     
     private let emailAddressField: UITextField = {
         let field = UITextField()
         field.placeholder = "Email Address"
+        field.font = UIFont(name: "Roboto-Bold", size: 16)
         field.returnKeyType = .next
         field.leftViewMode = .always
         field.autocorrectionType = .no
         field.autocapitalizationType = .none
-        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))        
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
         field.backgroundColor = .secondarySystemBackground
         field.textColor = .black
         field.layer.cornerRadius = Constants.cornerRadius
@@ -31,11 +46,12 @@ class RegistrationViewController: UIViewController {
     private let usernameField: UITextField = {
         let field = UITextField()
         field.placeholder = "Username"
+        field.font = UIFont(name: "Roboto-Bold", size: 16)
         field.returnKeyType = .next
         field.leftViewMode = .always
         field.autocorrectionType = .no
         field.autocapitalizationType = .none
-        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
         field.backgroundColor = .secondarySystemBackground
         field.textColor = .black
         field.layer.cornerRadius = Constants.cornerRadius
@@ -45,57 +61,55 @@ class RegistrationViewController: UIViewController {
     private let passwordField: UITextField = {
         let field = UITextField()
         field.placeholder = "Password"
+        field.font = UIFont(name: "Roboto-Bold", size: 16)
         field.returnKeyType = .next
         field.isSecureTextEntry = true
         field.leftViewMode = .always
         field.autocorrectionType = .no
         field.autocapitalizationType = .none
-        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
         field.backgroundColor = .secondarySystemBackground
         field.textColor = .black
         field.layer.cornerRadius = Constants.cornerRadius
         return field
     }()
     
-    private let confirmPasswordField: UITextField = {
-        let field = UITextField()
-        field.placeholder = "Confirm Password"
-        field.returnKeyType = .continue
-        field.isSecureTextEntry = true
-        field.leftViewMode = .always
-        field.autocorrectionType = .no
-        field.autocapitalizationType = .none
-        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        field.backgroundColor = .secondarySystemBackground
-        field.textColor = .black
-        field.layer.cornerRadius = Constants.cornerRadius
-        return field
+    private let toggleButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+        button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = UIColor.secondaryLabel
+        return button
     }()
+    
     
     private let acceptButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "circle"), for: .normal)
+        button.tintColor = UIColor.label
         return button
     }()
     
-    private let acceptLabel: UILabel = {
-        let label = UILabel()
-        label.text = "I accept the Polligraph User Agreement and have read the Privacy Pollicy."
-        label.numberOfLines = 0
-        label.font = label.font.withSize(16)
-        label.textAlignment = .left
-        label.backgroundColor = .systemBlue
-        label.textColor = .black
-        label.sizeToFit()
-        label.adjustsFontSizeToFitWidth = true
-        return label
+    private let acceptLabelButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("I accept the Polligraph User Agreement and have read the Privacy Policy.", for: .normal)
+        button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 15)
+        button.titleLabel?.textAlignment = .left
+        button.setTitleColor(.label, for: .normal)
+        button.titleLabel?.sizeToFit()
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        return button
     }()
     
     private let createAccount: UIButton = {
         let button = UIButton()
         button.setTitle("Create an Account", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         button.titleLabel?.font = button.titleLabel?.font.withSize(18)
         button.backgroundColor = .black
+        button.layer.cornerRadius = Constants.cornerRadius
         button.setTitleColor(.white, for: .normal)
         return button
     }()
@@ -104,19 +118,51 @@ class RegistrationViewController: UIViewController {
         let label = UILabel()
         label.text = "Or create an account with"
         label.numberOfLines = 1
-        label.font = label.font.withSize(16)
+        label.font = UIFont(name: "Roboto-Bold", size: 16)
         label.textAlignment = .center
-        label.backgroundColor = .systemBlue
-        label.textColor = .black
+        label.textColor = .label
         label.sizeToFit()
         label.adjustsFontSizeToFitWidth = true
         return label
+    }()
+    
+    private let googleButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Google"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let appleButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Apple"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let facebookButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Facebook"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        title = "Let's Get Started!"
+        
+        toggleButton.addTarget(
+            self,
+            action: #selector(didTapPasswordToggle),
+            for: .touchUpInside)
+        
+        acceptButton.addTarget(self,
+                               action: #selector(didTapAcceptAgreement),
+                               for: .touchUpInside)
+        
+        acceptLabelButton.addTarget(self,
+                               action: #selector(didTapAcceptAgreement),
+                               for: .touchUpInside)
         
         emailAddressField.delegate = self
         usernameField.delegate = self
@@ -125,72 +171,92 @@ class RegistrationViewController: UIViewController {
         addSubviews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        headingLabel.frame = CGRect(
+            x: 24,
+            y: view.safeAreaInsets.top - 30,
+            width: view.width - 48,
+            height: 33)
         
         emailAddressField.frame = CGRect(
-            x: 35,
-            y: view.safeAreaInsets.top + 30,
-            width: view.width - 70,
+            x: 24,
+            y: headingLabel.bottom + 56,
+            width: view.width - 48,
             height: 46)
         
         usernameField.frame = CGRect(
-            x: 35,
-            y: emailAddressField.bottom + 20,
-            width: view.width - 70,
+            x: 24,
+            y: emailAddressField.bottom + 16,
+            width: view.width - 48,
             height: 46)
         
         passwordField.frame = CGRect(
-            x: 35,
-            y: usernameField.bottom + 20,
-            width: view.width - 70,
+            x: 24,
+            y: usernameField.bottom + 16,
+            width: view.width - 48,
             height: 46)
         
         acceptButton.frame = CGRect(
-            x: 35,
-            y: passwordField.bottom + 30,
+            x: 24,
+            y: passwordField.bottom + 24,
             width: 23,
             height: 23)
         
-        acceptLabel.frame = CGRect(
+        acceptLabelButton.frame = CGRect(
             x: acceptButton.right + 18,
             y: passwordField.bottom + 20,
-            width: view.width - 112,
+            width: view.width - 100,
             height: 40)
         
         createAccount.frame = CGRect(
-            x: 35,
-            y: acceptLabel.bottom + 80,
-            width: view.width - 70,
+            x: 24,
+            y: acceptLabelButton.bottom + 48,
+            width: view.width - 48,
             height: 46)
         
         orCreateAccountWith.frame = CGRect(
-            x: 35,
-            y: view.height - view.safeAreaInsets.bottom - 150,
-            width: view.width - 70,
+            x: 24,
+            y: view.height - view.safeAreaInsets.bottom - 200,
+            width: view.width - 48,
             height: 30)
+        
+        let toggleXConstraint = NSLayoutConstraint(item: toggleButton, attribute: .right, relatedBy: .equal, toItem: passwordField, attribute: .right, multiplier: 1.0, constant: -20.0)
+        let toggleYConstraint = NSLayoutConstraint(item: toggleButton, attribute: .centerY, relatedBy: .equal, toItem: passwordField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+        NSLayoutConstraint.activate([toggleXConstraint, toggleYConstraint])
+        
+        let appleXConstraint = NSLayoutConstraint(item: appleButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let appleYConstraint = NSLayoutConstraint(item: appleButton, attribute: .top, relatedBy: .equal, toItem: orCreateAccountWith, attribute: .bottom, multiplier: 1.0, constant: 32.0)
+        NSLayoutConstraint.activate([appleXConstraint, appleYConstraint])
+        
+        let googleXConstraint = NSLayoutConstraint(item: googleButton, attribute: .right, relatedBy: .equal, toItem: appleButton, attribute: .left, multiplier: 1.0, constant: -24)
+        let googleYConstraint = NSLayoutConstraint(item: googleButton, attribute: .top, relatedBy: .equal, toItem: orCreateAccountWith, attribute: .bottom, multiplier: 1.0, constant: 32.0)
+        NSLayoutConstraint.activate([googleXConstraint, googleYConstraint])
+        
+        let facebookXConstraint = NSLayoutConstraint(item: facebookButton, attribute: .left, relatedBy: .equal, toItem: appleButton, attribute: .right, multiplier: 1.0, constant: 24.0)
+        let facebookYConstraint = NSLayoutConstraint(item: facebookButton, attribute: .top, relatedBy: .equal, toItem: orCreateAccountWith, attribute: .bottom, multiplier: 1.0, constant: 32.0)
+        NSLayoutConstraint.activate([facebookXConstraint, facebookYConstraint])
     }
     
     private func addSubviews() {
+        view.addSubview(headingLabel)
         view.addSubview(emailAddressField)
         view.addSubview(usernameField)
         view.addSubview(passwordField)
+        view.addSubview(toggleButton)
         view.addSubview(acceptButton)
-        view.addSubview(acceptLabel)
+        view.addSubview(acceptLabelButton)
         view.addSubview(createAccount)
         view.addSubview(orCreateAccountWith)
+        view.addSubview(googleButton)
+        view.addSubview(appleButton)
+        view.addSubview(facebookButton)
     }
-    
-//    private func createBackButton() -> UIButton {
-//        let backButtonImage = UIImage(systemName: "arrow.backward")
-//        let backButton = UIButton(type: .custom)
-//        backButton.setImage(backButtonImage, for: .normal)
-//        backButton.tintColor = .black
-//        backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
-//        return backButton
-//    }
-    
-
     
     private func validateFields() -> String? {
         
@@ -216,15 +282,28 @@ class RegistrationViewController: UIViewController {
         return nil
     }
     
+    @objc private func didTapAcceptAgreement() {
+        acceptButton.setImage(UIImage(systemName: "circle.fill"), for: .normal)
+        isUserAcceptAgreement = true
+    }
+    
+    @objc private func didTapPasswordToggle() {
+        passwordField.isSecureTextEntry.toggle()
+    }
+    
     @objc private func didTapCreateAccount() {
         emailAddressField.resignFirstResponder()
         usernameField.resignFirstResponder()
         passwordField.resignFirstResponder()
-        
+                        
         let errorMessage = validateFields()
         
         if errorMessage != nil {
             let alert = Helper.errorAlert(title: "Error", message: errorMessage!)
+            self.present(alert, animated: true, completion: nil)
+        }
+        else if isUserAcceptAgreement == false {
+            let alert = Helper.errorAlert(title: "Please Check", message: "Check the User Agreement and Privacy Policy.")
             self.present(alert, animated: true, completion: nil)
         }
         else {
