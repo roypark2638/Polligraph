@@ -6,49 +6,39 @@
 //
 
 import UIKit
-//import FirebaseAuth
 
 class SignInViewController: UIViewController {
     
     struct Constants {
-        static let cornerRaius = CGFloat(10.0)
+        static let cornerRadius = CGFloat(20.0)
     }
     
-    // Create aumonyous closures
-    private let mainTitle: UILabel = {
-        let label = UILabel()
-        label.text = "polligraph"
-        label.font = label.font.withSize(62)
-        label.adjustsFontSizeToFitWidth = true
-        label.numberOfLines = 1
-        label.textAlignment = .center
-        label.sizeToFit()
-        label.backgroundColor = .red
-        return label
+    // Create anonymous closures
+    
+    private let imageContainerView: UIView = {
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        return containerView
     }()
-
-    private let subTitle: UILabel = {
-        let label = UILabel()
-        label.text = "Pick your side."
-        label.font = label.font.withSize(24)
-        label.adjustsFontSizeToFitWidth = true
-        label.numberOfLines = 1
-        label.textAlignment = .right
-        label.backgroundColor = .blue
-        
-        return label
+    
+    private let titleView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "Polligraph Main"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
     
     private let usernameEmailField: UITextField = {
         let field = UITextField()
-        field.placeholder = "Email Address / Username"
+        field.placeholder = "Email Address or Username"
+        field.font = UIFont(name: "Roboto-Bold", size: 16)
         field.returnKeyType = .next
         field.leftViewMode = .always
-        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
         field.autocorrectionType = .no
         field.autocapitalizationType = .none
         field.backgroundColor = .secondarySystemBackground
-        field.layer.cornerRadius = Constants.cornerRaius
+        field.layer.cornerRadius = Constants.cornerRadius
         field.layer.masksToBounds = true
         return field
     }()
@@ -57,33 +47,77 @@ class SignInViewController: UIViewController {
         let field = UITextField()
         field.placeholder = "Password"
         field.isSecureTextEntry = true
+        field.font = UIFont(name: "Roboto-Bold", size: 16)
         field.returnKeyType = .continue
         field.leftViewMode = .always
-        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
         field.autocorrectionType = .no
         field.autocapitalizationType = .none
         field.backgroundColor = .secondarySystemBackground
-        field.layer.cornerRadius = Constants.cornerRaius
+        field.layer.cornerRadius = Constants.cornerRadius
         field.layer.masksToBounds = true
         return field
     }()
-        
+    
+    private let toggleButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+        button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = UIColor.secondaryLabel
+        return button
+    }()
     
     private let signInButton: UIButton = {
         let button = UIButton()
         button.setTitle("Sign In", for: .normal)
         button.setTitleColor(.systemBackground, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         button.backgroundColor = .label
-        button.layer.cornerRadius = Constants.cornerRaius
+        button.layer.cornerRadius = Constants.cornerRadius
         return button
     }()
     
     private let forgotPasswordButton: UIButton = {
         let button = UIButton()
         button.setTitle("Forgot Password", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         button.setTitleColor(.label , for: .normal)
         button.backgroundColor = .systemBackground
-        button.layer.cornerRadius = Constants.cornerRaius
+        button.layer.cornerRadius = Constants.cornerRadius
+        return button
+    }()
+    
+    private let orSignInWithLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Or sign in with"
+        label.font = UIFont(name: "Roboto-Bold", size: 16)
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.sizeToFit()
+        label.backgroundColor = .systemBackground
+        return label
+    }()
+    
+    private let googleButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Google"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let appleButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Apple"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let facebookButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Facebook"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -93,9 +127,39 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         usernameEmailField.delegate = self
         passwordField.delegate = self
         view.backgroundColor = .systemBackground
+        
+        setupButtonActions()
+        addSubviews()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        setupLayout()
+    }
+    
+    private func addSubviews() {
+        view.addSubview(imageContainerView)
+        view.addSubview(usernameEmailField)
+        view.addSubview(passwordField)
+        view.addSubview(toggleButton)
+        view.addSubview(signInButton)
+        view.addSubview(forgotPasswordButton)
+        view.addSubview(orSignInWithLabel)
+        view.addSubview(googleButton)
+        view.addSubview(appleButton)
+        view.addSubview(facebookButton)
+    }
+    
+    private func setupButtonActions() {
+        toggleButton.addTarget(
+            self,
+            action: #selector(didTapPasswordToggle),
+            for: .touchUpInside)
         
         signInButton.addTarget(
             self,
@@ -104,36 +168,36 @@ class SignInViewController: UIViewController {
         
         forgotPasswordButton.addTarget(
             self,
-            action: #selector(didTapforgotPassword),
+            action: #selector(didTapForgotPassword),
             for: .touchUpInside)
-        
-        addSubviews()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    private func setupLayout() {
         
-        mainTitle.frame = CGRect(
-            x: 70,
-            y: view.safeAreaInsets.top + 70,
-            width: view.width - 140,
-            height: 80)
+        NSLayoutConstraint.activate([
+            imageContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
+            imageContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            imageContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            imageContainerView.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
         
-        subTitle.frame = CGRect(
-            x: 70,
-            y: mainTitle.bottom + 10,
-            width: view.width - 140,
-            height: 35)
+        imageContainerView.addSubview(titleView)
+        
+        NSLayoutConstraint.activate([
+            titleView.centerXAnchor.constraint(equalTo: imageContainerView.centerXAnchor),
+            titleView.centerYAnchor.constraint(equalTo: imageContainerView.centerYAnchor),
+            titleView.widthAnchor.constraint(equalTo: imageContainerView.widthAnchor, multiplier: 0.7)
+        ])
         
         usernameEmailField.frame = CGRect(
             x: 35,
-            y: subTitle.bottom + 120,
+            y: (view.height - view.safeAreaInsets.bottom) / 2,
             width: view.width - 70,
             height: 46)
         
         passwordField.frame = CGRect(
             x: 35,
-            y: usernameEmailField.bottom + 20,
+            y: usernameEmailField.bottom + 17,
             width: view.width - 70,
             height: 46)
 
@@ -145,21 +209,33 @@ class SignInViewController: UIViewController {
 
         forgotPasswordButton.frame = CGRect(
             x: 35,
-            y: signInButton.bottom + 15,
+            y: signInButton.bottom + 10,
             width: view.width - 70,
-            height: 46)
+            height: 20)
+        
+        orSignInWithLabel.frame = CGRect(
+            x: 50,
+            y: view.height - 170,
+            width: view.width - 100,
+            height: 20)
+        
+        let toggleXConstraint = NSLayoutConstraint(item: toggleButton, attribute: .right, relatedBy: .equal, toItem: passwordField, attribute: .right, multiplier: 1.0, constant: -20.0)
+        let toggleYConstraint = NSLayoutConstraint(item: toggleButton, attribute: .centerY, relatedBy: .equal, toItem: passwordField, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+        NSLayoutConstraint.activate([toggleXConstraint, toggleYConstraint])
+        
+        let appleXConstraint = NSLayoutConstraint(item: appleButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let appleYConstraint = NSLayoutConstraint(item: appleButton, attribute: .top, relatedBy: .equal, toItem: orSignInWithLabel, attribute: .bottom, multiplier: 1.0, constant: 10.0)
+        NSLayoutConstraint.activate([appleXConstraint, appleYConstraint])
+        
+        let googleXConstraint = NSLayoutConstraint(item: googleButton, attribute: .right, relatedBy: .equal, toItem: appleButton, attribute: .left, multiplier: 1.0, constant: -24)
+        let googleYConstraint = NSLayoutConstraint(item: googleButton, attribute: .top, relatedBy: .equal, toItem: orSignInWithLabel, attribute: .bottom, multiplier: 1.0, constant: 10.0)
+        NSLayoutConstraint.activate([googleXConstraint, googleYConstraint])
+        
+        let facebookXConstraint = NSLayoutConstraint(item: facebookButton, attribute: .left, relatedBy: .equal, toItem: appleButton, attribute: .right, multiplier: 1.0, constant: 24.0)
+        let facebookYConstraint = NSLayoutConstraint(item: facebookButton, attribute: .top, relatedBy: .equal, toItem: orSignInWithLabel, attribute: .bottom, multiplier: 1.0, constant: 10.0)
+        NSLayoutConstraint.activate([facebookXConstraint, facebookYConstraint])
         
     }
-    
-    private func addSubviews() {
-        view.addSubview(mainTitle)
-        view.addSubview(subTitle)
-        view.addSubview(usernameEmailField)
-        view.addSubview(passwordField)
-        view.addSubview(signInButton)
-        view.addSubview(forgotPasswordButton)
-    }
-    
     private func createBackButton() -> UIButton {
         let backButtonImage = UIImage(systemName: "arrow.backward")
         let backButton = UIButton(type: .custom)
@@ -167,6 +243,10 @@ class SignInViewController: UIViewController {
         backButton.tintColor = .label
         backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
         return backButton
+    }
+    
+    @objc private func didTapPasswordToggle() {
+        passwordField.isSecureTextEntry.toggle()
     }
     
     @objc private func didTapSignIn() {
@@ -238,7 +318,7 @@ class SignInViewController: UIViewController {
     
     
     // this needs to be changed to navigate to the tabBar controller if auth passes
-    @objc private func didTapforgotPassword() {
+    @objc private func didTapForgotPassword() {
         let vc = SignInViewController()
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
