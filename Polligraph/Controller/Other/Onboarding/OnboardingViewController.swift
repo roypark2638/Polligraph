@@ -9,6 +9,9 @@ import UIKit
 
 class OnboardingViewController: UIViewController {
     
+    // For user auth, this variable takes nothing and returns nothing
+    public var completion: (() -> Void)?
+        
     struct Constants {
         static let cornerRadius = CGFloat(20.0)
     }
@@ -47,6 +50,8 @@ class OnboardingViewController: UIViewController {
         return button
     }()
     
+    // MARK: - LifeCycle
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -65,6 +70,7 @@ class OnboardingViewController: UIViewController {
         setupLayout()
     }
     
+    // MARK: - Methods
     
     private func addSubviews() {
         view.addSubview(imageContainerView)
@@ -100,15 +106,15 @@ class OnboardingViewController: UIViewController {
         ])
 
         createAccountButton.frame = CGRect(
-            x: 50,
-            y: view.height - view.safeAreaInsets.bottom - 250,
-            width: view.width - 100,
+            x: 24,
+            y: (view.height/1.5),
+            width: view.width - 48,
             height: 46)
 
         signInButton.frame = CGRect(
-            x: 50,
-            y: createAccountButton.bottom + 20,
-            width: view.width - 100,
+            x: 24,
+            y: createAccountButton.bottom + 16,
+            width: view.width - 48,
             height: 46)
         
     }
@@ -122,11 +128,13 @@ class OnboardingViewController: UIViewController {
         return backButton
     }
     
+    // MARK: - Objc Methods
+    
     @objc private func didTapCreateAccount() {
         let vc = RegistrationViewController()
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
-        nav.navigationBar.prefersLargeTitles = true        
+        nav.navigationBar.prefersLargeTitles = true
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: createBackButton())
         present(nav, animated: true, completion: nil)
     }
@@ -145,6 +153,8 @@ class OnboardingViewController: UIViewController {
     }
 
 }
+
+// MARK: - UIView Extension
 
 
 extension UIView {
