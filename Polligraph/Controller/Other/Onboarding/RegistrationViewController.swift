@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import AuthenticationServices
 
 class RegistrationViewController: UIViewController {
     
@@ -84,19 +85,19 @@ class RegistrationViewController: UIViewController {
     }()
     
     
-    private let acceptButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "circle"), for: .normal)
-        button.tintColor = UIColor.label
-        return button
-    }()
+//    private let acceptButton: UIButton = {
+//        let button = UIButton()
+//        button.setImage(UIImage(systemName: "circle"), for: .normal)
+//        button.tintColor = UIColor.label
+//        return button
+//    }()
     
     private let acceptLabelButton: UIButton = {
         let button = UIButton()
-        button.setTitle("I accept the Polligraph User Agreement and have read the Privacy Policy.", for: .normal)
+        button.setTitle("By signing up, you agree to our Terms of Service and acknowledge that you have read our Privacy Policy to learn how we collect, use and share your data.", for: .normal)
         button.titleLabel?.numberOfLines = 0
-        button.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 15)
-        button.titleLabel?.textAlignment = .left
+        button.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 14)
+        button.titleLabel?.textAlignment = .center
         button.setTitleColor(.label, for: .normal)
         button.titleLabel?.sizeToFit()
         button.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -116,7 +117,7 @@ class RegistrationViewController: UIViewController {
     
     private let orCreateAccountWith: UILabel = {
         let label = UILabel()
-        label.text = "Or create an account with"
+        label.text = "Or Create an Account with"
         label.numberOfLines = 1
         label.font = UIFont(name: "Roboto-Bold", size: 16)
         label.textAlignment = .center
@@ -146,6 +147,8 @@ class RegistrationViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -156,13 +159,17 @@ class RegistrationViewController: UIViewController {
             action: #selector(didTapPasswordToggle),
             for: .touchUpInside)
         
-        acceptButton.addTarget(self,
-                               action: #selector(didTapAcceptAgreement),
-                               for: .touchUpInside)
+        createAccount.addTarget(
+            self,
+            action: #selector(didTapCreateAccount),
+            for: .touchUpInside)
+//        acceptButton.addTarget(self,
+//                               action: #selector(didTapAcceptAgreement),
+//                               for: .touchUpInside)
         
-        acceptLabelButton.addTarget(self,
-                               action: #selector(didTapAcceptAgreement),
-                               for: .touchUpInside)
+//        acceptLabelButton.addTarget(self,
+//                               action: #selector(didTapAcceptAgreement),
+//                               for: .touchUpInside)
         
         emailAddressField.delegate = self
         usernameField.delegate = self
@@ -202,16 +209,16 @@ class RegistrationViewController: UIViewController {
             width: view.width - 48,
             height: 46)
         
-        acceptButton.frame = CGRect(
-            x: 24,
-            y: passwordField.bottom + 24,
-            width: 23,
-            height: 23)
+//        acceptButton.frame = CGRect(
+//            x: 24,
+//            y: passwordField.bottom + 24,
+//            width: 23,
+//            height: 23)
         
         acceptLabelButton.frame = CGRect(
-            x: acceptButton.right + 18,
-            y: passwordField.bottom + 20,
-            width: view.width - 100,
+            x: 24,
+            y: passwordField.bottom + 24,
+            width: view.width - 48,
             height: 40)
         
         createAccount.frame = CGRect(
@@ -243,13 +250,15 @@ class RegistrationViewController: UIViewController {
         NSLayoutConstraint.activate([facebookXConstraint, facebookYConstraint])
     }
     
+    // MARK: - Methods
+    
     private func addSubviews() {
         view.addSubview(headingLabel)
         view.addSubview(emailAddressField)
         view.addSubview(usernameField)
         view.addSubview(passwordField)
         view.addSubview(toggleButton)
-        view.addSubview(acceptButton)
+//        view.addSubview(acceptButton)
         view.addSubview(acceptLabelButton)
         view.addSubview(createAccount)
         view.addSubview(orCreateAccountWith)
@@ -282,10 +291,12 @@ class RegistrationViewController: UIViewController {
         return nil
     }
     
-    @objc private func didTapAcceptAgreement() {
-        acceptButton.setImage(UIImage(systemName: "circle.fill"), for: .normal)
-        isUserAcceptAgreement = true
-    }
+//    @objc private func didTapAcceptAgreement() {
+//        acceptButton.setImage(UIImage(systemName: "circle.fill"), for: .normal)
+//        isUserAcceptAgreement = true
+//    }
+    
+    // MARK: - Objc Methods
     
     @objc private func didTapPasswordToggle() {
         passwordField.isSecureTextEntry.toggle()
@@ -302,10 +313,10 @@ class RegistrationViewController: UIViewController {
             let alert = Helper.errorAlert(title: "Error", message: errorMessage!)
             self.present(alert, animated: true, completion: nil)
         }
-        else if isUserAcceptAgreement == false {
-            let alert = Helper.errorAlert(title: "Please Check", message: "Check the User Agreement and Privacy Policy.")
-            self.present(alert, animated: true, completion: nil)
-        }
+//        else if isUserAcceptAgreement == false {
+//            let alert = Helper.errorAlert(title: "Please Check", message: "Check the User Agreement and Privacy Policy.")
+//            self.present(alert, animated: true, completion: nil)
+//        }
         else {
             
         guard let emailAddress = emailAddressField.text, !emailAddress.isEmpty,
@@ -389,6 +400,8 @@ class RegistrationViewController: UIViewController {
 //    }
 
 }
+
+// MARK: - UITextFieldDelegate
 
 extension RegistrationViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
