@@ -120,19 +120,19 @@ class RegistrationViewController: UIViewController {
             x: 24,
             y: headingLabel.bottom + 56,
             width: view.width - 48,
-            height: 46)
+            height: 50)
         
         usernameField.frame = CGRect(
             x: 24,
             y: emailAddressField.bottom + 16,
             width: view.width - 48,
-            height: 46)
+            height: 50)
         
         passwordField.frame = CGRect(
             x: 24,
             y: usernameField.bottom + 16,
             width: view.width - 48,
-            height: 46)
+            height: 50)
         
 //        acceptButton.frame = CGRect(
 //            x: 24,
@@ -144,13 +144,13 @@ class RegistrationViewController: UIViewController {
             x: 24,
             y: passwordField.bottom + 24,
             width: view.width - 48,
-            height: 40)
+            height: 50)
         
         createAccount.frame = CGRect(
             x: 24,
             y: acceptLabelButton.bottom + 48,
             width: view.width - 48,
-            height: 46)
+            height: 50)
         
         orCreateAccountWith.frame = CGRect(
             x: 24,

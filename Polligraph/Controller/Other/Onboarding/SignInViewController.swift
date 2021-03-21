@@ -169,19 +169,19 @@ class SignInViewController: UIViewController {
             x: 24,
             y: headingLabel.bottom + 56,
             width: view.width - 48,
-            height: 46)
+            height: 50)
         
         passwordField.frame = CGRect(
             x: 24,
             y: usernameEmailField.bottom + 17,
             width: view.width - 48,
-            height: 46)
+            height: 50)
 
         signInButton.frame = CGRect(
             x: 24,
             y: passwordField.bottom + 40,
             width: view.width - 48,
-            height: 46)
+            height: 50)
 
         forgotPasswordButton.frame = CGRect(
             x: 24,

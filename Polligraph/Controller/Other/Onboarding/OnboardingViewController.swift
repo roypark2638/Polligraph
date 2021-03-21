@@ -113,13 +113,13 @@ class OnboardingViewController: UIViewController {
             x: 24,
             y: (view.height/1.5),
             width: view.width - 48,
-            height: 46)
+            height: 50)
 
         signInButton.frame = CGRect(
             x: 24,
             y: createAccountButton.bottom + 16,
             width: view.width - 48,
-            height: 46)
+            height: 50)
         
     }
     
@@ -135,7 +135,8 @@ class OnboardingViewController: UIViewController {
     // MARK: - Objc Methods
     
     @objc private func didTapCreateAccount() {
-        let vc = RegistrationViewController()
+//        let vc = RegistrationViewController()
+        let vc = EmailVerificationViewController()
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         nav.navigationBar.prefersLargeTitles = true
