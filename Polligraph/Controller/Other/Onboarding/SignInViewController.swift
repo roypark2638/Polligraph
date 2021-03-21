@@ -4,29 +4,45 @@
 //
 //  Created by Roy Park on 3/2/21.
 //
-
+import GoogleSignIn
 import UIKit
+import FirebaseAuth
 
 class SignInViewController: UIViewController {
+    
+    // MARK: - Init
     
     struct Constants {
         static let cornerRadius = CGFloat(20.0)
     }
     
+    
     // Create anonymous closures
     
-    private let imageContainerView: UIView = {
-        let containerView = UIView()
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        return containerView
+    private let headingLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Welcome Back!"
+        label.numberOfLines = 1
+        label.font = UIFont(name: "Roboto-Bold", size: 28)
+        label.textAlignment = .left
+        label.textColor = .label
+        label.sizeToFit()
+        label.adjustsFontSizeToFitWidth = true
+        return label
     }()
     
-    private let titleView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "Polligraph Main"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
+//    private let imageContainerView: UIView = {
+//        let containerView = UIView()
+//        containerView.translatesAutoresizingMaskIntoConstraints = false
+//        return containerView
+//    }()
+//
+//    private let titleView: UIImageView = {
+//        let imageView = UIImageView(image: UIImage(named: "Polligraph Main"))
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        imageView.contentMode = .scaleAspectFit
+//        return imageView
+//    }()
     
     private let usernameEmailField: UITextField = {
         let field = UITextField()
@@ -102,6 +118,7 @@ class SignInViewController: UIViewController {
     
     private let googleButton: UIButton = {
         let button = UIButton()
+//        button.style = .iconOnly
         button.setImage(UIImage(named: "Google"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -121,12 +138,13 @@ class SignInViewController: UIViewController {
         return button
     }()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
+    // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+//        GIDSignIn.sharedInstance().signIn()
 
         usernameEmailField.delegate = self
         passwordField.delegate = self
@@ -142,8 +160,11 @@ class SignInViewController: UIViewController {
         setupLayout()
     }
     
+    // MARK: - Methods
+    
     private func addSubviews() {
-        view.addSubview(imageContainerView)
+//        view.addSubview(imageContainerView)
+        view.addSubview(headingLabel)
         view.addSubview(usernameEmailField)
         view.addSubview(passwordField)
         view.addSubview(toggleButton)
@@ -170,47 +191,62 @@ class SignInViewController: UIViewController {
             self,
             action: #selector(didTapForgotPassword),
             for: .touchUpInside)
+        
+        googleButton.addTarget(
+            self,
+            action: #selector(didTapGoogle),
+            for: .touchUpInside)
+        
+        appleButton.addTarget(
+            self,
+            action: #selector(didTapApple),
+            for: .touchUpInside)
     }
     
     private func setupLayout() {
+        headingLabel.frame = CGRect(
+            x: 24,
+            y: view.safeAreaInsets.top - 30,
+            width: view.width - 48,
+            height: 33)
         
-        NSLayoutConstraint.activate([
-            imageContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
-            imageContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            imageContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageContainerView.rightAnchor.constraint(equalTo: view.rightAnchor)
-        ])
-        
-        imageContainerView.addSubview(titleView)
-        
-        NSLayoutConstraint.activate([
-            titleView.centerXAnchor.constraint(equalTo: imageContainerView.centerXAnchor),
-            titleView.centerYAnchor.constraint(equalTo: imageContainerView.centerYAnchor),
-            titleView.widthAnchor.constraint(equalTo: imageContainerView.widthAnchor, multiplier: 0.7)
-        ])
+//        NSLayoutConstraint.activate([
+//            imageContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
+//            imageContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            imageContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            imageContainerView.rightAnchor.constraint(equalTo: view.rightAnchor)
+//        ])
+//        
+//        imageContainerView.addSubview(titleView)
+//        
+//        NSLayoutConstraint.activate([
+//            titleView.centerXAnchor.constraint(equalTo: imageContainerView.centerXAnchor),
+//            titleView.centerYAnchor.constraint(equalTo: imageContainerView.centerYAnchor),
+//            titleView.widthAnchor.constraint(equalTo: imageContainerView.widthAnchor, multiplier: 0.7)
+//        ])
         
         usernameEmailField.frame = CGRect(
-            x: 35,
-            y: (view.height - view.safeAreaInsets.bottom) / 2,
-            width: view.width - 70,
+            x: 24,
+            y: headingLabel.bottom + 56,
+            width: view.width - 48,
             height: 46)
         
         passwordField.frame = CGRect(
-            x: 35,
+            x: 24,
             y: usernameEmailField.bottom + 17,
-            width: view.width - 70,
+            width: view.width - 48,
             height: 46)
 
         signInButton.frame = CGRect(
-            x: 35,
+            x: 24,
             y: passwordField.bottom + 40,
-            width: view.width - 70,
+            width: view.width - 48,
             height: 46)
 
         forgotPasswordButton.frame = CGRect(
-            x: 35,
-            y: signInButton.bottom + 10,
-            width: view.width - 70,
+            x: 24,
+            y: signInButton.bottom + 20,
+            width: view.width - 48,
             height: 20)
         
         orSignInWithLabel.frame = CGRect(
@@ -236,6 +272,7 @@ class SignInViewController: UIViewController {
         NSLayoutConstraint.activate([facebookXConstraint, facebookYConstraint])
         
     }
+    
     private func createBackButton() -> UIButton {
         let backButtonImage = UIImage(systemName: "arrow.backward")
         let backButton = UIButton(type: .custom)
@@ -244,6 +281,8 @@ class SignInViewController: UIViewController {
         backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
         return backButton
     }
+    
+    // MARK: - Objc Methods
     
     @objc private func didTapPasswordToggle() {
         passwordField.isSecureTextEntry.toggle()
@@ -327,10 +366,24 @@ class SignInViewController: UIViewController {
         present(nav, animated: true, completion: nil)
     }
     
+    @objc private func didTapGoogle() {
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
+    @objc private func didTapApple() {
+        performAppleSignIn()
+    }
+    
     @objc private func backAction() {
         dismiss(animated: true, completion: nil)
     }
+    
+    private func performAppleSignIn() {
+        
+    }
 }
+
+// MARK: - UITextFieldDelegate
 
 extension SignInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
