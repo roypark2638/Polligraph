@@ -18,13 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        FirebaseApp.configure()
         
         let window = UIWindow(windowScene: windowScene)
-        if Auth.auth().currentUser == nil {
-            let navVC = UINavigationController(rootViewController: OnboardingViewController())
-            navVC.navigationBar.prefersLargeTitles = true
-            navVC.viewControllers.first?.navigationItem.largeTitleDisplayMode = .always
-            
-            window.rootViewController = navVC
-        } else if Auth.auth().currentUser!.isEmailVerified == false {
+        if !AuthManager.shared.isSignedIn() || !AuthManager.shared.isVerified() {
             let navVC = UINavigationController(rootViewController: OnboardingViewController())
             navVC.navigationBar.prefersLargeTitles = true
             navVC.viewControllers.first?.navigationItem.largeTitleDisplayMode = .always
