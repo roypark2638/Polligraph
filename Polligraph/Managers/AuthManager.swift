@@ -5,13 +5,29 @@
 //  Created by Roy Park on 3/5/21.
 //
 
-import FirebaseAuth
+import Firebase
+import GoogleSignIn
 
-public class AuthManager {
+public class AuthManager{
     static let shared = AuthManager()
     
     private let tabBarDelegate = TabBarDelegate()
     //MARK:- Public
+    
+    
+    /// Check if user is signed in or not.
+    /// - Returns: Boolean True / False
+    public func isSignedIn() -> Bool {
+        return Auth.auth().currentUser != nil
+    }
+    
+    public func isVerified() -> Bool {
+        if let currentUser = Auth.auth().currentUser {
+            return currentUser.isEmailVerified
+        } else {
+            return false
+        }
+    }
         
     /// Attempt to register New User to Firebase
     /// - parameters
@@ -53,6 +69,39 @@ public class AuthManager {
                     }
                 }
             }
+            else {
+                // either username or email does not exist
+                completion(false)
+            }
+        }
+    }
+    
+    public func insertUserIntoDatabase(username: String, email: String, completion: @escaping (Bool) -> Void) {
+        /*
+         - Check if username is available
+         - Check if email is available
+         */
+        DatabaseManager.shared.canCreateNewUser(with: email, username: username) { (canCreate) in
+            if canCreate {
+                /*
+                 - Create account in Firebase
+                 - Insert account to database
+                 */
+                    // Successfully created an account, insert into database
+                    DatabaseManager.shared.insertNewUser(with: email, username: username) { (inserted) in
+                        // success to insert into database
+                        if inserted {
+                            completion(true)
+                            return
+                        }
+                        // failed to insert into database
+                        else {
+                            completion(false)
+                            return
+                        }
+                    }
+                }
+            
             else {
                 // either username or email does not exist
                 completion(false)
@@ -152,4 +201,19 @@ public class AuthManager {
         }
         
     }
+    
+    public func googleSignIn(with credential: AuthCredential, completion: @escaping (Bool) -> Void) {
+        Auth.auth().signIn(with: credential) { (authResult, error) in
+            if let error = error {
+                print(error)
+                completion(false)
+                return
+            }
+            // user is signed in with Firebase
+            completion(true)
+        }
+            
+        
+    }
 }
+
