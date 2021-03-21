@@ -37,7 +37,7 @@ class RegistrationViewController: UIViewController {
     
     private let toggleButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+        button.setImage(UIImage(systemName: "Eye"), for: .normal)
         button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = UIColor.secondaryLabel
