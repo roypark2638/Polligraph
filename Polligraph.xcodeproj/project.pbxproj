@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		136265ACCA984952CDA7C8C8 /* Pods_Polligraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439A5B197B65A2DAB1D0D5B3 /* Pods_Polligraph.framework */; };
-		9707A80825F1BC4B0099089A /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9707A80725F1BC4B0099089A /* Notification.storyboard */; };
 		9707A80F25F1C5C80099089A /* TabBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9707A80E25F1C5C80099089A /* TabBarDelegate.swift */; };
+		973E0DDF26013CD1000B9BC5 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973E0DDE26013CD1000B9BC5 /* EmailVerificationViewController.swift */; };
 		977F238F25F33613002145BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F238E25F33613002145BB /* SettingsViewController.swift */; };
 		977F239325F33628002145BB /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239225F33628002145BB /* AuthViewController.swift */; };
 		977F239625F33636002145BB /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239525F33636002145BB /* AuthManager.swift */; };
@@ -25,16 +25,14 @@
 		979E085B25EF533F00609D4C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E085A25EF533F00609D4C /* SignInViewController.swift */; };
 		979E085E25EF535000609D4C /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E085D25EF535000609D4C /* RegistrationViewController.swift */; };
 		979E087625EF8BCD00609D4C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E087525EF8BCD00609D4C /* HomeViewController.swift */; };
-		979E087C25EF8C0E00609D4C /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 979E087B25EF8C0E00609D4C /* Home.storyboard */; };
 		979E088B25EF905800609D4C /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E088A25EF905800609D4C /* NotificationViewController.swift */; };
 		979E088F25EF906400609D4C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E088E25EF906400609D4C /* SearchViewController.swift */; };
 		979E089225EF906E00609D4C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E089125EF906E00609D4C /* ProfileViewController.swift */; };
 		979E089525EF908C00609D4C /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E089425EF908C00609D4C /* NewPostViewController.swift */; };
-		979E089825EF90B600609D4C /* NewPost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 979E089725EF90B600609D4C /* NewPost.storyboard */; };
-		979E089B25EF90D300609D4C /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 979E089A25EF90D300609D4C /* Profile.storyboard */; };
-		979E089E25EF90E500609D4C /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 979E089D25EF90E500609D4C /* Search.storyboard */; };
 		979E08A325EF92AE00609D4C /* PollPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E08A225EF92AE00609D4C /* PollPostViewController.swift */; };
-		979E08A625EF92B900609D4C /* PollPost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 979E08A525EF92B900609D4C /* PollPost.storyboard */; };
+		97A7EF3F25FB37AC006B842B /* GoogleSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A7EF3E25FB37AC006B842B /* GoogleSignIn.swift */; };
+		97A7EF4225FB37B6006B842B /* FacebookSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A7EF4125FB37B6006B842B /* FacebookSignIn.swift */; };
+		97A7EF4525FB37BE006B842B /* AppleSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A7EF4425FB37BE006B842B /* AppleSignIn.swift */; };
 		97BC9EE625F3750E004EDB60 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BC9EE525F3750E004EDB60 /* StorageManager.swift */; };
 		97BC9EE925F37541004EDB60 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BC9EE825F37541004EDB60 /* DatabaseManager.swift */; };
 		97BC9EF325F37A6F004EDB60 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BC9EF225F37A6F004EDB60 /* Extensions.swift */; };
@@ -43,15 +41,14 @@
 		97DB1B9525EDEC41008955BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DB1B9425EDEC41008955BC /* AppDelegate.swift */; };
 		97DB1B9725EDEC41008955BC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DB1B9625EDEC41008955BC /* SceneDelegate.swift */; };
 		97DB1B9925EDEC41008955BC /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DB1B9825EDEC41008955BC /* OnboardingViewController.swift */; };
-		97DB1B9C25EDEC41008955BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97DB1B9A25EDEC41008955BC /* Main.storyboard */; };
 		97DB1B9E25EDEC42008955BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97DB1B9D25EDEC42008955BC /* Assets.xcassets */; };
 		97DB1BA125EDEC42008955BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97DB1B9F25EDEC42008955BC /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		439A5B197B65A2DAB1D0D5B3 /* Pods_Polligraph.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Polligraph.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9707A80725F1BC4B0099089A /* Notification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notification.storyboard; sourceTree = "<group>"; };
 		9707A80E25F1C5C80099089A /* TabBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarDelegate.swift; sourceTree = "<group>"; };
+		973E0DDE26013CD1000B9BC5 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		977F238E25F33613002145BB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		977F239225F33628002145BB /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		977F239525F33636002145BB /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -67,16 +64,15 @@
 		979E085A25EF533F00609D4C /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		979E085D25EF535000609D4C /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		979E087525EF8BCD00609D4C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		979E087B25EF8C0E00609D4C /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		979E088A25EF905800609D4C /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		979E088E25EF906400609D4C /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		979E089125EF906E00609D4C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		979E089425EF908C00609D4C /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
-		979E089725EF90B600609D4C /* NewPost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewPost.storyboard; sourceTree = "<group>"; };
-		979E089A25EF90D300609D4C /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
-		979E089D25EF90E500609D4C /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		979E08A225EF92AE00609D4C /* PollPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollPostViewController.swift; sourceTree = "<group>"; };
-		979E08A525EF92B900609D4C /* PollPost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PollPost.storyboard; sourceTree = "<group>"; };
+		97A7EF3E25FB37AC006B842B /* GoogleSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignIn.swift; sourceTree = "<group>"; };
+		97A7EF4125FB37B6006B842B /* FacebookSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookSignIn.swift; sourceTree = "<group>"; };
+		97A7EF4425FB37BE006B842B /* AppleSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignIn.swift; sourceTree = "<group>"; };
+		97A7EF8025FB5DDB006B842B /* Polligraph.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Polligraph.entitlements; sourceTree = "<group>"; };
 		97BC9EE525F3750E004EDB60 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		97BC9EE825F37541004EDB60 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		97BC9EF225F37A6F004EDB60 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -86,7 +82,6 @@
 		97DB1B9425EDEC41008955BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97DB1B9625EDEC41008955BC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		97DB1B9825EDEC41008955BC /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		97DB1B9B25EDEC41008955BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		97DB1B9D25EDEC42008955BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97DB1BA025EDEC42008955BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97DB1BA225EDEC42008955BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -144,6 +139,9 @@
 				977F239B25F33645002145BB /* HapticsManager.swift */,
 				97BC9EE525F3750E004EDB60 /* StorageManager.swift */,
 				97BC9EE825F37541004EDB60 /* DatabaseManager.swift */,
+				97A7EF3E25FB37AC006B842B /* GoogleSignIn.swift */,
+				97A7EF4125FB37B6006B842B /* FacebookSignIn.swift */,
+				97A7EF4425FB37BE006B842B /* AppleSignIn.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -194,6 +192,7 @@
 				97DB1B9825EDEC41008955BC /* OnboardingViewController.swift */,
 				979E085A25EF533F00609D4C /* SignInViewController.swift */,
 				979E085D25EF535000609D4C /* RegistrationViewController.swift */,
+				973E0DDE26013CD1000B9BC5 /* EmailVerificationViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -228,9 +227,6 @@
 		97DB1B9325EDEC41008955BC /* Polligraph */ = {
 			isa = PBXGroup;
 			children = (
-				97CDAA2D25F75E4600476262 /* GoogleService-Info.plist */,
-				97DB1BA225EDEC42008955BC /* Info.plist */,
-				977F238925F3358B002145BB /* Resources */,
 				977F238A25F33591002145BB /* Managers */,
 				977F238B25F33596002145BB /* ViewModels */,
 				97DB1BAA25EDED06008955BC /* Models */,
@@ -238,6 +234,10 @@
 				97DB1BAB25EDED19008955BC /* Views */,
 				97DB1BB225EE01B5008955BC /* Support */,
 				9791A71725F9E2A30088BDAC /* Fonts */,
+				977F238925F3358B002145BB /* Resources */,
+				97A7EF8025FB5DDB006B842B /* Polligraph.entitlements */,
+				97CDAA2D25F75E4600476262 /* GoogleService-Info.plist */,
+				97DB1BA225EDEC42008955BC /* Info.plist */,
 			);
 			path = Polligraph;
 			sourceTree = "<group>";
@@ -256,13 +256,6 @@
 			isa = PBXGroup;
 			children = (
 				97DB1B9F25EDEC42008955BC /* LaunchScreen.storyboard */,
-				97DB1B9A25EDEC41008955BC /* Main.storyboard */,
-				979E087B25EF8C0E00609D4C /* Home.storyboard */,
-				979E089725EF90B600609D4C /* NewPost.storyboard */,
-				979E089D25EF90E500609D4C /* Search.storyboard */,
-				979E089A25EF90D300609D4C /* Profile.storyboard */,
-				9707A80725F1BC4B0099089A /* Notification.storyboard */,
-				979E08A525EF92B900609D4C /* PollPost.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -295,6 +288,7 @@
 				97DB1B8E25EDEC41008955BC /* Frameworks */,
 				97DB1B8F25EDEC41008955BC /* Resources */,
 				A6B9DB99CA04EE3979E258BB /* [CP] Embed Pods Frameworks */,
+				B1A56E1D2CD43CB2A3F9C54C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -343,18 +337,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				97DB1BA125EDEC42008955BC /* LaunchScreen.storyboard in Resources */,
-				979E087C25EF8C0E00609D4C /* Home.storyboard in Resources */,
-				979E089B25EF90D300609D4C /* Profile.storyboard in Resources */,
-				979E08A625EF92B900609D4C /* PollPost.storyboard in Resources */,
 				9791A71925F9E30C0088BDAC /* Roboto-Bold.ttf in Resources */,
-				979E089E25EF90E500609D4C /* Search.storyboard in Resources */,
-				979E089825EF90B600609D4C /* NewPost.storyboard in Resources */,
 				97DB1B9E25EDEC42008955BC /* Assets.xcassets in Resources */,
 				9791A71D25F9E3240088BDAC /* Roboto-Medium.ttf in Resources */,
 				97CDAA2E25F75E4600476262 /* GoogleService-Info.plist in Resources */,
 				9791A71E25F9E3240088BDAC /* Roboto-Regular.ttf in Resources */,
-				97DB1B9C25EDEC41008955BC /* Main.storyboard in Resources */,
-				9707A80825F1BC4B0099089A /* Notification.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +387,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Polligraph/Pods-Polligraph-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B1A56E1D2CD43CB2A3F9C54C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Polligraph/Pods-Polligraph-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Polligraph/Pods-Polligraph-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Polligraph/Pods-Polligraph-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -414,11 +418,14 @@
 				979E085B25EF533F00609D4C /* SignInViewController.swift in Sources */,
 				977F239325F33628002145BB /* AuthViewController.swift in Sources */,
 				97BC9EE925F37541004EDB60 /* DatabaseManager.swift in Sources */,
+				97A7EF4225FB37B6006B842B /* FacebookSignIn.swift in Sources */,
 				979E085E25EF535000609D4C /* RegistrationViewController.swift in Sources */,
 				977F239625F33636002145BB /* AuthManager.swift in Sources */,
 				979E089225EF906E00609D4C /* ProfileViewController.swift in Sources */,
+				97A7EF3F25FB37AC006B842B /* GoogleSignIn.swift in Sources */,
 				979E087625EF8BCD00609D4C /* HomeViewController.swift in Sources */,
 				977F238F25F33613002145BB /* SettingsViewController.swift in Sources */,
+				97A7EF4525FB37BE006B842B /* AppleSignIn.swift in Sources */,
 				97DB1B9925EDEC41008955BC /* OnboardingViewController.swift in Sources */,
 				977F239F25F3365A002145BB /* UserProfile.swift in Sources */,
 				97BC9EE625F3750E004EDB60 /* StorageManager.swift in Sources */,
@@ -426,6 +433,7 @@
 				977F239925F3363E002145BB /* APICaller.swift in Sources */,
 				97BC9F0F25F42D26004EDB60 /* TabBarViewController.swift in Sources */,
 				97DB1B9725EDEC41008955BC /* SceneDelegate.swift in Sources */,
+				973E0DDF26013CD1000B9BC5 /* EmailVerificationViewController.swift in Sources */,
 				979E08A325EF92AE00609D4C /* PollPostViewController.swift in Sources */,
 				97BC9EF325F37A6F004EDB60 /* Extensions.swift in Sources */,
 				9707A80F25F1C5C80099089A /* TabBarDelegate.swift in Sources */,
@@ -438,14 +446,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		97DB1B9A25EDEC41008955BC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				97DB1B9B25EDEC41008955BC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		97DB1B9F25EDEC42008955BC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -579,6 +579,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Polligraph/Polligraph.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FQ52H34MLU;
 				INFOPLIST_FILE = Polligraph/Info.plist;
@@ -600,6 +601,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Polligraph/Polligraph.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FQ52H34MLU;
 				INFOPLIST_FILE = Polligraph/Info.plist;
