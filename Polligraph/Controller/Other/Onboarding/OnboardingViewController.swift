@@ -8,7 +8,8 @@
 import UIKit
 
 class OnboardingViewController: UIViewController {
-    
+    // MARK: - Properties
+
     // For user auth, this variable takes nothing and returns nothing
     public var completion: (() -> Void)?
         
@@ -30,25 +31,28 @@ class OnboardingViewController: UIViewController {
         return imageView
     }()
     
-    private let createAccountButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Create an Account", for: .normal)
-        button.setTitleColor(.systemBackground, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
-        button.backgroundColor = .label
-        button.layer.cornerRadius = Constants.cornerRadius
-        return button
-    }()
+    private let createAccountButton = AuthButton(type: .black, title: "Create an Account")
+    private let signInButton = AuthButton(type: .secondary, title: "Sign In")
     
-    private let signInButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Sign In", for: .normal)
-        button.setTitleColor(.black , for: .normal)
-        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
-        button.backgroundColor = .secondarySystemBackground
-        button.layer.cornerRadius = Constants.cornerRadius
-        return button
-    }()
+//    private let createAccountButton: UIButton = {
+//        let button = UIButton()
+//        button.setTitle("Create an Account", for: .normal)
+//        button.setTitleColor(.systemBackground, for: .normal)
+//        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
+//        button.backgroundColor = .label
+//        button.layer.cornerRadius = Constants.cornerRadius
+//        return button
+//    }()
+//
+//    private let signInButton: UIButton = {
+//        let button = UIButton()
+//        button.setTitle("Sign In", for: .normal)
+//        button.setTitleColor(.black , for: .normal)
+//        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
+//        button.backgroundColor = .secondarySystemBackground
+//        button.layer.cornerRadius = Constants.cornerRadius
+//        return button
+//    }()
     
     // MARK: - LifeCycle
     
