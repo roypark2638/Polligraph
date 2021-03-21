@@ -9,8 +9,11 @@ import UIKit
 import FirebaseAuth
 
 class TabBarViewController: UITabBarController {
+    
+    private var onboardingPresented = false
 
 //    private var tabBarDelegate = TabBarDelegate()
+    // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,33 +24,25 @@ class TabBarViewController: UITabBarController {
         super.viewDidAppear(animated)
         
         // Check user auth status
-//        handleNotAuthenticated()
-//        createTabBar()
+        if !onboardingPresented {
+            presentOnboardingIfNeeded()
+        }
     }
     
-//    override func viewDidLayoutSubviews() {
-//        createTabBar()
-//    }
+    // MARK: Methods
     
-    private func handleNotAuthenticated() {
-        if Auth.auth().currentUser == nil {
-            // show singin page
-            let vc = SignInViewController()
-            // set the signinVC fullscreen so that user can't swipe the page away
-            vc.modalPresentationStyle = .fullScreen
-            
-            present(vc, animated: true, completion: nil)
+    private func presentOnboardingIfNeeded() {
+        if !AuthManager.shared.isSignedIn() {
+            onboardingPresented = true
+            let vc = OnboardingViewController()
+            vc.completion = { [weak self] in
+                self?.onboardingPresented = false
+            }
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: false, completion: nil)
         }
         else {
-            // show TabBarVC
-//            createTabBar()
-            let tabBarVC = TabBarViewController()
-            
-            dismiss(animated: true, completion: nil)
-            // dismiss the signin view(?) and set tabvarVC fullscreen
-            tabBarVC.modalPresentationStyle = .fullScreen
-            
-            present(tabBarVC, animated: true, completion: nil)
             
         }
     }
