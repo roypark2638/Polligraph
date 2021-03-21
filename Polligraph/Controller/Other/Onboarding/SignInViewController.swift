@@ -10,12 +10,11 @@ import FirebaseAuth
 
 class SignInViewController: UIViewController {
     
-    // MARK: - Init
-    
+    // MARK: - Properties
+
     struct Constants {
         static let cornerRadius = CGFloat(20.0)
     }
-    
     
     // Create anonymous closures
     
@@ -31,78 +30,21 @@ class SignInViewController: UIViewController {
         return label
     }()
     
-//    private let imageContainerView: UIView = {
-//        let containerView = UIView()
-//        containerView.translatesAutoresizingMaskIntoConstraints = false
-//        return containerView
-//    }()
-//
-//    private let titleView: UIImageView = {
-//        let imageView = UIImageView(image: UIImage(named: "Polligraph Main"))
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.contentMode = .scaleAspectFit
-//        return imageView
-//    }()
-    
-    private let usernameEmailField: UITextField = {
-        let field = UITextField()
-        field.placeholder = "Email Address or Username"
-        field.font = UIFont(name: "Roboto-Bold", size: 16)
-        field.returnKeyType = .next
-        field.leftViewMode = .always
-        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
-        field.autocorrectionType = .no
-        field.autocapitalizationType = .none
-        field.backgroundColor = .secondarySystemBackground
-        field.layer.cornerRadius = Constants.cornerRadius
-        field.layer.masksToBounds = true
-        return field
-    }()
-    
-    private let passwordField: UITextField = {
-        let field = UITextField()
-        field.placeholder = "Password"
-        field.isSecureTextEntry = true
-        field.font = UIFont(name: "Roboto-Bold", size: 16)
-        field.returnKeyType = .continue
-        field.leftViewMode = .always
-        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
-        field.autocorrectionType = .no
-        field.autocapitalizationType = .none
-        field.backgroundColor = .secondarySystemBackground
-        field.layer.cornerRadius = Constants.cornerRadius
-        field.layer.masksToBounds = true
-        return field
-    }()
+    private let usernameEmailField = AuthField(type: .email, title: "Email Address or Username")
+    private let passwordField = AuthField(type: .password, title: nil)
     
     private let toggleButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+        button.setImage(UIImage(systemName: "Eye"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
         button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = UIColor.secondaryLabel
         return button
     }()
     
-    private let signInButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Sign In", for: .normal)
-        button.setTitleColor(.systemBackground, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
-        button.backgroundColor = .label
-        button.layer.cornerRadius = Constants.cornerRadius
-        return button
-    }()
-    
-    private let forgotPasswordButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Forgot Password", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
-        button.setTitleColor(.label , for: .normal)
-        button.backgroundColor = .systemBackground
-        button.layer.cornerRadius = Constants.cornerRadius
-        return button
-    }()
+    private let signInButton = AuthButton(type: .black, title: "Sign In")
+    private let forgotPasswordButton = AuthButton(type: .boldPlain, title: "Forgot Password")
     
     private let orSignInWithLabel: UILabel = {
         let label = UILabel()
@@ -145,12 +87,11 @@ class SignInViewController: UIViewController {
         
         GIDSignIn.sharedInstance()?.presentingViewController = self
 //        GIDSignIn.sharedInstance().signIn()
-
-        usernameEmailField.delegate = self
-        passwordField.delegate = self
+        
         view.backgroundColor = .systemBackground
         
         setupButtonActions()
+        configureField()
         addSubviews()
     }
     
@@ -162,8 +103,22 @@ class SignInViewController: UIViewController {
     
     // MARK: - Methods
     
+    private func configureField() {
+        usernameEmailField.delegate = self
+        passwordField.delegate = self
+        
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.width, height: 50))
+        toolBar.items = [
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+            UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didTouchKeyboardDone))
+        ]
+        
+        toolBar.sizeToFit()
+        usernameEmailField.inputAccessoryView = toolBar
+        passwordField.inputAccessoryView = toolBar
+    }
+    
     private func addSubviews() {
-//        view.addSubview(imageContainerView)
         view.addSubview(headingLabel)
         view.addSubview(usernameEmailField)
         view.addSubview(passwordField)
@@ -209,21 +164,6 @@ class SignInViewController: UIViewController {
             y: view.safeAreaInsets.top - 30,
             width: view.width - 48,
             height: 33)
-        
-//        NSLayoutConstraint.activate([
-//            imageContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
-//            imageContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            imageContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            imageContainerView.rightAnchor.constraint(equalTo: view.rightAnchor)
-//        ])
-//        
-//        imageContainerView.addSubview(titleView)
-//        
-//        NSLayoutConstraint.activate([
-//            titleView.centerXAnchor.constraint(equalTo: imageContainerView.centerXAnchor),
-//            titleView.centerYAnchor.constraint(equalTo: imageContainerView.centerYAnchor),
-//            titleView.widthAnchor.constraint(equalTo: imageContainerView.widthAnchor, multiplier: 0.7)
-//        ])
         
         usernameEmailField.frame = CGRect(
             x: 24,
@@ -274,7 +214,7 @@ class SignInViewController: UIViewController {
     }
     
     private func createBackButton() -> UIButton {
-        let backButtonImage = UIImage(systemName: "arrow.backward")
+        let backButtonImage = UIImage(systemName: "Back Arrow")
         let backButton = UIButton(type: .custom)
         backButton.setImage(backButtonImage, for: .normal)
         backButton.tintColor = .label
@@ -283,14 +223,16 @@ class SignInViewController: UIViewController {
     }
     
     // MARK: - Objc Methods
-    
+    @objc private func didTouchKeyboardDone() {
+        usernameEmailField.resignFirstResponder()
+        passwordField.resignFirstResponder()
+    }
     @objc private func didTapPasswordToggle() {
         passwordField.isSecureTextEntry.toggle()
     }
     
     @objc private func didTapSignIn() {
-        usernameEmailField.resignFirstResponder()
-        passwordField.resignFirstResponder()
+        didTouchKeyboardDone()
         
         guard let usernameEmail = usernameEmailField.text, !usernameEmail.isEmpty else { return }
         guard let password = passwordField.text, !password.isEmpty, password.count >= 8 else { return }
