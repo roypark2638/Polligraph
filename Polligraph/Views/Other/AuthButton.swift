@@ -13,6 +13,7 @@ class AuthButton: UIButton {
         case black
         case secondary
         case plain
+        case boldPlain
     }
     
     private let type: ButtonType
@@ -50,7 +51,10 @@ class AuthButton: UIButton {
             backgroundColor = .clear
             titleLabel?.font = UIFont(name: "Roboto-Regular", size: 14)
             setTitleColor(.label, for: .normal)
-
+            
+        case .boldPlain:
+            backgroundColor = .clear
+            setTitleColor(.label, for: .normal)
         }
     }
     

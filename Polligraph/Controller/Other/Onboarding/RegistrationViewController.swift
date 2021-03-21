@@ -32,7 +32,7 @@ class RegistrationViewController: UIViewController {
     
     private let emailAddressField = AuthField(type: .email, title: nil)
     private let usernameField = AuthField(type: .username, title: nil)
-    private let passwordField = AuthField(type: .username, title: nil)
+    private let passwordField = AuthField(type: .password, title: nil)
 
     
     private let toggleButton: UIButton = {
@@ -247,9 +247,7 @@ class RegistrationViewController: UIViewController {
     }
     
     @objc private func didTapCreateAccount() {
-        emailAddressField.resignFirstResponder()
-        usernameField.resignFirstResponder()
-        passwordField.resignFirstResponder()
+        didTouchKeyboardDone()
                         
         let errorMessage = validateFields()
         

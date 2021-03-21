@@ -30,6 +30,8 @@
 		979E089225EF906E00609D4C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E089125EF906E00609D4C /* ProfileViewController.swift */; };
 		979E089525EF908C00609D4C /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E089425EF908C00609D4C /* NewPostViewController.swift */; };
 		979E08A325EF92AE00609D4C /* PollPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E08A225EF92AE00609D4C /* PollPostViewController.swift */; };
+		97A26BD1260745BF000C202F /* AuthField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A26BD0260745BF000C202F /* AuthField.swift */; };
+		97A26BD5260745CA000C202F /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A26BD4260745CA000C202F /* AuthButton.swift */; };
 		97A7EF3F25FB37AC006B842B /* GoogleSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A7EF3E25FB37AC006B842B /* GoogleSignIn.swift */; };
 		97A7EF4225FB37B6006B842B /* FacebookSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A7EF4125FB37B6006B842B /* FacebookSignIn.swift */; };
 		97A7EF4525FB37BE006B842B /* AppleSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A7EF4425FB37BE006B842B /* AppleSignIn.swift */; };
@@ -69,6 +71,8 @@
 		979E089125EF906E00609D4C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		979E089425EF908C00609D4C /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
 		979E08A225EF92AE00609D4C /* PollPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollPostViewController.swift; sourceTree = "<group>"; };
+		97A26BD0260745BF000C202F /* AuthField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthField.swift; sourceTree = "<group>"; };
+		97A26BD4260745CA000C202F /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
 		97A7EF3E25FB37AC006B842B /* GoogleSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignIn.swift; sourceTree = "<group>"; };
 		97A7EF4125FB37B6006B842B /* FacebookSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookSignIn.swift; sourceTree = "<group>"; };
 		97A7EF4425FB37BE006B842B /* AppleSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignIn.swift; sourceTree = "<group>"; };
@@ -185,6 +189,23 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		97A26BCE260745A8000C202F /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				97DB1B9F25EDEC42008955BC /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		97A26BCF260745AF000C202F /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				97A26BD0260745BF000C202F /* AuthField.swift */,
+				97A26BD4260745CA000C202F /* AuthButton.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		97BC9EEC25F375AD004EDB60 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,7 +276,8 @@
 		97DB1BAB25EDED19008955BC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				97DB1B9F25EDEC42008955BC /* LaunchScreen.storyboard */,
+				97A26BCF260745AF000C202F /* Other */,
+				97A26BCE260745A8000C202F /* Storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -423,6 +445,7 @@
 				977F239625F33636002145BB /* AuthManager.swift in Sources */,
 				979E089225EF906E00609D4C /* ProfileViewController.swift in Sources */,
 				97A7EF3F25FB37AC006B842B /* GoogleSignIn.swift in Sources */,
+				97A26BD1260745BF000C202F /* AuthField.swift in Sources */,
 				979E087625EF8BCD00609D4C /* HomeViewController.swift in Sources */,
 				977F238F25F33613002145BB /* SettingsViewController.swift in Sources */,
 				97A7EF4525FB37BE006B842B /* AppleSignIn.swift in Sources */,
@@ -433,6 +456,7 @@
 				977F239925F3363E002145BB /* APICaller.swift in Sources */,
 				97BC9F0F25F42D26004EDB60 /* TabBarViewController.swift in Sources */,
 				97DB1B9725EDEC41008955BC /* SceneDelegate.swift in Sources */,
+				97A26BD5260745CA000C202F /* AuthButton.swift in Sources */,
 				973E0DDF26013CD1000B9BC5 /* EmailVerificationViewController.swift in Sources */,
 				979E08A325EF92AE00609D4C /* PollPostViewController.swift in Sources */,
 				97BC9EF325F37A6F004EDB60 /* Extensions.swift in Sources */,

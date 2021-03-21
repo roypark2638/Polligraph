@@ -29,6 +29,7 @@ class AuthField: UITextField {
     init(type: FieldType, title: String?) {
         self.type = type
         super.init(frame: .zero)
+        placeholder = type.title
         if let safeTitle = title {
             placeholder = safeTitle
         }
@@ -41,7 +42,7 @@ class AuthField: UITextField {
     
     private func configureField() {
         backgroundColor = .secondarySystemBackground
-        placeholder = type.title
+//        placeholder = type.title
         layer.cornerRadius = 20.0
         layer.masksToBounds = true
         leftViewMode = .always
@@ -54,12 +55,12 @@ class AuthField: UITextField {
             
         }
         else if type == .email {
-            isSecureTextEntry = true
-            textContentType = .oneTimeCode
-        }
-        else if type == .password {
             keyboardType = .emailAddress
             textContentType = .emailAddress
+        }
+        else if type == .password {
+            isSecureTextEntry = true
+            textContentType = .oneTimeCode
         }
     }
 }
