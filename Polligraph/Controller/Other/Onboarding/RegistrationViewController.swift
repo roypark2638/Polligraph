@@ -37,14 +37,51 @@ class RegistrationViewController: UIViewController {
     
     private let toggleButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(systemName: "Eye"), for: .normal)
+        button.setImage(UIImage(named: "Eye"), for: .normal)
         button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = UIColor.secondaryLabel
         return button
     }()
     
-    private let acceptLabelButton = AuthButton(type: .plain, title: "By signing up, you agree to our Terms of Service and acknowledge that you have read our Privacy Policy to learn how we collect, use and share your data.")
+    private let termsLabel: UILabel = {
+        let label = UILabel()
+        let text1 = "By signing up, you agree to our "
+        let text2 = "Terms of Service "
+        let text3 = "and acknowledge that you have read our "
+        let text4 = "Privacy Policy "
+        let text5 = "to learn how we collect, use and share your data."
+        
+        let text1Attribute = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 14)]
+        let text2Attribute = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 14)]
+        let text3Attribute = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 14)]
+        let text4Attribute = [NSAttributedString.Key.font : UIFont(name: "Roboto-Bold", size: 14)]
+        let text5Attribute = [NSAttributedString.Key.font : UIFont(name: "Roboto-Regular", size: 14)]
+                        
+        let attributedString1 = NSMutableAttributedString(string: text1, attributes: text1Attribute as [NSAttributedString.Key : Any])
+        let attributedString2 = NSMutableAttributedString(string: text2, attributes: text2Attribute as [NSAttributedString.Key : Any])
+        let attributedString3 = NSMutableAttributedString(string: text3, attributes: text3Attribute as [NSAttributedString.Key : Any])
+        let attributedString4 = NSMutableAttributedString(string: text4, attributes: text4Attribute as [NSAttributedString.Key : Any])
+        let attributedString5 = NSMutableAttributedString(string: text5, attributes: text5Attribute as [NSAttributedString.Key : Any])
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 3
+        
+        attributedString1.append(attributedString2)
+        attributedString1.append(attributedString3)
+        attributedString1.append(attributedString4)
+        attributedString1.append(attributedString5)
+        attributedString1.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString1.length))
+        label.attributedText = attributedString1
+        
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
+        label.sizeToFit()
+        label.textColor = .label
+        return label
+    }()
+    
+//    private let acceptLabelButton = AuthButton(type: .plain, title: "By signing up, you agree to our Terms of Service and acknowledge that you have read our Privacy Policy to learn how we collect, use and share your data.")
     
     private let createAccount = AuthButton(type: .black, title: "Create an Account")
     
@@ -134,27 +171,23 @@ class RegistrationViewController: UIViewController {
             width: view.width - 48,
             height: 50)
         
-//        acceptButton.frame = CGRect(
-//            x: 24,
-//            y: passwordField.bottom + 24,
-//            width: 23,
-//            height: 23)
+        let termsLabelSize = termsLabel.sizeThatFits(CGSize(width: view.width - 48, height: view.height))
         
-        acceptLabelButton.frame = CGRect(
+        termsLabel.frame = CGRect(
             x: 24,
             y: passwordField.bottom + 24,
-            width: view.width - 48,
-            height: 50)
+            width: termsLabelSize.width,
+            height: termsLabelSize.height)
         
         createAccount.frame = CGRect(
             x: 24,
-            y: acceptLabelButton.bottom + 48,
+            y: termsLabel.bottom + 48,
             width: view.width - 48,
             height: 50)
         
         orCreateAccountWith.frame = CGRect(
             x: 24,
-            y: view.height - view.safeAreaInsets.bottom - 200,
+            y: view.height - view.safeAreaInsets.bottom - 160,
             width: view.width - 48,
             height: 30)
         
@@ -184,8 +217,7 @@ class RegistrationViewController: UIViewController {
         view.addSubview(usernameField)
         view.addSubview(passwordField)
         view.addSubview(toggleButton)
-//        view.addSubview(acceptButton)
-        view.addSubview(acceptLabelButton)
+        view.addSubview(termsLabel)
         view.addSubview(createAccount)
         view.addSubview(orCreateAccountWith)
         view.addSubview(googleButton)
@@ -255,10 +287,7 @@ class RegistrationViewController: UIViewController {
             let alert = Helper.errorAlert(title: "Error", message: errorMessage!)
             self.present(alert, animated: true, completion: nil)
         }
-//        else if isUserAcceptAgreement == false {
-//            let alert = Helper.errorAlert(title: "Please Check", message: "Check the User Agreement and Privacy Policy.")
-//            self.present(alert, animated: true, completion: nil)
-//        }
+
         else {
             
         guard let emailAddress = emailAddressField.text, !emailAddress.isEmpty,
@@ -267,27 +296,29 @@ class RegistrationViewController: UIViewController {
             return
         }
         
-        AuthManager.shared.registerNewUser(username: username, email: emailAddress, password: password) { (registered) in
-            let spinner = UIViewController.displayLoading(withView: self.view)
+        AuthManager.shared.registerNewUser(username: username, email: emailAddress, password: password) { [weak self] (registered) in
+            let spinner = UIViewController.displayLoading(withView: (self?.view)!)
             // we are going to update our UI so use DispatchQueue
             DispatchQueue.main.async {
                 // success to register an account
                 if registered {
                     AuthManager.shared.sendEmailVerification() { sentEmail in
                         // successfully sent the email to the link
-//                        if sentEmail {
-//
-//                        }
-//                        else {
-//                            // error to send an email
-//                            let alert = Helper.errorAlert(title: "Error Email Verification!", message: "Something went wrong with email verification link. Please try again.")
-//                            self.present(alert, animated: true, completion: nil)
-//                        }
-                        
+                        if sentEmail {
+
+                        }
+                        else {
+                            // error to send an email
+                            let alert = Helper.errorAlert(title: "Error Email Verification!", message: "Something went wrong with email verification link. Please try again.")
+                            self?.present(alert, animated: true, completion: nil)
+                        }
                     }
-                    let alert = Helper.errorAlert(title: "Verification Link Sent!", message: "Please check your email inbox associated with \(emailAddress) for the verification link.")
-                    self.present(alert, animated: true, completion: nil)
+//                    let alert = Helper.errorAlert(title: "Verification Link Sent!", message: "Please check your email inbox associated with \(emailAddress) for the verification link.")
+//                    self.present(alert, animated: true, completion: nil)
                     UIViewController.removeLoading(spinner: spinner)
+                    let vc = EmailVerificationViewController()
+                    vc.modalPresentationStyle = .fullScreen
+                    self?.present(vc, animated: true, completion: nil)
 //                    self.dismiss(animated: true, completion: nil)
                     return
                 }
@@ -297,7 +328,7 @@ class RegistrationViewController: UIViewController {
                     // TODO: databaseManager to check if the user can create account with email and username
                     UIViewController.removeLoading(spinner: spinner)
                     let alert = Helper.errorAlert(title: "Temp Error Duplicate", message: "Email or username are already taken (Temp).")
-                    self.present(alert, animated: true, completion: nil)
+                    self?.present(alert, animated: true, completion: nil)
                 }
             }
         }
@@ -331,11 +362,11 @@ class RegistrationViewController: UIViewController {
 //                    var errorTitle: String = "Login Error"
 //                    var errorMessage: String = "There was a problem logging in"
 //
-////                    if let errorCode = AuthErrorCode(rawValue: error._code) {
-////                        switch errorCode {
-////                        case .
-////                        }
-////                    }
+//                    if let errorCode = AuthErrorCode(rawValue: error._code) {
+//                        switch errorCode {
+//                        case .
+//                        }
+//                    }
 //                }
 //            }
 //        }
