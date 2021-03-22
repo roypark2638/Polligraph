@@ -71,7 +71,7 @@ class OnboardingViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        setupLayout()
+        setUpLayout()
     }
     
     // MARK: - Methods
@@ -94,7 +94,7 @@ class OnboardingViewController: UIViewController {
             for: .touchUpInside)
     }
     
-    private func setupLayout() {
+    private func setUpLayout() {
         NSLayoutConstraint.activate([
             imageContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
             imageContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -135,8 +135,7 @@ class OnboardingViewController: UIViewController {
     // MARK: - Objc Methods
     
     @objc private func didTapCreateAccount() {
-//        let vc = RegistrationViewController()
-        let vc = EmailVerificationViewController()
+        let vc = RegistrationViewController()        
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         nav.navigationBar.prefersLargeTitles = true
