@@ -35,11 +35,10 @@ class SignInViewController: UIViewController {
     
     private let toggleButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(systemName: "Eye"), for: .normal)
+        button.setImage(UIImage(named: "Eye"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = UIColor.secondaryLabel
         return button
     }()
     
@@ -98,7 +97,7 @@ class SignInViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        setupLayout()
+        setUpLayout()
     }
     
     // MARK: - Methods
@@ -158,7 +157,7 @@ class SignInViewController: UIViewController {
             for: .touchUpInside)
     }
     
-    private func setupLayout() {
+    private func setUpLayout() {
         headingLabel.frame = CGRect(
             x: 24,
             y: view.safeAreaInsets.top - 30,
@@ -191,7 +190,7 @@ class SignInViewController: UIViewController {
         
         orSignInWithLabel.frame = CGRect(
             x: 50,
-            y: view.height - 170,
+            y: view.height - view.safeAreaInsets.bottom - 160,
             width: view.width - 100,
             height: 20)
         
