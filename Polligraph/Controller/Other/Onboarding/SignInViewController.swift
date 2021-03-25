@@ -299,10 +299,11 @@ class SignInViewController: UIViewController {
     
     // this needs to be changed to navigate to the tabBar controller if auth passes
     @objc private func didTapForgotPassword() {
-        let vc = SignInViewController()
+        let vc = ForgotPasswordViewController()
         let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        nav.navigationBar.prefersLargeTitles = true
+        nav.navigationBar.backgroundColor = .clear
+        nav.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        nav.navigationBar.shadowImage = UIImage()
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: createBackButton())
         present(nav, animated: true, completion: nil)
     }
