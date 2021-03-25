@@ -15,7 +15,7 @@
 		977F239625F33636002145BB /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239525F33636002145BB /* AuthManager.swift */; };
 		977F239925F3363E002145BB /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239825F3363E002145BB /* APICaller.swift */; };
 		977F239C25F33645002145BB /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239B25F33645002145BB /* HapticsManager.swift */; };
-		977F239F25F3365A002145BB /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239E25F3365A002145BB /* UserProfile.swift */; };
+		977F239F25F3365A002145BB /* UserPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239E25F3365A002145BB /* UserPost.swift */; };
 		977F23A225F33680002145BB /* PollPostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F23A125F33680002145BB /* PollPostList.swift */; };
 		9791A70D25F96A4C0088BDAC /* SettingsCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9791A70C25F96A4C0088BDAC /* SettingsCellModel.swift */; };
 		9791A71925F9E30C0088BDAC /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9791A71825F9E30C0088BDAC /* Roboto-Bold.ttf */; };
@@ -45,6 +45,7 @@
 		97DB1B9925EDEC41008955BC /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DB1B9825EDEC41008955BC /* OnboardingViewController.swift */; };
 		97DB1B9E25EDEC42008955BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97DB1B9D25EDEC42008955BC /* Assets.xcassets */; };
 		97DB1BA125EDEC42008955BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97DB1B9F25EDEC42008955BC /* LaunchScreen.storyboard */; };
+		97EA192C260C423900D08BAC /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA192B260C423900D08BAC /* ForgotPasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,7 +57,7 @@
 		977F239525F33636002145BB /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		977F239825F3363E002145BB /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		977F239B25F33645002145BB /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
-		977F239E25F3365A002145BB /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		977F239E25F3365A002145BB /* UserPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPost.swift; sourceTree = "<group>"; };
 		977F23A125F33680002145BB /* PollPostList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollPostList.swift; sourceTree = "<group>"; };
 		9791A70C25F96A4C0088BDAC /* SettingsCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellModel.swift; sourceTree = "<group>"; };
 		9791A71825F9E30C0088BDAC /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
@@ -89,6 +90,7 @@
 		97DB1B9D25EDEC42008955BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97DB1BA025EDEC42008955BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97DB1BA225EDEC42008955BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97EA192B260C423900D08BAC /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		989BE7FEA84F3173270B7101 /* Pods-Polligraph.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Polligraph.release.xcconfig"; path = "Target Support Files/Pods-Polligraph/Pods-Polligraph.release.xcconfig"; sourceTree = "<group>"; };
 		AF2E107638AACE0E50F8D036 /* Pods-Polligraph.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Polligraph.debug.xcconfig"; path = "Target Support Files/Pods-Polligraph/Pods-Polligraph.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -214,6 +216,7 @@
 				979E085A25EF533F00609D4C /* SignInViewController.swift */,
 				979E085D25EF535000609D4C /* RegistrationViewController.swift */,
 				973E0DDE26013CD1000B9BC5 /* EmailVerificationViewController.swift */,
+				97EA192B260C423900D08BAC /* ForgotPasswordViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -266,7 +269,7 @@
 		97DB1BAA25EDED06008955BC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				977F239E25F3365A002145BB /* UserProfile.swift */,
+				977F239E25F3365A002145BB /* UserPost.swift */,
 				977F23A125F33680002145BB /* PollPostList.swift */,
 				9791A70C25F96A4C0088BDAC /* SettingsCellModel.swift */,
 			);
@@ -433,6 +436,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97EA192C260C423900D08BAC /* ForgotPasswordViewController.swift in Sources */,
 				979E088B25EF905800609D4C /* NotificationViewController.swift in Sources */,
 				979E089525EF908C00609D4C /* NewPostViewController.swift in Sources */,
 				9791A70D25F96A4C0088BDAC /* SettingsCellModel.swift in Sources */,
@@ -450,7 +454,7 @@
 				977F238F25F33613002145BB /* SettingsViewController.swift in Sources */,
 				97A7EF4525FB37BE006B842B /* AppleSignIn.swift in Sources */,
 				97DB1B9925EDEC41008955BC /* OnboardingViewController.swift in Sources */,
-				977F239F25F3365A002145BB /* UserProfile.swift in Sources */,
+				977F239F25F3365A002145BB /* UserPost.swift in Sources */,
 				97BC9EE625F3750E004EDB60 /* StorageManager.swift in Sources */,
 				97DB1B9525EDEC41008955BC /* AppDelegate.swift in Sources */,
 				977F239925F3363E002145BB /* APICaller.swift in Sources */,

@@ -65,7 +65,7 @@ class TabBarViewController: UITabBarController {
         searchNav.navigationBar.prefersLargeTitles = true
         newPostNav.navigationBar.prefersLargeTitles = true
         notificationNav.navigationBar.prefersLargeTitles = true
-        profileNav.navigationBar.prefersLargeTitles = true
+//        profileNav.navigationBar.prefersLargeTitles = true
         
         setViewControllers(viewControllers, animated: false)
         

@@ -8,6 +8,8 @@
 import UIKit
 import FirebaseAuth
 import AuthenticationServices
+import SafariServices
+
 
 class RegistrationViewController: UIViewController {
     // MARK: - Properties
@@ -63,6 +65,14 @@ class RegistrationViewController: UIViewController {
         let attributedString4 = NSMutableAttributedString(string: text4, attributes: text4Attribute as [NSAttributedString.Key : Any])
         let attributedString5 = NSMutableAttributedString(string: text5, attributes: text5Attribute as [NSAttributedString.Key : Any])
         
+//        attributedString2.addAttribute(.link, value: "https://www.google.com", range: NSMakeRange(0, attributedString2.length))
+//        attributedString4.addAttribute(.link, value: "https://www.google.com", range: NSMakeRange(0, attributedString4.length))
+//
+//        attributedString2.accessibilityRespondsToUserInteraction = true
+//        let term = UITapGestureRecognizer(target: self, action: #selector(didTouchTerms))
+//        attributedString4.accessibilityRespondsToUserInteraction = true
+//        let privacy = UITapGestureRecognizer(target: self, action: #selector(didTouchPrivacy))
+        
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 3
         
@@ -72,7 +82,7 @@ class RegistrationViewController: UIViewController {
         attributedString1.append(attributedString5)
         attributedString1.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString1.length))
         label.attributedText = attributedString1
-        
+                
         label.textAlignment = .center
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
@@ -390,4 +400,5 @@ extension RegistrationViewController: UITextFieldDelegate {
         
         return true
     }
+        
 }

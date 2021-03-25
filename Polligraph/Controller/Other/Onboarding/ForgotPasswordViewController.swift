@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import FirebaseAuth
 
-class ForgotPasswordViewController: UIViewController {
+class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     
@@ -66,6 +67,7 @@ class ForgotPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        configureField()
         addSubviews()
         
         confirmButton.addTarget(
@@ -78,6 +80,22 @@ class ForgotPasswordViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setUpLayouts()
+        configureField()
+    }
+    
+    // MARK: - Methods
+    
+    private func configureField() {
+        emailAddressField.delegate = self
+        
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.width, height: 50))
+        toolBar.items = [
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+            UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didTapKeyboardDone))
+        ]
+        
+        toolBar.sizeToFit()
+        emailAddressField.inputAccessoryView = toolBar
     }
     
     private func setUpLayouts() {
@@ -137,8 +155,49 @@ class ForgotPasswordViewController: UIViewController {
         view.addSubview(confirmButton)
     }
 
+    // MARK: Objc Methods
     
     @objc private func didTapSendLink() {
+        guard let email = emailAddressField.text, !email.trimmingCharacters(in: .whitespaces).isEmpty else {
+            print("Email is empty.")
+            return
+        }
         
+        Auth.auth().sendPasswordReset(withEmail: email) { [weak self] (error) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print(error)
+                    let alert = UIAlertController(
+                        title: "Error",
+                        message: error.localizedDescription,
+                        preferredStyle: .alert
+                    )
+                    alert.addAction(UIAlertAction(title: "Close", style: .cancel))
+                    self?.present(alert, animated: true, completion: nil)
+                }
+                else {
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(
+                            title: "Password Reset Link Sent!",
+                            message: "Please check your email inbox associated with \(email) to reset your password.",
+                            preferredStyle: .alert
+                        )
+                        alert.addAction(UIAlertAction(title: "Close", style: .cancel))
+                        self?.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
+    
+    @objc private func didTapKeyboardDone() {
+        emailAddressField.resignFirstResponder()
+    }
+    
+    // MARK: TextFieldDelegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        didTapSendLink()
+        return true
     }
 }
