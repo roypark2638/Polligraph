@@ -10,7 +10,7 @@ import Firebase
 import GoogleSignIn
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         FirebaseApp.configure()
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        GIDSignIn.sharedInstance().delegate = self
+//        GIDSignIn.sharedInstance().delegate = self
         let window = UIWindow(frame: UIScreen.main.bounds)
         
         if !AuthManager.shared.isSignedIn() || !AuthManager.shared.isVerified() {
@@ -55,51 +55,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
       -> Bool {
       return GIDSignIn.sharedInstance().handle(url)
     }
+//
+//    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+//        if let error = error {
+//            // if there is an error
+//            print(error)
+//            return
+//        }
+//
+//        print("User email: \(user.profile.email ?? "No Email")")
+//
+//
+//        guard let authentication = user.authentication else { return }
+//        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+//        let userID = user.userID
+//        let idToken = user.authentication.idToken
+////        let fullName = user.profile.name.trimmingCharacters(in: .whitespacesAndNewlines)
+//        let givenName = user.profile.givenName
+//        let familyName = user.profile.familyName
+//        let email = user.profile.email
+//        AuthManager.shared.googleSignIn(with: credential) { (success) in
+//            if success {
+//                print("user is signed in")
+//            }
+//            else {
+//                print("error to sign in")
+//            }
+//        }
+//
+//
+//        AuthManager.shared.insertUserIntoDatabase(username: givenName! + familyName! + userID!, email: email!) { (success) in
+//            if success {
+//                print("user is in database")
+//            }
+//            else {
+//                print("error to insert user in database")
+//            }
+//        }
+//
+//
+//    }
     
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if let error = error {
-            // if there is an error
-            print(error)
-            return
-        }
-        
-        print("User email: \(user.profile.email ?? "No Email")")
-        
-        
-        guard let authentication = user.authentication else { return }
-        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-        let userID = user.userID
-        let idToken = user.authentication.idToken
-//        let fullName = user.profile.name.trimmingCharacters(in: .whitespacesAndNewlines)
-        let givenName = user.profile.givenName
-        let familyName = user.profile.familyName
-        let email = user.profile.email
-        AuthManager.shared.googleSignIn(with: credential) { (success) in
-            if success {
-                print("user is signed in")
-            }
-            else {
-                print("error to sign in")
-            }
-        }
-        
-        
-        AuthManager.shared.insertUserIntoDatabase(username: givenName! + familyName! + userID!, email: email!) { (success) in
-            if success {
-                print("user is in database")
-            }
-            else {
-                print("error to insert user in database")
-            }
-        }
-
-        
-    }
-    
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        // perform any operations when the user disconnects from app here.
-        
-    }
+//    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+//        // perform any operations when the user disconnects from app here.
+//
+//    }
 
     // MARK: UISceneSession Lifecycle
 
