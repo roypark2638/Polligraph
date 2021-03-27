@@ -31,7 +31,7 @@ struct User {
     let username: String
     let bio: String
     let name: (first: String, last: String)
-    let birthDate: Date
+//    let birthDate: Date? // I need to change this not to be null later
     let gender: Gender
     let counts: UserCount
 }

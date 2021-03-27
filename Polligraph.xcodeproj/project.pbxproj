@@ -46,6 +46,10 @@
 		97DB1B9E25EDEC42008955BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97DB1B9D25EDEC42008955BC /* Assets.xcassets */; };
 		97DB1BA125EDEC42008955BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97DB1B9F25EDEC42008955BC /* LaunchScreen.storyboard */; };
 		97EA192C260C423900D08BAC /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA192B260C423900D08BAC /* ForgotPasswordViewController.swift */; };
+		97EA1953260DEC5700D08BAC /* ProfileHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA1952260DEC5700D08BAC /* ProfileHeaderCollectionReusableView.swift */; };
+		97EA1958260DED2700D08BAC /* ProfileTabsCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA1957260DED2700D08BAC /* ProfileTabsCollectionReusableView.swift */; };
+		97EA195B260DED8900D08BAC /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA195A260DED8900D08BAC /* PostCollectionViewCell.swift */; };
+		97EA1972260F38F700D08BAC /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA1971260F38F700D08BAC /* ProfileHeaderViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +95,10 @@
 		97DB1BA025EDEC42008955BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97DB1BA225EDEC42008955BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97EA192B260C423900D08BAC /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		97EA1952260DEC5700D08BAC /* ProfileHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		97EA1957260DED2700D08BAC /* ProfileTabsCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabsCollectionReusableView.swift; sourceTree = "<group>"; };
+		97EA195A260DED8900D08BAC /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewCell.swift; sourceTree = "<group>"; };
+		97EA1971260F38F700D08BAC /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
 		989BE7FEA84F3173270B7101 /* Pods-Polligraph.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Polligraph.release.xcconfig"; path = "Target Support Files/Pods-Polligraph/Pods-Polligraph.release.xcconfig"; sourceTree = "<group>"; };
 		AF2E107638AACE0E50F8D036 /* Pods-Polligraph.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Polligraph.debug.xcconfig"; path = "Target Support Files/Pods-Polligraph/Pods-Polligraph.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,6 +163,7 @@
 		977F238B25F33596002145BB /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				97EA1971260F38F700D08BAC /* ProfileHeaderViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -281,6 +290,7 @@
 			children = (
 				97A26BCF260745AF000C202F /* Other */,
 				97A26BCE260745A8000C202F /* Storyboard */,
+				97EA1955260DED1400D08BAC /* CollectionView Headers */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -299,6 +309,16 @@
 			children = (
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		97EA1955260DED1400D08BAC /* CollectionView Headers */ = {
+			isa = PBXGroup;
+			children = (
+				97EA1952260DEC5700D08BAC /* ProfileHeaderCollectionReusableView.swift */,
+				97EA1957260DED2700D08BAC /* ProfileTabsCollectionReusableView.swift */,
+				97EA195A260DED8900D08BAC /* PostCollectionViewCell.swift */,
+			);
+			path = "CollectionView Headers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -441,6 +461,7 @@
 				979E089525EF908C00609D4C /* NewPostViewController.swift in Sources */,
 				9791A70D25F96A4C0088BDAC /* SettingsCellModel.swift in Sources */,
 				979E088F25EF906400609D4C /* SearchViewController.swift in Sources */,
+				97EA195B260DED8900D08BAC /* PostCollectionViewCell.swift in Sources */,
 				979E085B25EF533F00609D4C /* SignInViewController.swift in Sources */,
 				977F239325F33628002145BB /* AuthViewController.swift in Sources */,
 				97BC9EE925F37541004EDB60 /* DatabaseManager.swift in Sources */,
@@ -453,6 +474,7 @@
 				979E087625EF8BCD00609D4C /* HomeViewController.swift in Sources */,
 				977F238F25F33613002145BB /* SettingsViewController.swift in Sources */,
 				97A7EF4525FB37BE006B842B /* AppleSignIn.swift in Sources */,
+				97EA1953260DEC5700D08BAC /* ProfileHeaderCollectionReusableView.swift in Sources */,
 				97DB1B9925EDEC41008955BC /* OnboardingViewController.swift in Sources */,
 				977F239F25F3365A002145BB /* UserPost.swift in Sources */,
 				97BC9EE625F3750E004EDB60 /* StorageManager.swift in Sources */,
@@ -462,6 +484,8 @@
 				97DB1B9725EDEC41008955BC /* SceneDelegate.swift in Sources */,
 				97A26BD5260745CA000C202F /* AuthButton.swift in Sources */,
 				973E0DDF26013CD1000B9BC5 /* EmailVerificationViewController.swift in Sources */,
+				97EA1958260DED2700D08BAC /* ProfileTabsCollectionReusableView.swift in Sources */,
+				97EA1972260F38F700D08BAC /* ProfileHeaderViewModel.swift in Sources */,
 				979E08A325EF92AE00609D4C /* PollPostViewController.swift in Sources */,
 				97BC9EF325F37A6F004EDB60 /* Extensions.swift in Sources */,
 				9707A80F25F1C5C80099089A /* TabBarDelegate.swift in Sources */,
