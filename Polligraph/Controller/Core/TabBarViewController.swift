@@ -53,7 +53,16 @@ class TabBarViewController: UITabBarController {
         let searchVC = SearchViewController()
         let newPostVC = NewPostViewController()
         let notificationVC = NotificationViewController()
-        let profileVC = ProfileViewController()
+        let profileVC = ProfileViewController(
+            user: User(
+                username: "jennk75",
+                bio: "Please follow if you want up to date news on politics!",
+                name: (first: "Jenny", last: "Kim"),
+//                birthDate: nil,
+                gender: .female,
+                counts: UserCount(followers: 105, following: 105, posts: 105)
+            )
+        )
         
         let homeNav = UINavigationController(rootViewController: homeVC)
         let searchNav = UINavigationController(rootViewController: searchVC)
@@ -61,11 +70,28 @@ class TabBarViewController: UITabBarController {
         let notificationNav = UINavigationController(rootViewController: notificationVC)
         let profileNav = UINavigationController(rootViewController: profileVC)
         
-        homeNav.navigationBar.prefersLargeTitles = true
-        searchNav.navigationBar.prefersLargeTitles = true
-        newPostNav.navigationBar.prefersLargeTitles = true
-        notificationNav.navigationBar.prefersLargeTitles = true
-//        profileNav.navigationBar.prefersLargeTitles = true
+        homeNav.navigationBar.backgroundColor = .systemBackground
+        homeNav.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        homeNav.navigationBar.shadowImage = UIImage()
+
+        searchNav.navigationBar.backgroundColor = .clear
+        searchNav.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        searchNav.navigationBar.shadowImage = UIImage()
+        
+        notificationNav.navigationBar.backgroundColor = .clear
+        notificationNav.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        notificationNav.navigationBar.shadowImage = UIImage()
+        
+        profileNav.navigationBar.isTranslucent = false
+        profileNav.navigationBar.backgroundColor = .systemBackground
+        profileNav.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        profileNav.navigationBar.shadowImage = UIImage()
+        profileNav.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont(name: "Roboto-Bold", size: 18) ?? UIFont.systemFont(ofSize: 18)
+        ]
+
+        
+        
         
         setViewControllers(viewControllers, animated: false)
         
