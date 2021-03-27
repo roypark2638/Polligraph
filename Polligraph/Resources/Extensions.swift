@@ -76,3 +76,35 @@ extension String {
             .self.replacingOccurrences(of: "$", with: "-")
     }
 }
+
+extension NumberFormatter {
+    public static let groupingFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.usesGroupingSeparator = true
+        formatter.groupingSize = 3
+        formatter.maximumFractionDigits = 1
+        return formatter
+    }()
+}
+
+extension Double {
+    public var followersFormatted: String {
+        if self >= 1_000, self < 1_000_000 {
+            return NumberFormatter.groupingFormatter.string(
+                from: NSNumber(value: self / 1_000))! + "k"
+        }
+        
+        if self >= 1_000_000 {
+            return NumberFormatter.groupingFormatter.string(
+                from: NSNumber(value: self / 1_000_000))! + "m"
+        }
+        
+        return NumberFormatter.groupingFormatter.string(from: NSNumber(value: self))!
+    }
+}
+
+extension Int {
+    public var followersFormatted: String {
+        Double(self).followersFormatted
+    }
+}
