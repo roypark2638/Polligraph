@@ -32,9 +32,9 @@ class RegistrationViewController: UIViewController {
         return label
     }()
     
-    private let emailAddressField = AuthField(type: .email, title: nil)
-    private let usernameField = AuthField(type: .username, title: nil)
-    private let passwordField = AuthField(type: .password, title: nil)
+    private let emailAddressField = TextField(type: .email, title: nil)
+    private let usernameField = TextField(type: .username, title: nil)
+    private let passwordField = TextField(type: .password, title: nil)
 
     
     private let toggleButton: UIButton = {
@@ -311,7 +311,8 @@ class RegistrationViewController: UIViewController {
             // we are going to update our UI so use DispatchQueue
             DispatchQueue.main.async {
                 // success to register an account
-                if registered {
+                switch registered {
+                case .success:
                     AuthManager.shared.sendEmailVerification() { sentEmail in
                         // successfully sent the email to the link
                         if sentEmail {
@@ -322,24 +323,31 @@ class RegistrationViewController: UIViewController {
                             let alert = Helper.errorAlert(title: "Error Email Verification!", message: "Something went wrong with email verification link. Please try again.")
                             self?.present(alert, animated: true, completion: nil)
                         }
+                        
+                        UIViewController.removeLoading(spinner: spinner)
+                        let vc = EmailVerificationViewController()
+                        vc.modalPresentationStyle = .fullScreen
+                        self?.present(vc, animated: true, completion: nil)
+    //                    self.dismiss(animated: true, completion: nil)
+                        return
                     }
-//                    let alert = Helper.errorAlert(title: "Verification Link Sent!", message: "Please check your email inbox associated with \(emailAddress) for the verification link.")
-//                    self.present(alert, animated: true, completion: nil)
-                    UIViewController.removeLoading(spinner: spinner)
-                    let vc = EmailVerificationViewController()
-                    vc.modalPresentationStyle = .fullScreen
-                    self?.present(vc, animated: true, completion: nil)
-//                    self.dismiss(animated: true, completion: nil)
-                    return
-                }
-                // fail to register an account
-                else {
-                    // error to create an account
-                    // TODO: databaseManager to check if the user can create account with email and username
+                case .failure(let error):
                     UIViewController.removeLoading(spinner: spinner)
                     let alert = Helper.errorAlert(title: "Temp Error Duplicate", message: "Email or username are already taken (Temp).")
                     self?.present(alert, animated: true, completion: nil)
                 }
+//                if registered {
+                    
+//                    let alert = Helper.errorAlert(title: "Verification Link Sent!", message: "Please check your email inbox associated with \(emailAddress) for the verification link.")
+//                    self.present(alert, animated: true, completion: nil)
+
+//                }
+                // fail to register an account
+//                else {
+                    // error to create an account
+                    // TODO: databaseManager to check if the user can create account with email and username
+                    
+//                }
             }
         }
         }

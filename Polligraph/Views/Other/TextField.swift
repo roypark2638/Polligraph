@@ -1,5 +1,5 @@
 //
-//  AuthField.swift
+//  TextField.swift
 //  Polligraph
 //
 //  Created by Roy Park on 3/21/21.
@@ -8,18 +8,20 @@
 import UIKit
 
 // Make this to be re-usable
-class AuthField: UITextField {
+class TextField: UITextField {
     
     enum FieldType {
         case username
         case email
         case password
+        case other
         
         var title: String {
             switch self {
             case .username: return "Username"
             case .email: return "Email"
             case .password: return "Password"
+            case .other: return ""
             }
         }
     }
@@ -50,6 +52,7 @@ class AuthField: UITextField {
         returnKeyType = .done
         autocorrectionType = .no
         autocapitalizationType = .none
+        
         font = UIFont(name: "Roboto-Bold", size: 16)
         if type == .username {
             
@@ -61,6 +64,11 @@ class AuthField: UITextField {
         else if type == .password {
             isSecureTextEntry = true
             textContentType = .oneTimeCode
+        }
+        
+        else if type == .other {
+            font = UIFont(name: "Roboto-Regular", size: 16)
+            placeholder = ""
         }
     }
 }

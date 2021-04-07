@@ -59,7 +59,7 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
     }()
     
     
-    private let emailAddressField = AuthField(type: .email, title: "Email Address")
+    private let emailAddressField = TextField(type: .email, title: "Email Address")
     private let confirmButton = AuthButton(type: .black, title: "Send Link")
 
     // MARK: - LifeCycle
