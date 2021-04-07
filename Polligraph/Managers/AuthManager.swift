@@ -12,6 +12,19 @@ public class AuthManager{
     static let shared = AuthManager()
     
     private let tabBarDelegate = TabBarDelegate()
+    
+    public enum SignInMethod {
+        case email
+//        case google
+//        case apple
+//        case facebook
+    }
+    
+    enum AuthError: Error {
+        case SignInFailed
+        case SignUpFailed
+    }
+    
     //MARK:- Public
     
     
@@ -35,7 +48,7 @@ public class AuthManager{
     ///     email: String representing email
     ///     password: String representing password
     ///     completion: Async callback to check if Firebase successfully create and insert the account
-    public func registerNewUser(username: String, email: String, password: String, completion: @escaping (Bool) -> Void) {
+    public func registerNewUser(username: String, email: String, password: String, completion: @escaping (Result<String, Error>) -> Void) {
         /*
          - Check if username is available
          - Check if email is available
@@ -50,64 +63,60 @@ public class AuthManager{
                 Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
                     guard result != nil, error == nil else {
                         // Firebase auth could not create an account
-                        completion(false)
-                        return
+                        if let error = error {
+                            print("From AuthManager Error exist")
+                            print(error.localizedDescription)
+                            completion(.failure(error))
+                            return
+                        }
+                        else {
+                            print("From AuthManager No result but no error")
+                            completion(.failure(AuthError.SignUpFailed))
+                            return
+                        }
                     }
                     
                     // Successfully created an account, insert into database
-                    DatabaseManager.shared.insertNewUser(with: email, username: username) { (inserted) in
-                        // success to insert into database
-                        if inserted {
-                            completion(true)
-                            return
-                        }
-                        // failed to insert into database
-                        else {
-                            completion(false)
-                            return
-                        }
-                    }
+                    UserDefaults.standard.setValue(username, forKey: "username")
+                    
+                    DatabaseManager.shared.insertNewUser(with: email, username: username, completion: completion)
                 }
-            }
-            else {
-                // either username or email does not exist
-                completion(false)
             }
         }
     }
     
-    public func insertUserIntoDatabase(username: String, email: String, completion: @escaping (Bool) -> Void) {
-        /*
-         - Check if username is available
-         - Check if email is available
-         */
-        DatabaseManager.shared.canCreateNewUser(with: email, username: username) { (canCreate) in
-            if canCreate {
-                /*
-                 - Create account in Firebase
-                 - Insert account to database
-                 */
-                    // Successfully created an account, insert into database
-                    DatabaseManager.shared.insertNewUser(with: email, username: username) { (inserted) in
-                        // success to insert into database
-                        if inserted {
-                            completion(true)
-                            return
-                        }
-                        // failed to insert into database
-                        else {
-                            completion(false)
-                            return
-                        }
-                    }
-                }
-            
-            else {
-                // either username or email does not exist
-                completion(false)
-            }
-        }
-    }
+//    public func insertUserIntoDatabase(username: String, email: String, completion: @escaping (Bool) -> Void) {
+//        /*
+//         - Check if username is available
+//         - Check if email is available
+//         */
+//        DatabaseManager.shared.canCreateNewUser(with: email, username: username) { (canCreate) in
+//            if canCreate {
+//                /*
+//                 - Create account in Firebase
+//                 - Insert account to database
+//                 */
+//                    // Successfully created an account, insert into database
+//                    DatabaseManager.shared.insertNewUser(with: email, username: username) { (inserted) in
+//                        // success to insert into database
+//                        if inserted {
+//                            completion(true)
+//                            return
+//                        }
+//                        // failed to insert into database
+//                        else {
+//                            completion(false)
+//                            return
+//                        }
+//                    }
+//                }
+//
+//            else {
+//                // either username or email does not exist
+//                completion(false)
+//            }
+//        }
+//    }
     
     
     /// Send a email verification to the user
@@ -156,30 +165,47 @@ public class AuthManager{
     ///     email: optional String representing email
     ///     password: String representing password
     ///     completion: Async callback to check if Firebase successfully sign in the user
-    public func signInUser(username: String?, email: String?, password: String, completion: @escaping (Bool) -> Void) {
+    public func signInUser(with signInMethod: SignInMethod, username: String?, email: String?, password: String, completion: @escaping (Result<String, Error>) -> Void) {
         // reason why using @escaping is we use completion inside of another closure and make it possible to escape the code with completion
         // if user put the email
-        if let email = email {
-            Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
-                guard result != nil, error == nil else {
-                    // no result or there is error.
-                    completion(false)
-                    return
-                }
-            }
-            // user successfully sign in
-            completion(true)
-        }
-        
-        if let username = username {
-            Auth.auth().signIn(withEmail: username, password: password) { (result, error) in
-                guard result != nil, error == nil else {
-                    // no result or there is an error
-                    completion(false)
-                    return
+        switch signInMethod {
+        case .email:
+            // user tries to sign in with email address
+            if let email = email {
+                Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+                    guard result != nil, error == nil else {
+                        if let error = error {
+                            // error exist
+                            completion(.failure(error))
+                            return
+                        }
+                        else {
+                            // no error but no result
+                            completion(.failure(AuthError.SignInFailed))
+                            return
+                        }
+                    }
                 }
                 // user successfully sign in
-                completion(true)
+                completion(.success(email))
+            }
+            
+            // user tries to sign in with username
+            if let username = username {
+                Auth.auth().signIn(withEmail: username, password: password) { (result, error) in
+                    guard result != nil, error == nil else {
+                        if let error = error {
+                            // error exist
+                            completion(.failure(error))
+                            return
+                        }
+                        else {
+                            // no error but no result
+                            completion(.failure(AuthError.SignInFailed))
+                            return
+                        }
+                    }
+                }
             }
         }
     }
