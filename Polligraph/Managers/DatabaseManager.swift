@@ -7,22 +7,28 @@
 
 import FirebaseDatabase
 
-public class DatabaseManager {
+final public class DatabaseManager {
     
     static let shared = DatabaseManager()
     
-    private let reference = Database.database().reference()
+    private let database = Database.database().reference()
     
-    //MARK: Public
+    private init() {}
+    
+    enum DatabaseError: Error {
+        case insertingError
+    }
+    
+    //MARK:- Public
     
     // this function will check underlying database for us
     // no reason for auth manager to be aware of how that works
-    // simply ask datamanager, if auth manager can create an account with these parameters
+    // simply ask dataManager, if auth manager can create an account with these parameters
     /// Check if username and email is available
     /// - Parameters
     ///     - email: String representing email
     ///     - username : String representing username
-    ///     - completion: Async callback fro result if database entry succeded
+    ///     - completion: Async callback fro result if database entry succeeded
     public func canCreateNewUser(with email: String, username: String, completion: (Bool) -> Void) {
         completion(true)
     }
@@ -33,23 +39,73 @@ public class DatabaseManager {
     /// - parameters
     ///     - email: String representing email
     ///     - username: String representing username
-    ///     - completion: Async callback for result if database entry succeded
-    public func insertNewUser(with email: String, username: String, completion: @escaping (Bool) -> Void) {
-        reference.child(email.safeDatabaseKey()).setValue(["username": username]) { error, _ in
-            if error == nil {
-                // successed to insert new user
-                completion(true)
+    ///     - completion: Async callback for result if database entry succeeded
+    public func insertNewUser(
+        with email: String,
+        username: String,
+        completion: @escaping (Result<String, Error>) -> Void) {
+        /* current database structure
+         users: {
+            "RoyPark": {
+                email
+                posts: []
+            }
+         }
+         */
+        // users -> {}
+        // get current users key
+        // if that exists, insert new entry
+        // else create root users
+        database.child("users").observeSingleEvent(of: .value) { [weak self] (snapshot) in
+            guard var usersDictionary = snapshot.value as? [String: Any] else {
+                // Create users root node
+                self?.database.child("users").setValue(
+                    [
+                        username: [
+                            "email": email
+                        ]
+                    ]
+                ) { (error, _) in
+                    if let error = error {
+                        completion(.failure(error))
+                        return
+                    }
+                    else {
+                        completion(.success(email))
+                        return
+                    }
+                }
                 return
             }
-            else {
-                // failed with inserting new user
-                completion(false)
+            
+            usersDictionary[username] = ["email": email]
+            
+            self?.database.child("users").setValue(usersDictionary, withCompletionBlock: { (error, _) in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                completion(.success(email))
                 return
-            }
+            })
         }
-        return
     }
     
-    
+    public func getUsername(for email: String, completion: @escaping (String?) -> Void) {
+        database.child("users").observeSingleEvent(of: .value) { (snapshot) in
+            guard let users = snapshot.value as? [String: [String: Any]] else {
+                completion(nil)
+                return
+            }
+            
+            for (username, value) in users {
+                if value["email"] as? String == email {
+                    completion(username)
+                    break
+                }
+            }
+        }
+    }
     
 }
+
