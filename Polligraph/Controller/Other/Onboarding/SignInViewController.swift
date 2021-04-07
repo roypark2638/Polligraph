@@ -73,20 +73,20 @@ class SignInViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    private let facebookButton: FBLoginButton = {
-        let button = FBLoginButton()
-        button.setImage(UIImage(named: "Facebook"), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-//    private let facebookButton: UIButton = {
-//        let button = UIButton()
+
+//    private let facebookButton: FBLoginButton = {
+//        let button = FBLoginButton()
 //        button.setImage(UIImage(named: "Facebook"), for: .normal)
 //        button.translatesAutoresizingMaskIntoConstraints = false
 //        return button
 //    }()
+    
+    private let facebookButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Facebook"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     // MARK: - LifeCycle
     
@@ -95,6 +95,7 @@ class SignInViewController: UIViewController {
         
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.delegate = self
+                
 //        GIDSignIn.sharedInstance()?.signIn()
         view.backgroundColor = .systemBackground
         
@@ -343,7 +344,8 @@ class SignInViewController: UIViewController {
     }
     
     @objc private func didTapFacebook() {
-        
+//        LoginButtonDelegate.loginButton(<#LoginButtonDelegate#>)
+//        loginButton(<#T##loginButton: FBLoginButton##FBLoginButton#>, didCompleteWith: <#T##LoginManagerLoginResult?#>, error: <#T##Error?#>)
     }
     
     @objc private func backAction() {
@@ -459,17 +461,26 @@ extension SignInViewController: ASAuthorizationControllerPresentationContextProv
 }
 
 
-//extension SignInViewController: LoginButtonDelegate {
-//    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-//        <#code#>
-//    }
-//    
-//    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-//        <#code#>
-//    }
-//    
-//    
-//}
+extension SignInViewController: LoginButtonDelegate {
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        guard let token = result?.token?.tokenString else {
+            print("User failed to log in with Facebook")
+            return
+        }
+        
+        let credential = FacebookAuthProvider.credential(withAccessToken: token)
+        
+        Auth.auth().signIn(with: credential) { (authResult, error) in
+            
+        }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        // No operation
+    }
+    
+    
+}
 
     
 //    @IBAction func signinButtonPressed(_ sender: UIButton) {

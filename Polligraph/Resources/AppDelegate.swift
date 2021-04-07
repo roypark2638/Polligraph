@@ -45,9 +45,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: Google SignIn Methods
     
+//    func application(_ application: UIApplication,
+//                     open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+//        if GIDSignIn.sharedInstance().handle(url) {
+//            return true
+//        }
+//        else if ApplicationDelegate.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) {
+//            return true
+//        }
+//        return false
+//    }
+    
     @available(iOS 9.0, *)
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
       -> Bool {
+//        if GIDSignIn.sharedInstance().handle(url) {
+//            return true
+//        }
+//        else if ApplicationDelegate.shared.application(app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation]) {
+//            return true
+//        }
+//        return false
+        
         ApplicationDelegate.shared.application(
             application,
             open: url,
