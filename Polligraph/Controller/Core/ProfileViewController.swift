@@ -52,7 +52,7 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = .systemBackground
         collectionView.delegate = self
         collectionView.dataSource = self
-        title = "polinews"        
+        title = user.username
         
         view.addSubview(collectionView)
         configureNavigationBar()
@@ -72,12 +72,17 @@ class ProfileViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
+//        let username = UserDefaults.standard.string(forKey: "username")?.uppercased() ?? "ME"
+//        if title == username {
+//
+//        }
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "Settings Icon"),
             style: .done,
             target: self,
             action: #selector(didTapSettingsButton))
-        navigationItem.rightBarButtonItem?.tintColor = .label
+//        navigationItem.rightBarButtonItem?.tintColor = .label
     }
     
     // MARK: - Objc Methods
@@ -85,6 +90,7 @@ class ProfileViewController: UIViewController {
     @objc private func didTapSettingsButton() {
         let vc = SettingsViewController()
         vc.title = "Settings"
+        navigationController?.navigationBar.tintColor = .label
         navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -160,7 +166,7 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
         ) as! ProfileHeaderCollectionReusableView
         
         profileHeader.delegate = self
-        let viewModel = ProfileHeaderViewModel(profileImageURL: nil, isFollowing: true, followerCount: 110_000, pollsCount: 92_000)
+        let viewModel = ProfileHeaderViewModel(profileImageURL: nil, isFollowing: nil, followerCount: 110_000, pollsCount: 92_000)
         profileHeader.configure(with: viewModel)
         
         
@@ -182,14 +188,36 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
 extension ProfileViewController: ProfileHeaderCollectionReusableViewDelegate {
     func profileHeaderCollectionReusableView(_ header: ProfileHeaderCollectionReusableView, didTapPollsButtonWith viewModel: ProfileHeaderViewModel) {
         collectionView.scrollToItem(at: IndexPath(row: 0, section: 1), at: .top, animated: true)
+        
+        
     }
     
     func profileHeaderCollectionReusableView(
         _ header: ProfileHeaderCollectionReusableView,
         didTapPrimaryButtonWith viewModel: ProfileHeaderViewModel
     ) {
-        let vc = SettingsViewController()
-        present(UINavigationController(rootViewController: vc), animated: true)
+        guard let currentUsername = UserDefaults.standard.string(forKey: "username") else { return }
+        
+        if self.user.username.lowercased() == currentUsername.lowercased() {
+            // edit profile
+            let vc = EditProfileViewController()
+            let nav = UINavigationController(rootViewController: vc)
+//            nav.navigationItem.backButtonTitle = ""
+//            nav.navigationBar.backIndicatorImage = UIImage(named: "Back Arrow")
+//            nav.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "Back Arrow")
+            nav.navigationBar.isTranslucent = false
+            nav.navigationBar.backgroundColor = .clear
+            nav.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            nav.navigationBar.shadowImage = UIImage()
+            
+            nav.modalPresentationStyle = .fullScreen
+            nav.navigationBar.tintColor = .label
+            present(nav, animated: true, completion: nil)
+//            navigationController?.pushViewController(vc, animated: true)
+        }
+        else {
+            // follow or unfollow current users profile that we are viewing
+        }
     }
     
     
