@@ -53,11 +53,13 @@ class TabBarViewController: UITabBarController {
         let searchVC = SearchViewController()
         let newPostVC = NewPostViewController()
         let notificationVC = NotificationViewController()
+        
+        
         let profileVC = ProfileViewController(
             user: User(
-                username: "jennk75",
+                username: UserDefaults.standard.string(forKey: "username") ?? "me",
                 bio: "Please follow if you want up to date news on politics!",
-                name: (first: "Jenny", last: "Kim"),
+                name: (first: "roy", last: "park"),
 //                birthDate: nil,
                 gender: .female,
                 counts: UserCount(followers: 105, following: 105, posts: 105)
@@ -90,7 +92,10 @@ class TabBarViewController: UITabBarController {
             NSAttributedString.Key.font: UIFont(name: "Roboto-Bold", size: 18) ?? UIFont.systemFont(ofSize: 18)
         ]
 
-        
+        homeNav.navigationBar.tintColor = .label
+        searchNav.navigationBar.tintColor = .label
+        notificationNav.navigationBar.tintColor = .label
+        profileNav.navigationBar.tintColor = .label
         
         
         setViewControllers(viewControllers, animated: false)
