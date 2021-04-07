@@ -8,6 +8,7 @@ import GoogleSignIn
 import UIKit
 import FirebaseAuth
 import AuthenticationServices
+import FBSDKLoginKit
 
 class SignInViewController: UIViewController {
     // MARK: - Properties
@@ -31,8 +32,8 @@ class SignInViewController: UIViewController {
         return label
     }()
     
-    private let usernameEmailField = AuthField(type: .email, title: "Email Address or Username")
-    private let passwordField = AuthField(type: .password, title: nil)
+    private let usernameEmailField = TextField(type: .email, title: "Email Address or Username")
+    private let passwordField = TextField(type: .password, title: nil)
     
     private let toggleButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -73,12 +74,19 @@ class SignInViewController: UIViewController {
         return button
     }()
     
-    private let facebookButton: UIButton = {
-        let button = UIButton()
+    private let facebookButton: FBLoginButton = {
+        let button = FBLoginButton()
         button.setImage(UIImage(named: "Facebook"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+//    private let facebookButton: UIButton = {
+//        let button = UIButton()
+//        button.setImage(UIImage(named: "Facebook"), for: .normal)
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        return button
+//    }()
     
     // MARK: - LifeCycle
     
@@ -87,8 +95,7 @@ class SignInViewController: UIViewController {
         
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.delegate = self
-//        GIDSignIn.sharedInstance().signIn()
-        
+//        GIDSignIn.sharedInstance()?.signIn()
         view.backgroundColor = .systemBackground
         
         setupButtonActions()
@@ -99,7 +106,7 @@ class SignInViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        setUpLayout()
+        configureLayouts()
     }
     
     // MARK: - Methods
@@ -157,9 +164,14 @@ class SignInViewController: UIViewController {
             self,
             action: #selector(didTapApple),
             for: .touchUpInside)
+        
+        facebookButton.addTarget(
+            self,
+            action: #selector(didTapFacebook),
+            for: .touchUpInside)
     }
     
-    private func setUpLayout() {
+    private func configureLayouts() {
         headingLabel.frame = CGRect(
             x: 24,
             y: view.safeAreaInsets.top - 30,
@@ -228,6 +240,7 @@ class SignInViewController: UIViewController {
         usernameEmailField.resignFirstResponder()
         passwordField.resignFirstResponder()
     }
+    
     @objc private func didTapPasswordToggle() {
         passwordField.isSecureTextEntry.toggle()
     }
@@ -252,24 +265,14 @@ class SignInViewController: UIViewController {
             username = usernameEmail
         }
         
-        AuthManager.shared.signInUser(username: username, email: email, password: password) { [weak self] (signIn) in
+        // with needs to be fixed.
+        AuthManager.shared.signInUser(with: .email, username: username, email: email, password: password) { [weak self] (signIn) in
             let spinner = UIViewController.displayLoading(withView: (self?.view)!)
             // this closure is background thread, and we want to update UI on the main thread.
             DispatchQueue.main.async {
-                
-                if signIn {
+                switch signIn {
+                case .success(let email):
                     UIViewController.removeLoading(spinner: spinner)
-                    
-//                    self?.dismiss(animated: true, completion: nil)
-//                    self?.navigationController?.
-                    
-                    
-//                    let vc = TabBarViewController()
-//                    let nav = UINavigationController(rootViewController: vc)
-//                    vc.modalPresentationStyle = .fullScreen
-//                    nav.navigationBar.prefersLargeTitles = true
-//                    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.createBackButton())
-//                    self.present(vc, animated: true, completion: nil)
                     AuthManager.shared.userVerification { (verified) in
                         if verified {
                             self?.dismiss(animated: true, completion: nil)
@@ -281,9 +284,12 @@ class SignInViewController: UIViewController {
                             self?.present(alert, animated: true, completion: nil)
                         }
                     }
-                }
-                else {
-                    // error
+                    self?.dismiss(animated: true, completion: nil)
+                    print(email)
+                break
+                    
+                case .failure(let error):
+                    print(error.localizedDescription)
                     print("error")
                     UIViewController.removeLoading(spinner: spinner)
                     let alert = UIAlertController(title: "Sign In Error",
@@ -293,11 +299,29 @@ class SignInViewController: UIViewController {
                                                   style: .cancel,
                                                   handler: nil))
                     self?.present(alert, animated: true)
+                
+//                if signIn {
+                    
+                    
+//                    self?.dismiss(animated: true, completion: nil)
+//                    self?.navigationController?.
+                    
+                    
+//                    let vc = TabBarViewController()
+//                    let nav = UINavigationController(rootViewController: vc)
+//                    vc.modalPresentationStyle = .fullScreen
+//                    nav.navigationBar.prefersLargeTitles = true
+//                    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.createBackButton())
+//                    self.present(vc, animated: true, completion: nil)
+                    
+//                }
+//                else {
+                    // error
+                   
                 }
             }
         }
     }
-    
     
     // this needs to be changed to navigate to the tabBar controller if auth passes
     @objc private func didTapForgotPassword() {
@@ -316,6 +340,10 @@ class SignInViewController: UIViewController {
     
     @objc private func didTapApple() {
         performAppleSignIn()
+    }
+    
+    @objc private func didTapFacebook() {
+        
     }
     
     @objc private func backAction() {
@@ -367,6 +395,7 @@ extension SignInViewController: GIDSignInDelegate {
         Auth.auth().signIn(with: credential) { [weak self] (authResult, error) in
             guard authResult != nil, error == nil else {
                 // error
+                print("Error sign in")
                 return
             }
             print("Successfully login with Google")
@@ -427,9 +456,21 @@ extension SignInViewController: ASAuthorizationControllerPresentationContextProv
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return view.window!
     }
-    
-    
 }
+
+
+//extension SignInViewController: LoginButtonDelegate {
+//    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+//        <#code#>
+//    }
+//    
+//    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+//        <#code#>
+//    }
+//    
+//    
+//}
+
     
 //    @IBAction func signinButtonPressed(_ sender: UIButton) {
 //        guard let email = emailTextField.text else { return }

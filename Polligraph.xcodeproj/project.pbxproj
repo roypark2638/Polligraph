@@ -10,6 +10,7 @@
 		136265ACCA984952CDA7C8C8 /* Pods_Polligraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439A5B197B65A2DAB1D0D5B3 /* Pods_Polligraph.framework */; };
 		9707A80F25F1C5C80099089A /* TabBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9707A80E25F1C5C80099089A /* TabBarDelegate.swift */; };
 		973E0DDF26013CD1000B9BC5 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973E0DDE26013CD1000B9BC5 /* EmailVerificationViewController.swift */; };
+		974581E0261D43B900F2C5B1 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974581DF261D43B900F2C5B1 /* EditProfileViewController.swift */; };
 		977F238F25F33613002145BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F238E25F33613002145BB /* SettingsViewController.swift */; };
 		977F239325F33628002145BB /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239225F33628002145BB /* AuthViewController.swift */; };
 		977F239625F33636002145BB /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239525F33636002145BB /* AuthManager.swift */; };
@@ -30,9 +31,8 @@
 		979E089225EF906E00609D4C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E089125EF906E00609D4C /* ProfileViewController.swift */; };
 		979E089525EF908C00609D4C /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E089425EF908C00609D4C /* NewPostViewController.swift */; };
 		979E08A325EF92AE00609D4C /* PollPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E08A225EF92AE00609D4C /* PollPostViewController.swift */; };
-		97A26BD1260745BF000C202F /* AuthField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A26BD0260745BF000C202F /* AuthField.swift */; };
+		97A26BD1260745BF000C202F /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A26BD0260745BF000C202F /* TextField.swift */; };
 		97A26BD5260745CA000C202F /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A26BD4260745CA000C202F /* AuthButton.swift */; };
-		97A7EF3F25FB37AC006B842B /* GoogleSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A7EF3E25FB37AC006B842B /* GoogleSignIn.swift */; };
 		97A7EF4225FB37B6006B842B /* FacebookSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A7EF4125FB37B6006B842B /* FacebookSignIn.swift */; };
 		97A7EF4525FB37BE006B842B /* AppleSignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A7EF4425FB37BE006B842B /* AppleSignInManager.swift */; };
 		97BC9EE625F3750E004EDB60 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BC9EE525F3750E004EDB60 /* StorageManager.swift */; };
@@ -56,6 +56,7 @@
 		439A5B197B65A2DAB1D0D5B3 /* Pods_Polligraph.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Polligraph.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9707A80E25F1C5C80099089A /* TabBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarDelegate.swift; sourceTree = "<group>"; };
 		973E0DDE26013CD1000B9BC5 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
+		974581DF261D43B900F2C5B1 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		977F238E25F33613002145BB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		977F239225F33628002145BB /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		977F239525F33636002145BB /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -76,9 +77,8 @@
 		979E089125EF906E00609D4C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		979E089425EF908C00609D4C /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
 		979E08A225EF92AE00609D4C /* PollPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollPostViewController.swift; sourceTree = "<group>"; };
-		97A26BD0260745BF000C202F /* AuthField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthField.swift; sourceTree = "<group>"; };
+		97A26BD0260745BF000C202F /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		97A26BD4260745CA000C202F /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
-		97A7EF3E25FB37AC006B842B /* GoogleSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignIn.swift; sourceTree = "<group>"; };
 		97A7EF4125FB37B6006B842B /* FacebookSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookSignIn.swift; sourceTree = "<group>"; };
 		97A7EF4425FB37BE006B842B /* AppleSignInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInManager.swift; sourceTree = "<group>"; };
 		97A7EF8025FB5DDB006B842B /* Polligraph.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Polligraph.entitlements; sourceTree = "<group>"; };
@@ -153,7 +153,6 @@
 				977F239B25F33645002145BB /* HapticsManager.swift */,
 				97BC9EE525F3750E004EDB60 /* StorageManager.swift */,
 				97BC9EE825F37541004EDB60 /* DatabaseManager.swift */,
-				97A7EF3E25FB37AC006B842B /* GoogleSignIn.swift */,
 				97A7EF4125FB37B6006B842B /* FacebookSignIn.swift */,
 				97A7EF4425FB37BE006B842B /* AppleSignInManager.swift */,
 			);
@@ -211,7 +210,7 @@
 		97A26BCF260745AF000C202F /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				97A26BD0260745BF000C202F /* AuthField.swift */,
+				97A26BD0260745BF000C202F /* TextField.swift */,
 				97A26BD4260745CA000C202F /* AuthButton.swift */,
 			);
 			path = Other;
@@ -235,6 +234,7 @@
 			children = (
 				979E08A225EF92AE00609D4C /* PollPostViewController.swift */,
 				977F238E25F33613002145BB /* SettingsViewController.swift */,
+				974581DF261D43B900F2C5B1 /* EditProfileViewController.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -469,8 +469,7 @@
 				979E085E25EF535000609D4C /* RegistrationViewController.swift in Sources */,
 				977F239625F33636002145BB /* AuthManager.swift in Sources */,
 				979E089225EF906E00609D4C /* ProfileViewController.swift in Sources */,
-				97A7EF3F25FB37AC006B842B /* GoogleSignIn.swift in Sources */,
-				97A26BD1260745BF000C202F /* AuthField.swift in Sources */,
+				97A26BD1260745BF000C202F /* TextField.swift in Sources */,
 				979E087625EF8BCD00609D4C /* HomeViewController.swift in Sources */,
 				977F238F25F33613002145BB /* SettingsViewController.swift in Sources */,
 				97A7EF4525FB37BE006B842B /* AppleSignInManager.swift in Sources */,
@@ -484,6 +483,7 @@
 				97DB1B9725EDEC41008955BC /* SceneDelegate.swift in Sources */,
 				97A26BD5260745CA000C202F /* AuthButton.swift in Sources */,
 				973E0DDF26013CD1000B9BC5 /* EmailVerificationViewController.swift in Sources */,
+				974581E0261D43B900F2C5B1 /* EditProfileViewController.swift in Sources */,
 				97EA1958260DED2700D08BAC /* ProfileTabsCollectionReusableView.swift in Sources */,
 				97EA1972260F38F700D08BAC /* ProfileHeaderViewModel.swift in Sources */,
 				979E08A325EF92AE00609D4C /* PollPostViewController.swift in Sources */,

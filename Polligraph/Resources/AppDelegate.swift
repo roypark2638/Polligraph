@@ -8,15 +8,20 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FBSDKCoreKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         
         FirebaseApp.configure()
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
 //        GIDSignIn.sharedInstance().delegate = self
@@ -35,16 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
         
         return true
-        
-//        if !AuthManager.shared.isSignedIn { // Not Sign In
-//            // show onboarding page
-//            window.rootViewController = TabBarViewController()
-//        }
-//        else { // Sign In
-//            let navVC = UINavigationController(rootViewController: OnboardingViewController())
-//            navVC.navigationBar.prefersLargeTitles = true
-//            window.rootViewController = navVC
-//        }
 
     }
     
@@ -53,53 +48,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @available(iOS 9.0, *)
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
       -> Bool {
+        ApplicationDelegate.shared.application(
+            application,
+            open: url,
+            sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+            annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+        )
       return GIDSignIn.sharedInstance().handle(url)
     }
-//
-//    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-//        if let error = error {
-//            // if there is an error
-//            print(error)
-//            return
-//        }
-//
-//        print("User email: \(user.profile.email ?? "No Email")")
-//
-//
-//        guard let authentication = user.authentication else { return }
-//        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-//        let userID = user.userID
-//        let idToken = user.authentication.idToken
-////        let fullName = user.profile.name.trimmingCharacters(in: .whitespacesAndNewlines)
-//        let givenName = user.profile.givenName
-//        let familyName = user.profile.familyName
-//        let email = user.profile.email
-//        AuthManager.shared.googleSignIn(with: credential) { (success) in
-//            if success {
-//                print("user is signed in")
-//            }
-//            else {
-//                print("error to sign in")
-//            }
-//        }
-//
-//
-//        AuthManager.shared.insertUserIntoDatabase(username: givenName! + familyName! + userID!, email: email!) { (success) in
-//            if success {
-//                print("user is in database")
-//            }
-//            else {
-//                print("error to insert user in database")
-//            }
-//        }
-//
-//
-//    }
-    
-//    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-//        // perform any operations when the user disconnects from app here.
-//
-//    }
 
     // MARK: UISceneSession Lifecycle
 
