@@ -346,7 +346,105 @@ class SignInViewController: UIViewController {
     @objc private func didTapFacebook() {
 //        LoginButtonDelegate.loginButton(<#LoginButtonDelegate#>)
 //        loginButton(<#T##loginButton: FBLoginButton##FBLoginButton#>, didCompleteWith: <#T##LoginManagerLoginResult?#>, error: <#T##Error?#>)
+        let loginManager = LoginManager()
+        
+        if let _ = AccessToken.current {
+            loginManager.logOut()
+        }
+        else {
+            loginManager.logIn(permissions: ["email"], from: self) { (result, error) in
+                guard result != nil, error == nil else {
+                    print("Problem with login with Facebook \(error?.localizedDescription ?? "")")
+                    return
+                }
+//                Profile.loadCurrentProfile { (profile, error) in
+//                    print(Profile.current?.name)
+//                    print(Profile.current?.email)
+//                }
+                
+                guard let token = result?.token?.tokenString else {
+                    print("User failed to login with Facebook")
+                    return
+                }
+                
+                let facebookRequest = FBSDKLoginKit.GraphRequest(
+                    graphPath: "me",
+                    parameters: ["fields": "email, name"],
+                    tokenString: token,
+                    version: nil,
+                    httpMethod: .get
+                )
+                
+                facebookRequest.start { (_, result, error) in
+                    guard let result = result as? [String: Any],
+                          error == nil else {
+                        print("Failed to make Facebook graph request")
+                        return
+                    }
+                    print("\(result)")
+                    guard let username = result["name"] as? String,
+                          let email = result["email"] as? String,
+                          let id = result["id"] as? String else {
+                        print("failed to get email and name from fb result")
+                        return
+                    }
+                    let nameComponents = username.components(separatedBy: " ")
+                    guard nameComponents.count == 2 else { return }
+                    
+                    let firstName = nameComponents[0]
+                    let lastName = nameComponents[1]
+                    
+                    let tempUsername = firstName + lastName + id
+                    
+                    DatabaseManager.shared.canCreateNewUser(with: email, username: tempUsername) { (success) in
+                        if success {
+                            // Yes, can create new user with the given info
+                            DatabaseManager.shared.insertNewUser(with: email, username: username) { (result) in
+                                switch result {
+                                case .success:
+                                    print("Successfully insert new user")
+                                case .failure(let error):
+                                    print("Error with inserting new user to database. \(error.localizedDescription)")
+                                }
+                            }
+                        }
+                        else {
+                            // No, already exist
+                        }
+                    }
+                    
+                    let credential = FacebookAuthProvider.credential(withAccessToken: token)
+                    
+                    Auth.auth().signIn(with: credential) { [weak self] (result, error) in
+                        guard result != nil, error == nil else {
+                            print("Facebook credential failed, MFA may be needed - \(error?.localizedDescription ?? "")")
+                            return
+                        }
+                        print("Successfully login with Facebook")
+                        DispatchQueue.main.async {
+                            let vc = TabBarViewController()
+                            vc.modalPresentationStyle = .fullScreen
+                            self?.present(vc, animated: true, completion: nil)
+                        }
+                    }
+                }
+            }
+        }
     }
+    
+//    private func getFBUserDate(didCompleteWith result: LoginManagerLoginResult?) {
+//        guard let token = result?.token?.tokenString else {
+//            print("User failed to log in with Facebook")
+//        }
+//
+//        let credential = FacebookAuthProvider.credential(withAccessToken: token)
+//
+//        FirebaseAuth
+//
+//        if (FBSDKLoginKit.AccessToken.current != nil) {
+//            GraphRequest(graphPath: <#T##String#>, parameters: <#T##[String : Any]#>, tokenString: <#T##String?#>, version: <#T##String?#>, httpMethod: <#T##HTTPMethod#>)
+//        }
+//    }
     
     @objc private func backAction() {
         dismiss(animated: true, completion: nil)
@@ -470,8 +568,19 @@ extension SignInViewController: LoginButtonDelegate {
         
         let credential = FacebookAuthProvider.credential(withAccessToken: token)
         
-        Auth.auth().signIn(with: credential) { (authResult, error) in
+        Auth.auth().signIn(with: credential) { [weak self] (authResult, error) in
+            guard authResult != nil, error == nil else {
+                print("Error with login with Facebook Auth")
+                print(error?.localizedDescription ?? "")
+                return
+            }
             
+            print("Success with login with Facebook")
+            DispatchQueue.main.async {
+                let vc = TabBarViewController()
+                vc.modalPresentationStyle = .fullScreen
+                self?.present(vc, animated: true, completion: nil)
+            }
         }
     }
     

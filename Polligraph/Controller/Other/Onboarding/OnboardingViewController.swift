@@ -158,18 +158,18 @@ class OnboardingViewController: UIViewController {
 
 }
 
-// MARK: - UIView Extension
-
-
-extension UIView {
-    func addConstrains(withFormat: String, views: UIView...) {
-        var viewsDictionary = [String: UIView]()
-        for (index, view) in views.enumerated() {
-            let key = "v\(index)"
-            viewsDictionary[key] = view
-            view.translatesAutoresizingMaskIntoConstraints = false
-        }
-        
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: withFormat, options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: viewsDictionary))
-    }
-}
+//// MARK: - UIView Extension
+//
+//
+//extension UIView {
+//    func addConstrains(withFormat: String, views: UIView...) {
+//        var viewsDictionary = [String: UIView]()
+//        for (index, view) in views.enumerated() {
+//            let key = "v\(index)"
+//            viewsDictionary[key] = view
+//            view.translatesAutoresizingMaskIntoConstraints = false
+//        }
+//        
+//        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: withFormat, options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: viewsDictionary))
+//    }
+//}

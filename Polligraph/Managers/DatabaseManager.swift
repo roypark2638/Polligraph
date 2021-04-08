@@ -11,6 +11,12 @@ final public class DatabaseManager {
     
     static let shared = DatabaseManager()
     
+//    static func safeEmail(emailAddress: String) -> String {
+//        var safeEmail = emailAddress.replacingOccurrences(of: ".", with: "-")
+//        safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
+//        return safeEmail
+//    }
+    
     private let database = Database.database().reference()
     
     private init() {}
@@ -21,20 +27,30 @@ final public class DatabaseManager {
     
     //MARK:- Public
     
-    // this function will check underlying database for us
-    // no reason for auth manager to be aware of how that works
-    // simply ask dataManager, if auth manager can create an account with these parameters
+    /// this function will check underlying database for us
+    /// no reason for auth manager to be aware of how that works
+    /// simply ask dataManager, if auth manager can create an account with these parameters
     /// Check if username and email is available
     /// - Parameters
     ///     - email: String representing email
     ///     - username : String representing username
     ///     - completion: Async callback fro result if database entry succeeded
-    public func canCreateNewUser(with email: String, username: String, completion: (Bool) -> Void) {
-        completion(true)
+    public func canCreateNewUser(with email: String, username: String, completion: @escaping (Bool) -> Void) {
+//        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+        database.child("email").observeSingleEvent(of: .value) { (snapshot) in
+            guard snapshot.value as? [String: Any] == nil else {
+                completion(false)
+                return
+            }
+            completion(true)
+            
+        }
+        
     }
+        
     
-    // We are not going to save the user password here. It's considered extremely bad practice
-    // Firebase will take care of storing the user password for us
+    /// We are not going to save the user password here. It's considered extremely bad practice
+    /// Firebase will take care of storing the user password for us
     /// Insert new user data to database
     /// - parameters
     ///     - email: String representing email
