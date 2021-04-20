@@ -185,6 +185,8 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
     
 }
 
+// MARK: - ProfileHeaderCollectionReusableViewDelegate
+
 extension ProfileViewController: ProfileHeaderCollectionReusableViewDelegate {
     func profileHeaderCollectionReusableView(_ header: ProfileHeaderCollectionReusableView, didTapPollsButtonWith viewModel: ProfileHeaderViewModel) {
         collectionView.scrollToItem(at: IndexPath(row: 0, section: 1), at: .top, animated: true)

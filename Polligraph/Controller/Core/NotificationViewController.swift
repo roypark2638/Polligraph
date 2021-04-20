@@ -11,60 +11,62 @@ class NotificationViewController: UIViewController {
     
     // MARK: - Properties
     
-    struct Constants {
-        static let padding: CGFloat = 70
-    }
+    fileprivate var currentIndex = 0
     
-    private let alertsButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Alerts", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 18)
-        button.setTitleColor(.label, for: .normal)
-        return button
+    private let control : UISegmentedControl = {
+        let titles = ["Alert", "Inbox"]
+        let control = UISegmentedControl(items: titles)
+        control.backgroundColor = .clear
+        control.selectedSegmentTintColor = .label
+        control.selectedSegmentIndex = 0
+        return control
     }()
     
-    private let inboxButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Inbox", for: .normal)
-        button.setTitleColor(.secondaryLabel, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 18)
-        return button
-    }()
+//    struct Constants {
+//        static let padding: CGFloat = 70
+//    }
     
-    private let noNotificationLabel: UILabel = {
-        let label = UILabel()
-        label.text = "No new alerts."
-        label.numberOfLines = 1
-        label.font = UIFont(name: "Roboto-Regular", size: 18)
-        label.textColor = .secondaryLabel
-        label.isHidden = false
-        label.textAlignment = .center
-        return label
-    }()
+//    private let alertsButton: UIButton = {
+//        let button = UIButton()
+//        button.setTitle("Alerts", for: .normal)
+//        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 18)
+//        button.setTitleColor(.label, for: .normal)
+//        return button
+//    }()
+//
+//    private let inboxButton: UIButton = {
+//        let button = UIButton()
+//        button.setTitle("Inbox", for: .normal)
+//        button.setTitleColor(.secondaryLabel, for: .normal)
+//        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 18)
+//        return button
+//    }()
     
-    private let collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let collectionView = UICollectionView(
-            frame: .zero,
-            collectionViewLayout: layout
-        )
-        
-        collectionView.register(
-            UICollectionViewCell.self,
-            forCellWithReuseIdentifier: "cell"
-        )
-//        collectionView.register(
-//            NotificationTabsCollectionReusableView.self,
-//            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-//            withReuseIdentifier: NotificationTabsCollectionReusableView.identifier
+
+    
+//    private let collectionView: UICollectionView = {
+//        let layout = UICollectionViewFlowLayout()
+//        layout.scrollDirection = .vertical
+//        let collectionView = UICollectionView(
+//            frame: .zero,
+//            collectionViewLayout: layout
 //        )
-        collectionView.backgroundColor = .systemBackground
-        collectionView.showsVerticalScrollIndicator = false
-        // when it's empty, default tableView is hidden
-        collectionView.isHidden = false
-        return collectionView
-    }()
+//
+//        collectionView.register(
+//            UICollectionViewCell.self,
+//            forCellWithReuseIdentifier: "cell"
+//        )
+////        collectionView.register(
+////            NotificationTabsCollectionReusableView.self,
+////            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+////            withReuseIdentifier: NotificationTabsCollectionReusableView.identifier
+////        )
+//        collectionView.backgroundColor = .systemBackground
+//        collectionView.showsVerticalScrollIndicator = false
+//        // when it's empty, default tableView is hidden
+//        collectionView.isHidden = false
+//        return collectionView
+//    }()
     
     private let spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: .large)
@@ -73,7 +75,7 @@ class NotificationViewController: UIViewController {
         return spinner
     }()
     
-    var notifications = [Notification]()
+//    var notifications = [Alert]()
     
     // MARK:- LifeCycle
 
@@ -81,14 +83,15 @@ class NotificationViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .systemBackground
-        addSubviews()
-        configureLayouts()
-        configureButton()
+        let vc = AlertViewController()
+        navigationController?.pushViewController(vc, animated: true)
+//        addSubviews()
+//        configureLayouts()
+//        configureButton()
 //        fetchNotificationData()
-        updateUI()
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
+//        collectionView.delegate = self
+//        collectionView.dataSource = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -98,79 +101,9 @@ class NotificationViewController: UIViewController {
     
     // MARK: - Methods
     
-    private func fetchNotificationData() {
-//        DatabaseManager.shared.getNotifications { [weak self] (notifications) in
-//            DispatchQueue.main.async {
-//                self?.spinner.stopAnimating()
-//                self?.spinner.isHidden = true
-//                self?.notifications = notifications
-//                self?.updateUI()
-//            }
-//        }
-    }
+
     
-    private func updateUI() {
-        if notifications.isEmpty {
-            noNotificationLabel.isHidden = false
-            collectionView.isHidden = true
-        }
-        else {
-            noNotificationLabel.isHidden = true
-            collectionView.isHidden = false
-        }
-        
-        collectionView.reloadData()
-    }
-    
-    private func addSubviews() {
-        view.addSubview(noNotificationLabel)
-        view.addSubview(collectionView)
-        view.addSubview(alertsButton)
-        view.addSubview(inboxButton)
-    }
-    
-    private func configureLayouts() {
-        collectionView.frame = view.bounds
-        
-        alertsButton.sizeToFit()
-        let alertsButtonX = ((view.width/2)-alertsButton.width)/2
-        alertsButton.frame = CGRect(
-            x: alertsButtonX,
-            y: Constants.padding,
-            width: alertsButton.width,
-            height: alertsButton.height
-        )
-        
-        inboxButton.sizeToFit()
-        inboxButton.frame = CGRect(
-            x: alertsButtonX + (view.width / 2),
-            y: Constants.padding,
-            width: inboxButton.width,
-            height: inboxButton.height
-        )
-        
-        noNotificationLabel.sizeToFit()
-        noNotificationLabel.frame = CGRect(
-            x: (view.width-noNotificationLabel.width)/2,
-            y: view.safeAreaInsets.top + 150,
-            width: noNotificationLabel.width,
-            height: noNotificationLabel.height
-        )
-    }
-    
-    private func configureButton() {
-        alertsButton.addTarget(
-            self,
-            action: #selector(didTapAlert),
-            for: .touchUpInside
-        )
-        
-        inboxButton.addTarget(
-            self,
-            action: #selector(didTapInbox),
-            for: .touchUpInside
-        )
-    }
+   
     
     @objc private func didTapAlert() {
         
@@ -181,25 +114,65 @@ class NotificationViewController: UIViewController {
     }
 }
 
-extension NotificationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
+// MARK: - UICollectionViewDataSource
+
+//extension NotificationViewController: UICollectionViewDataSource {
+//    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        return 1
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView,
+//                        numberOfItemsInSection section: Int
+//    ) -> Int {
+//        return notifications.count
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView,
+//                        cellForItemAt indexPath: IndexPath
+//    ) -> UICollectionViewCell {
+//        let model = notifications[indexPath.row]
+        
+//        switch model.type {
+//        case .userFollow(let username):
+//            guard let cell = collectionView.dequeueReusableCell(
+//                withReuseIdentifier: AlertUserFollowTableViewCell.identifier,
+//                for: indexPath
+//            ) as? AlertUserFollowTableViewCell else {
+//                let defaultCell = collectionView.dequeueReusableCell(
+//                    withReuseIdentifier: "cell",
+//                    for: indexPath
+//                )
+//                return defaultCell
+//            }
+//            cell.configure(with: username)
+//            return cell
+//
+//        case .postComment(let postName):
+////            guard let cell = collectionView.dequeueReusableCell(
+////                withReuseIdentifier: NotificationPostCommentCollectionViewCell.identifier,
+////                    for: <#T##IndexPath#>
+////            )
+//        break
+//        case .postCommentLike(let postName):
+//            break
+//        }
+//
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+//        cell.backgroundColor = .systemBlue
+//        return cell
+//    }
+//
+//
+//}
+
+// MARK: - UICollectionViewDelegate
+
+extension NotificationViewController: UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int
-    ) -> Int {
-        return 20
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath
-    ) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .systemBlue
-        return cell
-    }
-    
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension NotificationViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath
@@ -253,3 +226,17 @@ extension NotificationViewController: UICollectionViewDelegate, UICollectionView
         
     }
 }
+
+// MARK: -
+
+//extension NotificationViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+//    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+//
+//    }
+//
+//    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+//
+//    }
+//
+//
+//}

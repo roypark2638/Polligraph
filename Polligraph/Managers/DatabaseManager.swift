@@ -124,9 +124,13 @@ final public class DatabaseManager {
     }
     
  
-    public func getNotifications(completion: @escaping ([Notification]) -> Void) {
-        completion(Notification.mockData())
+    public func getAlerts(completion: @escaping ([Alert]) -> Void) {
+        completion(Alert.mockData())
     }
     
+    
+    public func markAlertAsHidden(alertID: String, completion: @escaping (Bool) -> Void) {
+        completion(true)
+    }
 }
 

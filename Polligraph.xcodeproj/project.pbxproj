@@ -9,8 +9,15 @@
 /* Begin PBXBuildFile section */
 		136265ACCA984952CDA7C8C8 /* Pods_Polligraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439A5B197B65A2DAB1D0D5B3 /* Pods_Polligraph.framework */; };
 		9707A80F25F1C5C80099089A /* TabBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9707A80E25F1C5C80099089A /* TabBarDelegate.swift */; };
+		9716A02A262E92C800365AEE /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9716A029262E92C800365AEE /* AlertViewController.swift */; };
+		9716A02D262E92CF00365AEE /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9716A02C262E92CF00365AEE /* InboxViewController.swift */; };
 		973E0DDF26013CD1000B9BC5 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973E0DDE26013CD1000B9BC5 /* EmailVerificationViewController.swift */; };
 		974581E0261D43B900F2C5B1 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974581DF261D43B900F2C5B1 /* EditProfileViewController.swift */; };
+		974581EB261EACF800F2C5B1 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974581EA261EACF800F2C5B1 /* Alert.swift */; };
+		974581EE261EBED700F2C5B1 /* NotificationTabsCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974581ED261EBED700F2C5B1 /* NotificationTabsCollectionReusableView.swift */; };
+		974581F2261F0D9200F2C5B1 /* AlertUserFollowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974581F1261F0D9200F2C5B1 /* AlertUserFollowTableViewCell.swift */; };
+		974581F6261F0DA300F2C5B1 /* AlertPostCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974581F5261F0DA300F2C5B1 /* AlertPostCommentTableViewCell.swift */; };
+		974581F9261F0DAC00F2C5B1 /* AlertPostCommentLikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974581F8261F0DAC00F2C5B1 /* AlertPostCommentLikeTableViewCell.swift */; };
 		977F238F25F33613002145BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F238E25F33613002145BB /* SettingsViewController.swift */; };
 		977F239325F33628002145BB /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239225F33628002145BB /* AuthViewController.swift */; };
 		977F239625F33636002145BB /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239525F33636002145BB /* AuthManager.swift */; };
@@ -55,8 +62,15 @@
 /* Begin PBXFileReference section */
 		439A5B197B65A2DAB1D0D5B3 /* Pods_Polligraph.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Polligraph.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9707A80E25F1C5C80099089A /* TabBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarDelegate.swift; sourceTree = "<group>"; };
+		9716A029262E92C800365AEE /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		9716A02C262E92CF00365AEE /* InboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
 		973E0DDE26013CD1000B9BC5 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		974581DF261D43B900F2C5B1 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		974581EA261EACF800F2C5B1 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		974581ED261EBED700F2C5B1 /* NotificationTabsCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTabsCollectionReusableView.swift; sourceTree = "<group>"; };
+		974581F1261F0D9200F2C5B1 /* AlertUserFollowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUserFollowTableViewCell.swift; sourceTree = "<group>"; };
+		974581F5261F0DA300F2C5B1 /* AlertPostCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPostCommentTableViewCell.swift; sourceTree = "<group>"; };
+		974581F8261F0DAC00F2C5B1 /* AlertPostCommentLikeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPostCommentLikeTableViewCell.swift; sourceTree = "<group>"; };
 		977F238E25F33613002145BB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		977F239225F33628002145BB /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		977F239525F33636002145BB /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -132,6 +146,33 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		9716A032262E950900365AEE /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				974581F1261F0D9200F2C5B1 /* AlertUserFollowTableViewCell.swift */,
+				974581F5261F0DA300F2C5B1 /* AlertPostCommentTableViewCell.swift */,
+				974581F8261F0DAC00F2C5B1 /* AlertPostCommentLikeTableViewCell.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		9716A035262E951300365AEE /* Inbox */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Inbox;
+			sourceTree = "<group>";
+		};
+		974581F0261F0D7200F2C5B1 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				974581ED261EBED700F2C5B1 /* NotificationTabsCollectionReusableView.swift */,
+				9716A032262E950900365AEE /* Alert */,
+				9716A035262E951300365AEE /* Inbox */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
 		977F238925F3358B002145BB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +226,8 @@
 			children = (
 				97BC9EED25F375B7004EDB60 /* General */,
 				97BC9EEC25F375AD004EDB60 /* Onboarding */,
+				9716A029262E92C800365AEE /* AlertViewController.swift */,
+				9716A02C262E92CF00365AEE /* InboxViewController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -260,6 +303,7 @@
 		97DB1B9325EDEC41008955BC /* Polligraph */ = {
 			isa = PBXGroup;
 			children = (
+				977F238925F3358B002145BB /* Resources */,
 				977F238A25F33591002145BB /* Managers */,
 				977F238B25F33596002145BB /* ViewModels */,
 				97DB1BAA25EDED06008955BC /* Models */,
@@ -267,7 +311,6 @@
 				97DB1BAB25EDED19008955BC /* Views */,
 				97DB1BB225EE01B5008955BC /* Support */,
 				9791A71725F9E2A30088BDAC /* Fonts */,
-				977F238925F3358B002145BB /* Resources */,
 				97A7EF8025FB5DDB006B842B /* Polligraph.entitlements */,
 				97CDAA2D25F75E4600476262 /* GoogleService-Info.plist */,
 				97DB1BA225EDEC42008955BC /* Info.plist */,
@@ -281,6 +324,7 @@
 				977F239E25F3365A002145BB /* UserPost.swift */,
 				977F23A125F33680002145BB /* PollPostList.swift */,
 				9791A70C25F96A4C0088BDAC /* SettingsCellModel.swift */,
+				974581EA261EACF800F2C5B1 /* Alert.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -288,6 +332,7 @@
 		97DB1BAB25EDED19008955BC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				974581F0261F0D7200F2C5B1 /* Notification */,
 				97A26BCF260745AF000C202F /* Other */,
 				97A26BCE260745A8000C202F /* Storyboard */,
 				97EA1955260DED1400D08BAC /* CollectionView Headers */,
@@ -456,10 +501,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				974581F9261F0DAC00F2C5B1 /* AlertPostCommentLikeTableViewCell.swift in Sources */,
+				9716A02A262E92C800365AEE /* AlertViewController.swift in Sources */,
 				97EA192C260C423900D08BAC /* ForgotPasswordViewController.swift in Sources */,
 				979E088B25EF905800609D4C /* NotificationViewController.swift in Sources */,
 				979E089525EF908C00609D4C /* NewPostViewController.swift in Sources */,
 				9791A70D25F96A4C0088BDAC /* SettingsCellModel.swift in Sources */,
+				974581EE261EBED700F2C5B1 /* NotificationTabsCollectionReusableView.swift in Sources */,
 				979E088F25EF906400609D4C /* SearchViewController.swift in Sources */,
 				97EA195B260DED8900D08BAC /* PostCollectionViewCell.swift in Sources */,
 				979E085B25EF533F00609D4C /* SignInViewController.swift in Sources */,
@@ -471,13 +519,17 @@
 				979E089225EF906E00609D4C /* ProfileViewController.swift in Sources */,
 				97A26BD1260745BF000C202F /* TextField.swift in Sources */,
 				979E087625EF8BCD00609D4C /* HomeViewController.swift in Sources */,
+				974581F2261F0D9200F2C5B1 /* AlertUserFollowTableViewCell.swift in Sources */,
+				974581F6261F0DA300F2C5B1 /* AlertPostCommentTableViewCell.swift in Sources */,
 				977F238F25F33613002145BB /* SettingsViewController.swift in Sources */,
 				97A7EF4525FB37BE006B842B /* AppleSignInManager.swift in Sources */,
+				974581EB261EACF800F2C5B1 /* Alert.swift in Sources */,
 				97EA1953260DEC5700D08BAC /* ProfileHeaderCollectionReusableView.swift in Sources */,
 				97DB1B9925EDEC41008955BC /* OnboardingViewController.swift in Sources */,
 				977F239F25F3365A002145BB /* UserPost.swift in Sources */,
 				97BC9EE625F3750E004EDB60 /* StorageManager.swift in Sources */,
 				97DB1B9525EDEC41008955BC /* AppDelegate.swift in Sources */,
+				9716A02D262E92CF00365AEE /* InboxViewController.swift in Sources */,
 				977F239925F3363E002145BB /* APICaller.swift in Sources */,
 				97BC9F0F25F42D26004EDB60 /* TabBarViewController.swift in Sources */,
 				97DB1B9725EDEC41008955BC /* SceneDelegate.swift in Sources */,
