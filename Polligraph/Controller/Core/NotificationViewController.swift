@@ -84,7 +84,14 @@ class NotificationViewController: UIViewController {
 
         view.backgroundColor = .systemBackground
         let vc = AlertViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        let nav = UINavigationController(rootViewController: vc)
+        nav.navigationBar.isTranslucent = false
+        nav.navigationBar.shadowImage = UIImage()
+        nav.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        nav.modalPresentationStyle = .currentContext
+        tabBarController?.hidesBottomBarWhenPushed = false
+        present(nav, animated: false, completion: nil)
+//        navigationController?.pushViewController(vc, animated: true)
 //        addSubviews()
 //        configureLayouts()
 //        configureButton()
