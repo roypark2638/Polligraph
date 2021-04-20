@@ -97,22 +97,32 @@ class TabBarViewController: UITabBarController {
         notificationNav.navigationBar.tintColor = .label
         profileNav.navigationBar.tintColor = .label
         
+        tabBar.unselectedItemTintColor = .black
+        UITabBar.appearance().tintColor = .label
+//        let appearance = tabBar.standardAppearance
+//        appearance.shadowImage = nil
+//        appearance.shadowColor = nil
+//        tabBar.standardAppearance = appearance
+        
+        tabBar.shadowImage = UIImage()
+        tabBar.backgroundImage = UIImage()
+        tabBar.isTranslucent = false
         
         setViewControllers(viewControllers, animated: false)
         
-        homeNav.tabBarItem = UITabBarItem(title: "Home",
+        homeNav.tabBarItem = UITabBarItem(title: nil,
                                           image: UIImage(systemName: "house"),
                                           selectedImage: UIImage(systemName: "house.fill"))
-        searchNav.tabBarItem = UITabBarItem(title: "Search",
+        searchNav.tabBarItem = UITabBarItem(title: nil,
                                            image: UIImage(systemName: "magnifyingglass.circle"),
                                            selectedImage: UIImage(systemName: "magnifyingglass.circle.fill"))
-        newPostNav.tabBarItem = UITabBarItem(title: "NewPost",
+        newPostNav.tabBarItem = UITabBarItem(title: nil,
                                             image: UIImage(systemName: "plus.circle"),
                                             selectedImage: UIImage(systemName: "plus.circle.fill"))
-        notificationNav.tabBarItem = UITabBarItem(title: "Notification",
+        notificationNav.tabBarItem = UITabBarItem(title: nil,
                                                  image: UIImage(systemName: "bell"),
                                                  selectedImage: UIImage(systemName: "bell.fill"))
-        profileNav.tabBarItem = UITabBarItem(title: "Profile",
+        profileNav.tabBarItem = UITabBarItem(title: nil,
                                             image: UIImage(systemName: "person.crop.circle"),
                                             selectedImage: UIImage(systemName: "person.crop.circle.fill"))
         
