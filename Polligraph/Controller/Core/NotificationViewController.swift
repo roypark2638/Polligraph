@@ -7,6 +7,22 @@
 
 import UIKit
 
+enum NotificationPages: Int {
+    case alerts
+    case inbox
+    
+    var identifier: String {
+        switch self {
+        case .alerts: return "Alerts"
+        case .inbox: return "Inbox"
+        }
+    }
+    
+    static func pagesToShow() -> [NotificationPages] {
+        return [.alerts, .inbox]
+    }
+}
+
 class NotificationViewController: UIViewController {
     
     // MARK: - Properties
@@ -75,6 +91,11 @@ class NotificationViewController: UIViewController {
         return spinner
     }()
     
+    private let codeSegmented = CustomSegmentedControl(
+        frame: .zero,
+        buttonTitles: ["Alerts", "Inbox"]
+    )
+
 //    var notifications = [Alert]()
     
     // MARK:- LifeCycle
@@ -83,14 +104,19 @@ class NotificationViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .systemBackground
-        let vc = AlertViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        nav.navigationBar.isTranslucent = false
-        nav.navigationBar.shadowImage = UIImage()
-        nav.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        nav.modalPresentationStyle = .currentContext
-        tabBarController?.hidesBottomBarWhenPushed = false
-        present(nav, animated: false, completion: nil)
+        
+        codeSegmented.backgroundColor = .clear
+        self.navigationController?.navigationBar.layer.zPosition = -1
+        self.navigationController?.navigationBar.isUserInteractionEnabled = false
+        view.addSubview(codeSegmented)
+//        let vc = AlertViewController()
+//        let nav = UINavigationController(rootViewController: vc)
+//        nav.navigationBar.isTranslucent = false
+//        nav.navigationBar.shadowImage = UIImage()
+//        nav.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        nav.modalPresentationStyle = .currentContext
+//        tabBarController?.hidesBottomBarWhenPushed = false
+//        present(nav, animated: false, completion: nil)
 //        navigationController?.pushViewController(vc, animated: true)
 //        addSubviews()
 //        configureLayouts()
@@ -103,7 +129,12 @@ class NotificationViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        codeSegmented.frame = CGRect(
+            x: 0,
+            y: 50,
+            width: view.width,
+            height: 50
+        )
     }
     
     // MARK: - Methods
@@ -174,32 +205,32 @@ class NotificationViewController: UIViewController {
 
 // MARK: - UICollectionViewDelegate
 
-extension NotificationViewController: UICollectionViewDelegate {
-    
-}
+//extension NotificationViewController: UICollectionViewDelegate {
+//
+//}
 
 // MARK: - UICollectionViewDelegateFlowLayout
-extension NotificationViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath
-    ) -> CGSize {
-        return CGSize(width: view.width, height: 40)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumInteritemSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        return 1
-    }
+//extension NotificationViewController: UICollectionViewDelegateFlowLayout {
+//    func collectionView(_ collectionView: UICollectionView,
+//                        layout collectionViewLayout: UICollectionViewLayout,
+//                        sizeForItemAt indexPath: IndexPath
+//    ) -> CGSize {
+//        return CGSize(width: view.width, height: 40)
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView,
+//                        layout collectionViewLayout: UICollectionViewLayout,
+//                        minimumLineSpacingForSectionAt section: Int
+//    ) -> CGFloat {
+//        return 1
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView,
+//                        layout collectionViewLayout: UICollectionViewLayout,
+//                        minimumInteritemSpacingForSectionAt section: Int
+//    ) -> CGFloat {
+//        return 1
+//    }
 //
 //    func collectionView(_ collectionView: UICollectionView,
 //                        viewForSupplementaryElementOfKind kind: String,
@@ -220,19 +251,19 @@ extension NotificationViewController: UICollectionViewDelegateFlowLayout {
 //        return UICollectionReusableView()
 //
 //    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        referenceSizeForHeaderInSection section: Int
-    ) -> CGSize {
-        return CGSize(
-            width: view.width,
-            height: 56
-        )
-        
-        
-    }
-}
+//
+//    func collectionView(_ collectionView: UICollectionView,
+//                        layout collectionViewLayout: UICollectionViewLayout,
+//                        referenceSizeForHeaderInSection section: Int
+//    ) -> CGSize {
+//        return CGSize(
+//            width: view.width,
+//            height: 56
+//        )
+//
+//
+//    }
+//}
 
 // MARK: -
 

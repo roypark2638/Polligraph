@@ -11,6 +11,7 @@
 		9707A80F25F1C5C80099089A /* TabBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9707A80E25F1C5C80099089A /* TabBarDelegate.swift */; };
 		9716A02A262E92C800365AEE /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9716A029262E92C800365AEE /* AlertViewController.swift */; };
 		9716A02D262E92CF00365AEE /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9716A02C262E92CF00365AEE /* InboxViewController.swift */; };
+		9716A03D262F807E00365AEE /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9716A03C262F807E00365AEE /* CustomSegmentedControl.swift */; };
 		973E0DDF26013CD1000B9BC5 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973E0DDE26013CD1000B9BC5 /* EmailVerificationViewController.swift */; };
 		974581E0261D43B900F2C5B1 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974581DF261D43B900F2C5B1 /* EditProfileViewController.swift */; };
 		974581EB261EACF800F2C5B1 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974581EA261EACF800F2C5B1 /* Alert.swift */; };
@@ -64,6 +65,7 @@
 		9707A80E25F1C5C80099089A /* TabBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarDelegate.swift; sourceTree = "<group>"; };
 		9716A029262E92C800365AEE /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		9716A02C262E92CF00365AEE /* InboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
+		9716A03C262F807E00365AEE /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		973E0DDE26013CD1000B9BC5 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		974581DF261D43B900F2C5B1 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		974581EA261EACF800F2C5B1 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 			children = (
 				97A26BD0260745BF000C202F /* TextField.swift */,
 				97A26BD4260745CA000C202F /* AuthButton.swift */,
+				9716A03C262F807E00365AEE /* CustomSegmentedControl.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				979E089525EF908C00609D4C /* NewPostViewController.swift in Sources */,
 				9791A70D25F96A4C0088BDAC /* SettingsCellModel.swift in Sources */,
 				974581EE261EBED700F2C5B1 /* NotificationTabsCollectionReusableView.swift in Sources */,
+				9716A03D262F807E00365AEE /* CustomSegmentedControl.swift in Sources */,
 				979E088F25EF906400609D4C /* SearchViewController.swift in Sources */,
 				97EA195B260DED8900D08BAC /* PostCollectionViewCell.swift in Sources */,
 				979E085B25EF533F00609D4C /* SignInViewController.swift in Sources */,
