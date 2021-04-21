@@ -7,7 +7,15 @@
 
 import UIKit
 
+protocol CustomSegmentedControlDelegate: AnyObject {
+    func customSegmentedControlDidTapButton(
+        _ control: CustomSegmentedControl,
+        sender: UIButton)
+}
+
 class CustomSegmentedControl: UIView {
+    
+    public weak var delegate: CustomSegmentedControlDelegate?
     
     convenience init(frame: CGRect, buttonTitles: [String]) {
         self.init(frame: frame)
@@ -71,7 +79,7 @@ class CustomSegmentedControl: UIView {
             button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 18)
             button.addTarget(
                 self,
-                action: #selector(CustomSegmentedControl.buttonAction(sender:)),
+                action: #selector(buttonAction(sender:)),
                 for: .touchUpInside
             )
             button.setTitleColor(textColor, for: .normal)
@@ -87,6 +95,8 @@ class CustomSegmentedControl: UIView {
     }
     
     @objc private func buttonAction(sender: UIButton) {
+        delegate?.customSegmentedControlDidTapButton(self, sender: sender)
+        print("Custom it's tapped")
         for (buttonIndex, button) in buttons.enumerated() {
             button.setTitleColor(textColor, for: .normal)
             if button == sender {
@@ -99,5 +109,6 @@ class CustomSegmentedControl: UIView {
                 button.setTitleColor(selectorTextColor, for: .normal)
             }
         }
+        
     }
 }
