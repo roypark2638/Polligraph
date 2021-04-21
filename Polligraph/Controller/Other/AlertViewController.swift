@@ -9,8 +9,6 @@ import UIKit
 
 class AlertViewController: UIViewController {
     
-    var alerts = [Alert]()
-    
     private let noAlert: UILabel = {
         let label = UILabel()
         label.text = "No new alerts."
@@ -39,6 +37,11 @@ class AlertViewController: UIViewController {
             AlertPostCommentLikeTableViewCell.self,
             forCellReuseIdentifier: AlertPostCommentLikeTableViewCell.identifier
         )
+        tableView.register(
+            AlertPostCommentReplyTableViewCell.self,
+            forCellReuseIdentifier: AlertPostCommentReplyTableViewCell.identifier
+        )
+        
         return tableView
     }()
     
@@ -48,6 +51,8 @@ class AlertViewController: UIViewController {
         spinner.startAnimating()
         return spinner
     }()
+    
+    private var alerts: [Alert] = []
     
     // MARK: - Lifecycle
 
@@ -130,7 +135,9 @@ extension AlertViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = alerts[indexPath.row]
+//        let cellType = alerts[indexPath.row].type
+        let alert = alerts[indexPath.row]
+//        let model = viewModels[indexPath.row]
         
 //        guard let cell = tableView.dequeueReusableCell(
 //                withIdentifier: AlertUserFollowTableViewCell.identifier,
@@ -141,36 +148,48 @@ extension AlertViewController: UITableViewDataSource {
 //        cell.configure(with: "TestUsername", model: model)
 //
 //        return cell
-        switch model.type {
+        switch alert.type {
 
-        case .userFollow(let username):
+        case .userFollow(let alert):
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: AlertUserFollowTableViewCell.identifier,
                     for: indexPath
             ) as? AlertUserFollowTableViewCell else {
-                return tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+                fatalError()
             }
-            cell.configure(with: username, model: model)
+            cell.configure(with: alert)
             return cell
 
-        case .postComment(let postName):
+        case .postComment(let alert):
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: AlertPostCommentTableViewCell.identifier,
                     for: indexPath
             ) as? AlertPostCommentTableViewCell else {
-                return tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+                fatalError()
             }
-            cell.configure(with: model)
+            cell.configure(with: alert)
 
             return cell
-        case .postCommentLike(let postName):
+            
+        case .postCommentLike(let alert):
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: AlertPostCommentLikeTableViewCell.identifier,
                     for: indexPath
             ) as? AlertPostCommentLikeTableViewCell else {
-                return tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+                fatalError()
             }
-            cell.configure(with: model)
+            cell.configure(with: alert)
+            
+            return cell
+            
+        case .postCommentReply(let alert):
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: AlertPostCommentReplyTableViewCell.identifier,
+                    for: indexPath
+            ) as? AlertPostCommentReplyTableViewCell else {
+                fatalError()
+            }
+            cell.configure(with: alert)
             
             return cell
         }

@@ -1,26 +1,25 @@
 //
-//  AlertPostCommentTableViewCell.swift
+//  AlertPostCommentReplyTableViewCell.swift
 //  Polligraph
 //
-//  Created by Roy Park on 4/8/21.
+//  Created by Roy Park on 4/21/21.
 //
 
 import UIKit
 
-class AlertPostCommentTableViewCell: UITableViewCell {
-    static let identifier = "AlertPostCommentCollectionViewCell"
-    
-    // MARK: - Subviews
-    
+class AlertPostCommentReplyTableViewCell: UITableViewCell {
+
+    static let identifier = "AlertPostCommentReplyTableViewCell"
+
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.layer.masksToBounds = true
         return imageView
     }()
     
-    private let alertLabel: UILabel = {
+    private let alertMessage: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont(name: "Roboto-Regular", size: 16)
@@ -31,12 +30,12 @@ class AlertPostCommentTableViewCell: UITableViewCell {
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.font = UIFont(name: "Roboto-Regular", size: 16)
         label.textColor = .secondaryLabel
+        label.font = UIFont(name: "Roboto-Regular", size: 16)
         return label
     }()
     
-    // MARK: - Init
+    var postID: String?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -48,8 +47,6 @@ class AlertPostCommentTableViewCell: UITableViewCell {
         fatalError()
     }
     
-    // MARK: - Lifecycle
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         configureLayouts()
@@ -58,51 +55,38 @@ class AlertPostCommentTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         profileImageView.image = nil
-        alertLabel.text = nil
+        alertMessage.text = nil
         dateLabel.text = nil
     }
     
-    // MARK: - Methods
-    
-    func configure(with viewModel: CommentAlertCellViewModel) {
-        profileImageView.image = UIImage(named: "Profile Image")
-        alertLabel.text = "\(viewModel.username) commented on your post."
+    private func addSubviews() {
+        contentView.addSubview(profileImageView)
+        contentView.addSubview(alertMessage)
+        contentView.addSubview(dateLabel)
     }
     
     private func configureLayouts() {
         let imageSize = CGFloat(40)
-                        
-        profileImageView.layer.cornerRadius = imageSize/2
+        
         profileImageView.frame = CGRect(
             x: 16,
             y: 10,
             width: imageSize,
             height: imageSize
-        ).integral
+        )
         
-        alertLabel.sizeToFit()
-        alertLabel.frame = CGRect(
+        alertMessage.sizeToFit()
+        alertMessage.frame = CGRect(
             x: profileImageView.right + 16,
-            y: 10,
-            width: contentView.width - 32 - profileImageView.right,
-            height: alertLabel.height
-        ).integral
-        
-//        dateLabel.sizeToFit()
-//        dateLabel.frame = CGRect(
-//            x: alertLabel.right + 10,
-//            y: alertLabel.bottom,
-//            width: dateLabel.width,
-//            height: dateLabel.height
-//        ).integral
-        
-        
+            y: profileImageView.top,
+            width: contentView.width-profileImageView.right-32,
+            height: alertMessage.height
+        )
     }
     
-    private func addSubviews() {
-        contentView.addSubview(dateLabel)
-        contentView.addSubview(alertLabel)
-        contentView.addSubview(profileImageView)
+    
+    func configure(with viewModel: ReplyCommentAlertCellViewModel) {
+        profileImageView.image = UIImage(named: "Profile Image")
+        alertMessage.text = "\(viewModel.username) replied to your comment on (postname)"
     }
-
 }

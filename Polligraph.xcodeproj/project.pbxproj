@@ -12,6 +12,9 @@
 		9716A02A262E92C800365AEE /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9716A029262E92C800365AEE /* AlertViewController.swift */; };
 		9716A02D262E92CF00365AEE /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9716A02C262E92CF00365AEE /* InboxViewController.swift */; };
 		9716A03D262F807E00365AEE /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9716A03C262F807E00365AEE /* CustomSegmentedControl.swift */; };
+		9716A0552630B79400365AEE /* AlertCellViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9716A0542630B79400365AEE /* AlertCellViewModels.swift */; };
+		9716A0582630BA7000365AEE /* AlertCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9716A0572630BA7000365AEE /* AlertCellType.swift */; };
+		9716A05B2630C1F800365AEE /* AlertPostCommentReplyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9716A05A2630C1F800365AEE /* AlertPostCommentReplyTableViewCell.swift */; };
 		973E0DDF26013CD1000B9BC5 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973E0DDE26013CD1000B9BC5 /* EmailVerificationViewController.swift */; };
 		974581E0261D43B900F2C5B1 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974581DF261D43B900F2C5B1 /* EditProfileViewController.swift */; };
 		974581EB261EACF800F2C5B1 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974581EA261EACF800F2C5B1 /* Alert.swift */; };
@@ -66,6 +69,9 @@
 		9716A029262E92C800365AEE /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		9716A02C262E92CF00365AEE /* InboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
 		9716A03C262F807E00365AEE /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
+		9716A0542630B79400365AEE /* AlertCellViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCellViewModels.swift; sourceTree = "<group>"; };
+		9716A0572630BA7000365AEE /* AlertCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCellType.swift; sourceTree = "<group>"; };
+		9716A05A2630C1F800365AEE /* AlertPostCommentReplyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPostCommentReplyTableViewCell.swift; sourceTree = "<group>"; };
 		973E0DDE26013CD1000B9BC5 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		974581DF261D43B900F2C5B1 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		974581EA261EACF800F2C5B1 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -154,6 +160,7 @@
 				974581F1261F0D9200F2C5B1 /* AlertUserFollowTableViewCell.swift */,
 				974581F5261F0DA300F2C5B1 /* AlertPostCommentTableViewCell.swift */,
 				974581F8261F0DAC00F2C5B1 /* AlertPostCommentLikeTableViewCell.swift */,
+				9716A05A2630C1F800365AEE /* AlertPostCommentReplyTableViewCell.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -206,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				97EA1971260F38F700D08BAC /* ProfileHeaderViewModel.swift */,
+				9716A0542630B79400365AEE /* AlertCellViewModels.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -328,6 +336,7 @@
 				977F23A125F33680002145BB /* PollPostList.swift */,
 				9791A70C25F96A4C0088BDAC /* SettingsCellModel.swift */,
 				974581EA261EACF800F2C5B1 /* Alert.swift */,
+				9716A0572630BA7000365AEE /* AlertCellType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -512,6 +521,7 @@
 				9791A70D25F96A4C0088BDAC /* SettingsCellModel.swift in Sources */,
 				974581EE261EBED700F2C5B1 /* NotificationTabsCollectionReusableView.swift in Sources */,
 				9716A03D262F807E00365AEE /* CustomSegmentedControl.swift in Sources */,
+				9716A05B2630C1F800365AEE /* AlertPostCommentReplyTableViewCell.swift in Sources */,
 				979E088F25EF906400609D4C /* SearchViewController.swift in Sources */,
 				97EA195B260DED8900D08BAC /* PostCollectionViewCell.swift in Sources */,
 				979E085B25EF533F00609D4C /* SignInViewController.swift in Sources */,
@@ -527,6 +537,7 @@
 				974581F6261F0DA300F2C5B1 /* AlertPostCommentTableViewCell.swift in Sources */,
 				977F238F25F33613002145BB /* SettingsViewController.swift in Sources */,
 				97A7EF4525FB37BE006B842B /* AppleSignInManager.swift in Sources */,
+				9716A0552630B79400365AEE /* AlertCellViewModels.swift in Sources */,
 				974581EB261EACF800F2C5B1 /* Alert.swift in Sources */,
 				97EA1953260DEC5700D08BAC /* ProfileHeaderCollectionReusableView.swift in Sources */,
 				97DB1B9925EDEC41008955BC /* OnboardingViewController.swift in Sources */,
@@ -535,6 +546,7 @@
 				97DB1B9525EDEC41008955BC /* AppDelegate.swift in Sources */,
 				9716A02D262E92CF00365AEE /* InboxViewController.swift in Sources */,
 				977F239925F3363E002145BB /* APICaller.swift in Sources */,
+				9716A0582630BA7000365AEE /* AlertCellType.swift in Sources */,
 				97BC9F0F25F42D26004EDB60 /* TabBarViewController.swift in Sources */,
 				97DB1B9725EDEC41008955BC /* SceneDelegate.swift in Sources */,
 				97A26BD5260745CA000C202F /* AuthButton.swift in Sources */,

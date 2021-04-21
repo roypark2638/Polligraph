@@ -54,7 +54,6 @@ class AlertUserFollowTableViewCell: UITableViewCell {
 
     var postID: String?
     
-    var username: String?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -124,11 +123,10 @@ class AlertUserFollowTableViewCell: UITableViewCell {
         followButton.addTarget(self, action: #selector(didTapFollow), for: .touchUpInside)
     }
     
-    func configure(with username: String, model: Alert) {
-        self.username = username
+    func configure(with viewModel: FollowAlertCellViewModel) {       
         profileImageView.image = UIImage(named: "Profile Image2")
-        alertMessage.text = model.text
-        dateLabel.text = .date(with: model.date)
+        alertMessage.text = "\(viewModel.username) started following you."
+        dateLabel.text = .date(with: viewModel.date)
     }
     
     @objc private func didTapFollow() {

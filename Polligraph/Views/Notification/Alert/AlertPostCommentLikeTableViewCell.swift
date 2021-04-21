@@ -41,12 +41,6 @@ class AlertPostCommentLikeTableViewCell: UITableViewCell {
         contentView.clipsToBounds = true
         addSubviews()
     }
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        contentView.clipsToBounds = true
-//
-//        addSubviews()
-//    }
     
     required init?(coder: NSCoder) {
         fatalError()
@@ -91,12 +85,9 @@ class AlertPostCommentLikeTableViewCell: UITableViewCell {
     }
     
     
-    func configure(with alert: Alert) {
+    func configure(with viewModel: LikeCommentAlertCellViewModel) {
         profileImageView.image = UIImage(named: "Profile Image")
-        alertMessage.text = alert.text
+        alertMessage.text = "\(viewModel.username) liked your comment on (postname)"
     }
     
-    @objc private func didTapFollow() {
-        
-    }
 }
