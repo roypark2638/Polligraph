@@ -13,37 +13,30 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        
+        configureNavigationBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        do {
-//            try Auth.auth().signOut()
-//        }
-//        catch {
-//            print("failed to sign out")
-//        }
-        // check auth status
-//        handleNotAuthenticated()
     }
     
-//    private func handleNotAuthenticated() {
-//        if Auth.auth().currentUser == nil {
-//            // show onboarding in page
-//            let onboardingVC = OnboardingViewController()
-//            // set the onboardingVC fullScreen so that user can't swipe the page away
-//            onboardingVC.modalPresentationStyle = .fullScreen
-//
-//            present(onboardingVC, animated: false)
-//        }
-//        else {
-//
-//        }
-//    }
-    
-    
-    
+    private func configureNavigationBar() {
+        let titleViewImage = UIImageView(image: UIImage(named: "Polligraph Logo"))
+        navigationItem.titleView = titleViewImage
 
+        let menuViewImage = UIImage(named: "Hamburger Icon")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: menuViewImage,
+            style: .plain,
+            target: self,
+            action: #selector(didTapMenu)
+        )
+    }
+    
+    @objc private func didTapMenu() {
+        
+    }
 
 }

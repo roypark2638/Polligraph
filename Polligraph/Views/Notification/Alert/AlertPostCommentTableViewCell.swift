@@ -17,6 +17,7 @@ class AlertPostCommentTableViewCell: UITableViewCell {
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -25,6 +26,7 @@ class AlertPostCommentTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         label.font = UIFont(name: "Roboto-Regular", size: 16)
         label.textColor = .label
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -33,6 +35,7 @@ class AlertPostCommentTableViewCell: UITableViewCell {
         label.numberOfLines = 1
         label.font = UIFont(name: "Roboto-Regular", size: 16)
         label.textColor = .secondaryLabel
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -40,8 +43,9 @@ class AlertPostCommentTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.clipsToBounds = true
+//        contentView.clipsToBounds = true
         addSubviews()
+        configureLayouts()
     }
     
     required init?(coder: NSCoder) {
@@ -50,10 +54,6 @@ class AlertPostCommentTableViewCell: UITableViewCell {
     
     // MARK: - Lifecycle
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        configureLayouts()
-    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -64,30 +64,39 @@ class AlertPostCommentTableViewCell: UITableViewCell {
     
     // MARK: - Methods
     
-    func configure(with viewModel: CommentAlertCellViewModel) {
-        profileImageView.image = UIImage(named: "Profile Image")
-        alertLabel.text = "\(viewModel.username) commented on your post."
-    }
-    
     private func configureLayouts() {
-        let imageSize = CGFloat(40)
-                        
-        profileImageView.layer.cornerRadius = imageSize/2
-        profileImageView.frame = CGRect(
-            x: 16,
-            y: 10,
-            width: imageSize,
-            height: imageSize
-        ).integral
+        NSLayoutConstraint.activate([
+            profileImageView.heightAnchor.constraint(equalToConstant: 40),
+            profileImageView.widthAnchor.constraint(equalToConstant: 40),
+            profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            profileImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            profileImageView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -10)
+        ])
         
-        alertLabel.sizeToFit()
-        alertLabel.frame = CGRect(
-            x: profileImageView.right + 16,
-            y: 10,
-            width: contentView.width - 32 - profileImageView.right,
-            height: alertLabel.height
-        ).integral
-        
+        NSLayoutConstraint.activate([
+            alertLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
+            alertLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            alertLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            alertLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
+        ])
+//        let imageSize = CGFloat(40)
+//
+//        profileImageView.layer.cornerRadius = imageSize/2
+//        profileImageView.frame = CGRect(
+//            x: 16,
+//            y: 10,
+//            width: imageSize,
+//            height: imageSize
+//        ).integral
+//
+//        alertLabel.sizeToFit()
+//        alertLabel.frame = CGRect(
+//            x: profileImageView.right + 16,
+//            y: 10,
+//            width: contentView.width - 32 - profileImageView.right,
+//            height: alertLabel.height
+//        ).integral
+//
 //        dateLabel.sizeToFit()
 //        dateLabel.frame = CGRect(
 //            x: alertLabel.right + 10,
@@ -100,9 +109,13 @@ class AlertPostCommentTableViewCell: UITableViewCell {
     }
     
     private func addSubviews() {
-        contentView.addSubview(dateLabel)
-        contentView.addSubview(alertLabel)
-        contentView.addSubview(profileImageView)
+        addSubview(dateLabel)
+        addSubview(alertLabel)
+        addSubview(profileImageView)
     }
 
+    func configure(with viewModel: CommentAlertCellViewModel) {
+        profileImageView.image = UIImage(named: "Edit Profile Image")
+        alertLabel.text = "\(viewModel.username) commented on your post."
+    }
 }

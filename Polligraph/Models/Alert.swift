@@ -68,7 +68,7 @@ public class Alert {
                 )
             ))
         }
-        print(alerts)
+        
         return alerts
     }
 }

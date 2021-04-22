@@ -75,6 +75,7 @@ class TabBarViewController: UITabBarController {
         homeNav.navigationBar.backgroundColor = .systemBackground
         homeNav.navigationBar.setBackgroundImage(UIImage(), for: .default)
         homeNav.navigationBar.shadowImage = UIImage()
+        homeNav.navigationBar.isTranslucent = false
 
         searchNav.navigationBar.backgroundColor = .clear
         searchNav.navigationBar.setBackgroundImage(UIImage(), for: .default)

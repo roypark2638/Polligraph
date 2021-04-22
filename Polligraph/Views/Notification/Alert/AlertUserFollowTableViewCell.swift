@@ -21,14 +21,17 @@ class AlertUserFollowTableViewCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.masksToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    private let alertMessage: UILabel = {
+    public let alertLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont(name: "Roboto-Regular", size: 16)
+        label.textAlignment = .left
         label.textColor = .label
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -40,6 +43,7 @@ class AlertUserFollowTableViewCell: UITableViewCell {
         button.layer.cornerRadius = 14
         button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 14)
         button.layer.masksToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -48,6 +52,7 @@ class AlertUserFollowTableViewCell: UITableViewCell {
         label.numberOfLines = 1
         label.textColor = .secondaryLabel
         label.font = UIFont(name: "Roboto-Regular", size: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -59,63 +64,78 @@ class AlertUserFollowTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.clipsToBounds = true
         addSubviews()
+        configureLayouts()
+
         configureButtons()
     }
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        contentView.clipsToBounds = true
-//
-//        addSubviews()
-//        configureButtons()
-//    }
+
     
     required init?(coder: NSCoder) {
         fatalError()
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        configureLayouts()
-    }
+
     
     override func prepareForReuse() {
         super.prepareForReuse()
         profileImageView.image = nil
-        alertMessage.text = nil
+        alertLabel.text = nil
         dateLabel.text = nil
     }
     
     private func addSubviews() {
-        contentView.addSubview(profileImageView)
-        contentView.addSubview(alertMessage)
-        contentView.addSubview(followButton)
-        contentView.addSubview(dateLabel)
+        addSubview(profileImageView)
+        addSubview(alertLabel)
+        addSubview(followButton)
+//        addSubview(dateLabel)
     }
     
     private func configureLayouts() {
-        let imageSize = CGFloat(40)
+        NSLayoutConstraint.activate([
+            profileImageView.heightAnchor.constraint(equalToConstant: 40),
+            profileImageView.widthAnchor.constraint(equalToConstant: 40),
+            profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            profileImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            profileImageView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -10)
+        ])
+
+        NSLayoutConstraint.activate([
+            followButton.heightAnchor.constraint(equalToConstant: 28),
+            followButton.widthAnchor.constraint(equalToConstant: 76),
+            followButton.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            followButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
+        ])
+
+        NSLayoutConstraint.activate([
+            alertLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
+            alertLabel.trailingAnchor.constraint(equalTo: followButton.leadingAnchor, constant: -16),
+            alertLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            alertLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
+        ])
         
-        profileImageView.frame = CGRect(
-            x: 16,
-            y: 10,
-            width: imageSize,
-            height: imageSize
-        )
         
-        alertMessage.sizeToFit()
-        alertMessage.frame = CGRect(
-            x: profileImageView.right + 16,
-            y: profileImageView.top,
-            width: contentView.width-48-imageSize-76,
-            height: alertMessage.height
-        )
+//        let imageSize = CGFloat(40)
         
-        followButton.frame = CGRect(
-            x: alertMessage.right,
-            y: 16,
-            width: 76,
-            height: 28
-        )
+//        profileImageView.frame = CGRect(
+//            x: 16,
+//            y: 10,
+//            width: imageSize,
+//            height: imageSize
+//        )
+//
+//        alertMessage.sizeToFit()
+//        alertMessage.frame = CGRect(
+//            x: profileImageView.right + 16,
+//            y: profileImageView.top,
+//            width: contentView.width-48-imageSize-76,
+//            height: alertMessage.height
+//        )
+//
+//        followButton.frame = CGRect(
+//            x: alertMessage.right,
+//            y: 16,
+//            width: 76,
+//            height: 28
+//        )
                 
     }
     
@@ -125,7 +145,7 @@ class AlertUserFollowTableViewCell: UITableViewCell {
     
     func configure(with viewModel: FollowAlertCellViewModel) {       
         profileImageView.image = UIImage(named: "Profile Image2")
-        alertMessage.text = "\(viewModel.username) started following you."
+        alertLabel.text = "\(viewModel.username) started following you."
         dateLabel.text = .date(with: viewModel.date)
     }
     

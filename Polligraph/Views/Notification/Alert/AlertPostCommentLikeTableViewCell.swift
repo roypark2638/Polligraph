@@ -15,14 +15,16 @@ class AlertPostCommentLikeTableViewCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.masksToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    private let alertMessage: UILabel = {
+    private let alertLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont(name: "Roboto-Regular", size: 16)
         label.textColor = .label
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -31,6 +33,7 @@ class AlertPostCommentLikeTableViewCell: UITableViewCell {
         label.numberOfLines = 1
         label.textColor = .secondaryLabel
         label.font = UIFont(name: "Roboto-Regular", size: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -40,54 +43,51 @@ class AlertPostCommentLikeTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.clipsToBounds = true
         addSubviews()
+        configureLayouts()
     }
     
     required init?(coder: NSCoder) {
         fatalError()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        configureLayouts()
-    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         profileImageView.image = nil
-        alertMessage.text = nil
+        alertLabel.text = nil
         dateLabel.text = nil
     }
     
     private func addSubviews() {
-        contentView.addSubview(profileImageView)
-        contentView.addSubview(alertMessage)
-        contentView.addSubview(dateLabel)
+        addSubview(profileImageView)
+        addSubview(alertLabel)
+        addSubview(dateLabel)
     }
     
     private func configureLayouts() {
-        let imageSize = CGFloat(40)
+//        let imageSize = CGFloat(40)
         
-        profileImageView.frame = CGRect(
-            x: 16,
-            y: 10,
-            width: imageSize,
-            height: imageSize
-        )
+        NSLayoutConstraint.activate([
+            profileImageView.heightAnchor.constraint(equalToConstant: 40),
+            profileImageView.widthAnchor.constraint(equalToConstant: 40),
+            profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            profileImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            profileImageView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -10)
+        ])
         
-        alertMessage.sizeToFit()
-        alertMessage.frame = CGRect(
-            x: profileImageView.right + 16,
-            y: profileImageView.top,
-            width: contentView.width-profileImageView.right-32,
-            height: alertMessage.height
-        )
+        NSLayoutConstraint.activate([
+            alertLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
+            alertLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            alertLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            alertLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
+        ])
         
     }
     
     
     func configure(with viewModel: LikeCommentAlertCellViewModel) {
-        profileImageView.image = UIImage(named: "Profile Image")
-        alertMessage.text = "\(viewModel.username) liked your comment on (postname)"
+        profileImageView.image = UIImage(named: "Apple")
+        alertLabel.text = "\(viewModel.username) liked your comment on (postname)"
     }
     
 }

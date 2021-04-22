@@ -22,9 +22,6 @@ class AlertViewController: UIViewController {
     
     private let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(UITableViewCell.self,
-                           forCellReuseIdentifier: "cell")
-        
         tableView.register(
             AlertUserFollowTableViewCell.self,
             forCellReuseIdentifier: AlertUserFollowTableViewCell.identifier
@@ -59,12 +56,14 @@ class AlertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.estimatedRowHeight = 300
         addSubviews()
         fetchAlertData()
         tableView.delegate = self
         tableView.dataSource = self
 //        updateUI()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -135,19 +134,8 @@ extension AlertViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cellType = alerts[indexPath.row].type
         let alert = alerts[indexPath.row]
-//        let model = viewModels[indexPath.row]
-        
-//        guard let cell = tableView.dequeueReusableCell(
-//                withIdentifier: AlertUserFollowTableViewCell.identifier,
-//                for: indexPath)
-//                as? AlertUserFollowTableViewCell else {
-//            return UITableViewCell()
-//        }
-//        cell.configure(with: "TestUsername", model: model)
-//
-//        return cell
+
         switch alert.type {
 
         case .userFollow(let alert):
@@ -195,9 +183,13 @@ extension AlertViewController: UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        <#code#>
+//    }
 }
 
 // MARK: - UITableViewDelegate
