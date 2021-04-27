@@ -85,7 +85,7 @@ class NotificationViewController: UIViewController {
             x: 0,
             y: codeSegmented.bottom+2,
             width: view.width,
-            height: view.height-50
+            height: view.height-50 - 86
         )
         
         pageVC.view.frame = CGRect(
@@ -140,26 +140,26 @@ extension NotificationViewController: CustomSegmentedControlDelegate {
     func customSegmentedControlDidTapButton(_ control: CustomSegmentedControl, sender: UIButton) {
         guard let title = sender.titleLabel?.text else { return }
         if title == NotificationPages.alerts.identifier {
-//            addChild(alertVC)
-//            pageContainer.addSubview(alertVC.view)
-            pageVC.setViewControllers(
-                [alertVC],
-                direction: UIPageViewController.NavigationDirection.reverse,
-                animated: false,
-                completion: nil
-            )
-            currentIndex = 0
+            addChild(alertVC)
+            pageContainer.addSubview(alertVC.view)
+//            pageVC.setViewControllers(
+//                [alertVC],
+//                direction: UIPageViewController.NavigationDirection.reverse,
+//                animated: false,
+//                completion: nil
+//            )
+//            currentIndex = 0
         }
         else {
-//            addChild(inboxVC)
-//            pageContainer.addSubview(inboxVC.view)
-            pageVC.setViewControllers(
-                [inboxVC],
-                direction: UIPageViewController.NavigationDirection.forward,
-                animated: false,
-                completion: nil
-            )
-            currentIndex = 1
+            addChild(inboxVC)
+            pageContainer.addSubview(inboxVC.view)
+//            pageVC.setViewControllers(
+//                [inboxVC],
+//                direction: UIPageViewController.NavigationDirection.forward,
+//                animated: false,
+//                completion: nil
+//            )
+//            currentIndex = 1
         }
     }
 }
