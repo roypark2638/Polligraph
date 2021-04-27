@@ -145,7 +145,7 @@ class AlertUserFollowTableViewCell: UITableViewCell {
     
     func configure(with viewModel: FollowAlertCellViewModel) {       
         profileImageView.image = UIImage(named: "Profile Image2")
-        alertLabel.text = "\(viewModel.username) started following you."
+        alertLabel.text = "\(viewModel.username) started following you. asdfkalsjf awefj lds flaewj foawje fdaksdjkfl asdj f\n asdf ajewfajlsdjfadf \nasdf awefjasdfasdf \nawef asdf asef \n"
         dateLabel.text = .date(with: viewModel.date)
     }
     
