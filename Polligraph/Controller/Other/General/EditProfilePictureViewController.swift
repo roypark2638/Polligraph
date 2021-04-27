@@ -1,14 +1,14 @@
 //
-//  NewPostViewController.swift
+//  EditProfilePictureViewController.swift
 //  Polligraph
 //
-//  Created by Roy Park on 3/3/21.
+//  Created by Roy Park on 4/27/21.
 //
 
 import UIKit
 
 
-class NewPostViewController: UIViewController {
+class EditProfilePictureViewController: UIViewController {
     
     private let pageContainerView: UIView = {
         let view = UIView()
@@ -33,9 +33,7 @@ class NewPostViewController: UIViewController {
         view.addSubview(pageContainerView)
         segmentControl.backgroundColor = .clear
         segmentControl.delegate = self
-        
-        configureContainerView()
-        
+                
         pageVC = NewPostPageViewController()
         addChild(pageVC)
         pageVC.view.translatesAutoresizingMaskIntoConstraints = false
@@ -75,28 +73,41 @@ class NewPostViewController: UIViewController {
         return true
     }
     
-    private func configureContainerView() {
-        
-    }
-    
     private func configureNavigationBar() {
+
+        navigationController?.navigationBar.tintColor = .label
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .cancel,
+            image: UIImage(named: "X Icon"),
+            style: .plain,
             target: self,
             action: #selector(didTapClose)
         )
         
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Upload",
+            style: .plain,
+            target: self,
+            action: #selector(didTapUpload)
+        )
+        let attribute = [NSAttributedString.Key.font: UIFont(name: "Roboto-Bold", size: 18)]
+        let rightButton = self.navigationItem.rightBarButtonItem
+        rightButton?.setTitleTextAttributes(attribute as [NSAttributedString.Key : Any], for: .normal)
+        
     }
     
     @objc private func didTapClose() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func didTapUpload() {
         dismiss(animated: true, completion: nil)
     }
 
 }
 
 
-extension NewPostViewController: CustomSegmentedControlDelegate {
+extension EditProfilePictureViewController: CustomSegmentedControlDelegate {
     func customSegmentedControlDidTapButton(_ control: CustomSegmentedControl, sender: UIButton) {
         guard let title = sender.titleLabel?.text else { return }
         if title == NewPostPages.library.identifier {

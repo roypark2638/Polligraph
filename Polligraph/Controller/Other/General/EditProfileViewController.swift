@@ -234,6 +234,8 @@ class EditProfileViewController: UIViewController {
             target: self,
             action: #selector(didTapBackArrow)
         )
+        
+        
     }
     
     @objc private func didTapSave() {
@@ -245,7 +247,9 @@ class EditProfileViewController: UIViewController {
     }
     
     @objc private func didTapChangeImage() {
-        
+        let vc = EditProfilePictureViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true)
     }
 
 }
