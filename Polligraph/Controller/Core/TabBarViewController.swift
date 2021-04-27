@@ -22,6 +22,7 @@ class TabBarViewController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        delegate = self
         
         // Check user auth status
         if !onboardingPresented {
@@ -81,6 +82,7 @@ class TabBarViewController: UITabBarController {
         searchNav.navigationBar.setBackgroundImage(UIImage(), for: .default)
         searchNav.navigationBar.shadowImage = UIImage()
         
+        
         notificationNav.navigationBar.backgroundColor = .clear
         notificationNav.navigationBar.setBackgroundImage(UIImage(), for: .default)
         notificationNav.navigationBar.shadowImage = UIImage()
@@ -109,6 +111,7 @@ class TabBarViewController: UITabBarController {
         tabBar.backgroundImage = UIImage()
         tabBar.isTranslucent = false
         
+        
         setViewControllers(viewControllers, animated: false)
         
         homeNav.tabBarItem = UITabBarItem(title: nil,
@@ -126,57 +129,36 @@ class TabBarViewController: UITabBarController {
         profileNav.tabBarItem = UITabBarItem(title: nil,
                                             image: UIImage(systemName: "person.crop.circle"),
                                             selectedImage: UIImage(systemName: "person.crop.circle.fill"))
-        
         setViewControllers([homeNav, searchNav, newPostNav, notificationNav, profileNav], animated: false)
-        
-//        let viewControllerData: [(UIViewController, UIImage, UIImage)] = [
-//            (homeVC, UIImage(systemName: "house")!, UIImage(systemName: "house.fill")!),
-//            (searchVC, UIImage(systemName: "magnifyingglass.circle")!, UIImage(systemName: "magnifyingglass.circle.fill")!),
-//            (newPostVC, UIImage(systemName: "plus.circle")!, UIImage(systemName: "plus.circle.fill")!),
-//            (notificationVC, UIImage(systemName: "bell")!, UIImage(systemName: "bell.fill")!),
-//            (profileVC, UIImage(systemName: "person.crop.circle")!, UIImage(systemName: "person.crop.circle.fill")!),
-//        ]
-        
-//        let viewControllers = viewControllerData.map { (viewController, defaultImage, selectedImage ) -> UINavigationController in
-//
-//            let navigation = UINavigationController(rootViewController: viewController)
-//            navigation.tabBarItem.image = defaultImage
-//            navigation.tabBarItem.selectedImage = selectedImage
-//
-//            return navigation
-//        }
-//        setViewControllers(viewControllers, animated: false)
-        
-//        self.viewControllers = viewControllers
-//        self.tabBar.isTranslucent = false
-//        self.delegate = TabBarDelegate()
-
-        // we always want to make sure the icon image to be original
-        // not blue default color that swift provides
-//        if let items = self.tabBar.items {
-//            for item in items {
-//                if let image = item.image {
-//                    item.image = image.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-//                }
-//
-//                if let selectedImage = item.selectedImage {
-//                    item.selectedImage = selectedImage.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-//                }
-//                item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
-//            }
-//        }
-        
-        
-//        UINavigationBar.appearance().isTranslucent = false
-//        UINavigationBar.appearance().backgroundColor = UIColor.white
-//        let scene = UIApplication.shared.connectedScenes.first
-//        if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
-//            guard let window = sceneDelegate.window else { return }
-//            window.rootViewController = self
-//        }
-//        let sceneDelegate = viewControllers.window.windowScence.delegate
-//            UIApplication.shared.delegate as! Polligraph.SceneDelegate
-//        setViewControllers(viewControllers, animated: false)
     }
 
+}
+
+
+extension TabBarViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        
+        let selectedViewController = tabBarController.selectedViewController
+        
+        guard let _selectedViewController = selectedViewController else {
+            return false
+        }
+        
+        if viewController == _selectedViewController {
+            return false
+        }
+        
+        guard let controllerIndex = tabBarController.viewControllers?.firstIndex(of: viewController) else {
+            return true
+        }
+        
+        if controllerIndex == 2 {
+            let newPostVC = NewPostViewController()
+
+            let newPostNav = UINavigationController(rootViewController: newPostVC)
+            _selectedViewController.present(newPostNav, animated: true, completion: nil)
+            return false
+        }
+        return true
+    }
 }
