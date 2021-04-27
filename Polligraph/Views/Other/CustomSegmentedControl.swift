@@ -47,7 +47,7 @@ class CustomSegmentedControl: UIView {
         stack.distribution = .fillEqually
         addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        stack.topAnchor.constraint(equalTo: self.topAnchor, constant:-20).isActive = true
         stack.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         stack.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         stack.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true

@@ -76,7 +76,7 @@ class NotificationViewController: UIViewController {
         super.viewDidLayoutSubviews()
         codeSegmented.frame = CGRect(
             x: 0,
-            y: 50,
+            y: 50+20,
             width: view.width,
             height: 50
         )
