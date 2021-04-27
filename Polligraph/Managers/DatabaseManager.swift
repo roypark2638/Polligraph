@@ -34,7 +34,7 @@ final public class DatabaseManager {
     /// - Parameters
     ///     - email: String representing email
     ///     - username : String representing username
-    ///     - completion: Async callback fro result if database entry succeeded
+    ///     - completion: Async callback for result if database entry succeeded
     public func canCreateNewUser(with email: String, username: String, completion: @escaping (Bool) -> Void) {
 //        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
         database.child("email").observeSingleEvent(of: .value) { (snapshot) in
@@ -117,7 +117,7 @@ final public class DatabaseManager {
             for (username, value) in users {
                 if value["email"] as? String == email {
                     completion(username)
-                    break
+                    return
                 }
             }
         }
