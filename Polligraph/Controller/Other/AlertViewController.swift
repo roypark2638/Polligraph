@@ -138,46 +138,46 @@ extension AlertViewController: UITableViewDataSource {
 
         switch alert.type {
 
-        case .userFollow(let alert):
+        case .userFollow(let viewModel):
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: AlertUserFollowTableViewCell.identifier,
                     for: indexPath
             ) as? AlertUserFollowTableViewCell else {
                 fatalError()
             }
-            cell.configure(with: alert)
+            cell.configure(with: viewModel)
             return cell
 
-        case .postComment(let alert):
+        case .postComment(let viewModel):
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: AlertPostCommentTableViewCell.identifier,
                     for: indexPath
             ) as? AlertPostCommentTableViewCell else {
                 fatalError()
             }
-            cell.configure(with: alert)
+            cell.configure(with: viewModel)
 
             return cell
             
-        case .postCommentLike(let alert):
+        case .postCommentLike(let viewModel):
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: AlertPostCommentLikeTableViewCell.identifier,
                     for: indexPath
             ) as? AlertPostCommentLikeTableViewCell else {
                 fatalError()
             }
-            cell.configure(with: alert)
+            cell.configure(with: viewModel)
             
             return cell
             
-        case .postCommentReply(let alert):
+        case .postCommentReply(let viewModel):
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: AlertPostCommentReplyTableViewCell.identifier,
                     for: indexPath
             ) as? AlertPostCommentReplyTableViewCell else {
                 fatalError()
             }
-            cell.configure(with: alert)
+            cell.configure(with: viewModel)
             
             return cell
         }
