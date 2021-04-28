@@ -70,7 +70,7 @@ class NewPostPageViewController: UIPageViewController {
     private func newViewController(pageToShow: NewPostPages) -> UIViewController {
         switch pageToShow {
         case .library:
-            return LibraryViewController()
+            return PhotoLibraryViewController()
             
         case .camera:
             return CameraViewController()

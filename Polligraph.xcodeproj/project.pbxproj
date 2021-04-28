@@ -51,10 +51,11 @@
 		97BC9EF325F37A6F004EDB60 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BC9EF225F37A6F004EDB60 /* Extensions.swift */; };
 		97BC9F0F25F42D26004EDB60 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BC9F0E25F42D26004EDB60 /* TabBarViewController.swift */; };
 		97C76D052638B3CF00946EC7 /* NewPostPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C76D042638B3CF00946EC7 /* NewPostPageViewController.swift */; };
-		97C76D072638B51D00946EC7 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C76D062638B51D00946EC7 /* LibraryViewController.swift */; };
+		97C76D072638B51D00946EC7 /* PhotoLibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C76D062638B51D00946EC7 /* PhotoLibraryViewController.swift */; };
 		97C76D092638B52300946EC7 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C76D082638B52300946EC7 /* CameraViewController.swift */; };
 		97C76D0B2638CB6300946EC7 /* EditProfilePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C76D0A2638CB6300946EC7 /* EditProfilePictureViewController.swift */; };
 		97C76D0D2638CEB600946EC7 /* NewPostPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C76D0C2638CEB600946EC7 /* NewPostPages.swift */; };
+		97C76D0F2638DB4900946EC7 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C76D0E2638DB4900946EC7 /* PhotoCollectionViewCell.swift */; };
 		97CDAA2E25F75E4600476262 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97CDAA2D25F75E4600476262 /* GoogleService-Info.plist */; };
 		97DB1B9525EDEC41008955BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DB1B9425EDEC41008955BC /* AppDelegate.swift */; };
 		97DB1B9725EDEC41008955BC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DB1B9625EDEC41008955BC /* SceneDelegate.swift */; };
@@ -114,10 +115,11 @@
 		97BC9EF225F37A6F004EDB60 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		97BC9F0E25F42D26004EDB60 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		97C76D042638B3CF00946EC7 /* NewPostPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostPageViewController.swift; sourceTree = "<group>"; };
-		97C76D062638B51D00946EC7 /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
+		97C76D062638B51D00946EC7 /* PhotoLibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryViewController.swift; sourceTree = "<group>"; };
 		97C76D082638B52300946EC7 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		97C76D0A2638CB6300946EC7 /* EditProfilePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePictureViewController.swift; sourceTree = "<group>"; };
 		97C76D0C2638CEB600946EC7 /* NewPostPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostPages.swift; sourceTree = "<group>"; };
+		97C76D0E2638DB4900946EC7 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		97CDAA2D25F75E4600476262 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		97DB1B9125EDEC41008955BC /* Polligraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Polligraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97DB1B9425EDEC41008955BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -244,6 +246,8 @@
 		977F238D25F335EC002145BB /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				97C76D042638B3CF00946EC7 /* NewPostPageViewController.swift */,
+				97C76D062638B51D00946EC7 /* PhotoLibraryViewController.swift */,
 				97BC9EED25F375B7004EDB60 /* General */,
 				97BC9EEC25F375AD004EDB60 /* Onboarding */,
 				9716A029262E92C800365AEE /* AlertViewController.swift */,
@@ -360,9 +364,8 @@
 				97A26BCF260745AF000C202F /* Other */,
 				97A26BCE260745A8000C202F /* Storyboard */,
 				97EA1955260DED1400D08BAC /* CollectionView Headers */,
-				97C76D042638B3CF00946EC7 /* NewPostPageViewController.swift */,
-				97C76D062638B51D00946EC7 /* LibraryViewController.swift */,
 				97C76D082638B52300946EC7 /* CameraViewController.swift */,
+				97C76D0E2638DB4900946EC7 /* PhotoCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -544,9 +547,10 @@
 				97BC9EE925F37541004EDB60 /* DatabaseManager.swift in Sources */,
 				97A7EF4225FB37B6006B842B /* FacebookSignIn.swift in Sources */,
 				979E085E25EF535000609D4C /* RegistrationViewController.swift in Sources */,
+				97C76D0F2638DB4900946EC7 /* PhotoCollectionViewCell.swift in Sources */,
 				977F239625F33636002145BB /* AuthManager.swift in Sources */,
 				979E089225EF906E00609D4C /* ProfileViewController.swift in Sources */,
-				97C76D072638B51D00946EC7 /* LibraryViewController.swift in Sources */,
+				97C76D072638B51D00946EC7 /* PhotoLibraryViewController.swift in Sources */,
 				97A26BD1260745BF000C202F /* TextField.swift in Sources */,
 				979E087625EF8BCD00609D4C /* HomeViewController.swift in Sources */,
 				974581F2261F0D9200F2C5B1 /* AlertUserFollowTableViewCell.swift in Sources */,

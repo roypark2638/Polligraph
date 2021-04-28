@@ -94,5 +94,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Please allow access to photo library to choose your picture</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Please allow access to camera to take photo</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Please allow access so that you can record video</string>
 </dict>
 </plist>
