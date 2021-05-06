@@ -22,7 +22,7 @@ class TabBarViewController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        delegate = self
+//        delegate = self
         
         // Check user auth status
         if !onboardingPresented {
@@ -82,6 +82,12 @@ class TabBarViewController: UITabBarController {
         searchNav.navigationBar.setBackgroundImage(UIImage(), for: .default)
         searchNav.navigationBar.shadowImage = UIImage()
         
+        newPostNav.navigationBar.backgroundColor = .clear
+        newPostNav.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        newPostNav.navigationBar.shadowImage = UIImage()
+        newPostNav.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont(name: "Roboto-Bold", size: 18) ?? UIFont.systemFont(ofSize: 18)
+        ]
         
         notificationNav.navigationBar.backgroundColor = .clear
         notificationNav.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -135,30 +141,30 @@ class TabBarViewController: UITabBarController {
 }
 
 
-extension TabBarViewController: UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        
-        let selectedViewController = tabBarController.selectedViewController
-        
-        guard let _selectedViewController = selectedViewController else {
-            return false
-        }
-        
-        if viewController == _selectedViewController {
-            return false
-        }
-        
-        guard let controllerIndex = tabBarController.viewControllers?.firstIndex(of: viewController) else {
-            return true
-        }
-        
-        if controllerIndex == 2 {
-            let newPostVC = NewPostViewController()
-
-            let newPostNav = UINavigationController(rootViewController: newPostVC)
-            _selectedViewController.present(newPostNav, animated: true, completion: nil)
-            return false
-        }
-        return true
-    }
-}
+//extension TabBarViewController: UITabBarControllerDelegate {
+//    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+//
+//        let selectedViewController = tabBarController.selectedViewController
+//
+//        guard let _selectedViewController = selectedViewController else {
+//            return false
+//        }
+//
+//        if viewController == _selectedViewController {
+//            return false
+//        }
+//
+//        guard let controllerIndex = tabBarController.viewControllers?.firstIndex(of: viewController) else {
+//            return true
+//        }
+//
+//        if controllerIndex == 2 {
+//            let newPostVC = NewPostViewController()
+//
+//            let newPostNav = UINavigationController(rootViewController: newPostVC)
+//            _selectedViewController.present(newPostNav, animated: true, completion: nil)
+//            return false
+//        }
+//        return true
+//    }
+//}
