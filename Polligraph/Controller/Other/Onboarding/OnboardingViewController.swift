@@ -124,7 +124,7 @@ class OnboardingViewController: UIViewController {
     }
     
     private func createBackButton() -> UIButton {
-        let backButtonImage = UIImage(systemName: "arrow.backward")
+        let backButtonImage = UIImage(named: "Back Arrow")
         let backButton = UIButton(type: .custom)
         backButton.setImage(backButtonImage, for: .normal)
         backButton.tintColor = .black

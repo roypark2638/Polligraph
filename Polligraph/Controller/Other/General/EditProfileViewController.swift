@@ -92,6 +92,8 @@ class EditProfileViewController: UIViewController {
         textView.autocapitalizationType = .none
         return textView
     }()
+    
+    public var completion: (() -> Void)?
 
     
     // MARK:- LifeCycle
