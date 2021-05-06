@@ -10,8 +10,10 @@ import SDWebImage
 
 protocol ProfileHeaderCollectionReusableViewDelegate: AnyObject {
     func profileHeaderCollectionReusableView(_ header: ProfileHeaderCollectionReusableView, didTapPollsButtonWith viewModel: ProfileHeaderViewModel)
-//    func profileHeaderCollectionReusableView(_ header: ProfileHeaderCollectionReusableView, didTapFollowersButtonWith viewModel: String)
-    func profileHeaderCollectionReusableView(_ header: ProfileHeaderCollectionReusableView, didTapPrimaryButtonWith viewModel: ProfileHeaderViewModel)
+    func profileHeaderCollectionReusableView(_ header: ProfileHeaderCollectionReusableView, didTapEditProfileButtonWith viewModel: ProfileHeaderViewModel)
+    func profileHeaderCollectionReusableView(_ header: ProfileHeaderCollectionReusableView, didTapFollowButtonWith viewModel: ProfileHeaderViewModel)
+    func profileHeaderCollectionReusableView(_ header: ProfileHeaderCollectionReusableView, didTapUnfollowButtonWith viewModel: ProfileHeaderViewModel)
+    
 }
 
 class ProfileHeaderCollectionReusableView: UICollectionReusableView {
@@ -114,6 +116,11 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
         label.textAlignment = .left
         return label
     }()
+    
+    private var isFollowing = false
+    
+    private var actionType = ProfileButtonType.edit
+
     
     // MARK: - Init
     
@@ -221,11 +228,11 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
             height: bioLabelSize.height
         )
         
-        
     }
     
     func configure(with viewModel: ProfileHeaderViewModel) {
         self.viewModel = viewModel
+        
         let followersAttributedString = NSMutableAttributedString(string: "\(viewModel.followerCount.followersFormatted)")
         followersAttributedString.addAttribute(NSAttributedString.Key.kern, value: 1.1, range: NSMakeRange(0, followersAttributedString.length))
 
@@ -235,23 +242,31 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
         pollsAttributedString.addAttribute(NSAttributedString.Key.kern, value: 1.1, range: NSMakeRange(0, pollsAttributedString.length))
         pollsButton.setAttributedTitle(pollsAttributedString, for: .normal)
         
+        bioLabel.text = viewModel.bio
+        
         if let imageURL = viewModel.profileImageURL {
             profileImageView.sd_setImage(with: imageURL, completed: nil)
         }
         else {
             profileImageView.image = UIImage(named: "Profile Image")
         }
+        self.actionType = viewModel.buttonType
         
-        if let isFollowing = viewModel.isFollowing {
-            primaryButton.backgroundColor = isFollowing ? .systemGray5 : .label
-            primaryButton.setTitleColor(isFollowing ? .label : .systemBackground, for: .normal)
-            primaryButton.setTitle(isFollowing ? "Following" : "Follow", for: .normal)
-        }
-        else {
+        switch actionType {
+        case .edit:
             primaryButton.backgroundColor = .label
             primaryButton.setTitle("Edit Profile", for: .normal)
+        case .follow(isFollowing: let isFollowing):
+            self.isFollowing = isFollowing
+            updateFollowButton()
         }
 
+    }
+    
+    private func updateFollowButton() {
+        primaryButton.backgroundColor = isFollowing ? .systemGray5 : .label
+        primaryButton.setTitleColor(isFollowing ? .label : .systemBackground, for: .normal)
+        primaryButton.setTitle(isFollowing ? "Following" : "Follow", for: .normal)
     }
     
     // MARK: - Objc Methods
@@ -267,9 +282,31 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
     
     @objc private func didTapPrimaryButton() {
         guard let safeViewModel = viewModel else { return }
-        delegate?.profileHeaderCollectionReusableView(self, didTapPrimaryButtonWith: safeViewModel)
-        
-//        let nav = UINavigationController(rootViewController: vc)
-//        nav.pushViewController(, animated: <#T##Bool#>)
+        switch actionType {
+        case .edit:
+            delegate?.profileHeaderCollectionReusableView(
+                self,
+                didTapEditProfileButtonWith: safeViewModel
+            )
+
+        case .follow(isFollowing: let isFollowing):
+            if self.isFollowing {
+                // unfollow
+                delegate?.profileHeaderCollectionReusableView(
+                    self,
+                    didTapUnfollowButtonWith: safeViewModel
+                )
+            }
+            else {
+                // follow
+                delegate?.profileHeaderCollectionReusableView(
+                    self,
+                    didTapFollowButtonWith: safeViewModel
+                )
+            }
+            
+            self.isFollowing = !isFollowing
+            updateFollowButton()
+        }
     }
 }
