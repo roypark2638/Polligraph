@@ -297,14 +297,18 @@ class RegistrationViewController: UIViewController {
             let alert = Helper.errorAlert(title: "Error", message: errorMessage!)
             self.present(alert, animated: true, completion: nil)
         }
-
+        
         else {
             
-        guard let emailAddress = emailAddressField.text, !emailAddress.isEmpty,
-              let username = usernameField.text, !username.isEmpty,
-              let password = passwordField.text, password.count >= 8 else {
-            return
-        }
+            guard let emailAddress = emailAddressField.text, !emailAddress.trimmingCharacters(in: .whitespaces).isEmpty,
+                  let username = usernameField.text,
+                  !username.trimmingCharacters(in: .whitespaces).isEmpty,
+                  let password = passwordField.text,
+                  !password.trimmingCharacters(in: .whitespaces).isEmpty,
+                  password.count >= 8
+            else {
+                return
+            }
         
         AuthManager.shared.registerNewUser(username: username, email: emailAddress, password: password) { [weak self] (registered) in
             let spinner = UIViewController.displayLoading(withView: (self?.view)!)
@@ -333,6 +337,7 @@ class RegistrationViewController: UIViewController {
                     }
                 case .failure(let error):
                     UIViewController.removeLoading(spinner: spinner)
+                    print("error registering new user \(error.localizedDescription)")
                     let alert = Helper.errorAlert(title: "Temp Error Duplicate", message: "Email or username are already taken (Temp).")
                     self?.present(alert, animated: true, completion: nil)
                 }
