@@ -63,6 +63,10 @@
 		97DB1B9925EDEC41008955BC /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DB1B9825EDEC41008955BC /* OnboardingViewController.swift */; };
 		97DB1B9E25EDEC42008955BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97DB1B9D25EDEC42008955BC /* Assets.xcassets */; };
 		97DB1BA125EDEC42008955BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97DB1B9F25EDEC42008955BC /* LaunchScreen.storyboard */; };
+		97DBBB0A264379C40070A7FE /* TextPollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DBBB09264379C40070A7FE /* TextPollViewController.swift */; };
+		97DBBB0C264379CC0070A7FE /* PhotoPollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DBBB0B264379CC0070A7FE /* PhotoPollViewController.swift */; };
+		97DBBB0E264379D20070A7FE /* VideoPollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DBBB0D264379D20070A7FE /* VideoPollViewController.swift */; };
+		97DBBB10264379DC0070A7FE /* LinkPollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DBBB0F264379DC0070A7FE /* LinkPollViewController.swift */; };
 		97EA192C260C423900D08BAC /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA192B260C423900D08BAC /* ForgotPasswordViewController.swift */; };
 		97EA1953260DEC5700D08BAC /* ProfileHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA1952260DEC5700D08BAC /* ProfileHeaderCollectionReusableView.swift */; };
 		97EA1958260DED2700D08BAC /* ProfileTabsCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA1957260DED2700D08BAC /* ProfileTabsCollectionReusableView.swift */; };
@@ -130,6 +134,10 @@
 		97DB1B9D25EDEC42008955BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97DB1BA025EDEC42008955BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97DB1BA225EDEC42008955BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97DBBB09264379C40070A7FE /* TextPollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPollViewController.swift; sourceTree = "<group>"; };
+		97DBBB0B264379CC0070A7FE /* PhotoPollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPollViewController.swift; sourceTree = "<group>"; };
+		97DBBB0D264379D20070A7FE /* VideoPollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPollViewController.swift; sourceTree = "<group>"; };
+		97DBBB0F264379DC0070A7FE /* LinkPollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkPollViewController.swift; sourceTree = "<group>"; };
 		97EA192B260C423900D08BAC /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		97EA1952260DEC5700D08BAC /* ProfileHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		97EA1957260DED2700D08BAC /* ProfileTabsCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabsCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -248,6 +256,7 @@
 		977F238D25F335EC002145BB /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				97DBBB082643799C0070A7FE /* NewPost */,
 				979E089425EF908C00609D4C /* CameraViewController.swift */,
 				97C76D042638B3CF00946EC7 /* NewPostPageViewController.swift */,
 				97C76D062638B51D00946EC7 /* PhotoLibraryViewController.swift */,
@@ -387,6 +396,17 @@
 			children = (
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		97DBBB082643799C0070A7FE /* NewPost */ = {
+			isa = PBXGroup;
+			children = (
+				97DBBB09264379C40070A7FE /* TextPollViewController.swift */,
+				97DBBB0B264379CC0070A7FE /* PhotoPollViewController.swift */,
+				97DBBB0D264379D20070A7FE /* VideoPollViewController.swift */,
+				97DBBB0F264379DC0070A7FE /* LinkPollViewController.swift */,
+			);
+			path = NewPost;
 			sourceTree = "<group>";
 		};
 		97EA1955260DED1400D08BAC /* CollectionView Headers */ = {
@@ -543,12 +563,14 @@
 				974581EE261EBED700F2C5B1 /* NotificationTabsCollectionReusableView.swift in Sources */,
 				9716A03D262F807E00365AEE /* CustomSegmentedControl.swift in Sources */,
 				9716A05B2630C1F800365AEE /* AlertPostCommentReplyTableViewCell.swift in Sources */,
+				97DBBB0A264379C40070A7FE /* TextPollViewController.swift in Sources */,
 				979E088F25EF906400609D4C /* SearchViewController.swift in Sources */,
 				97EA195B260DED8900D08BAC /* PostCollectionViewCell.swift in Sources */,
 				979E085B25EF533F00609D4C /* SignInViewController.swift in Sources */,
 				977F239325F33628002145BB /* AuthViewController.swift in Sources */,
 				97BC9EE925F37541004EDB60 /* DatabaseManager.swift in Sources */,
 				97A7EF4225FB37B6006B842B /* FacebookSignIn.swift in Sources */,
+				97DBBB0C264379CC0070A7FE /* PhotoPollViewController.swift in Sources */,
 				979E085E25EF535000609D4C /* RegistrationViewController.swift in Sources */,
 				97C76D0F2638DB4900946EC7 /* PhotoCollectionViewCell.swift in Sources */,
 				977F239625F33636002145BB /* AuthManager.swift in Sources */,
@@ -565,6 +587,7 @@
 				974581EB261EACF800F2C5B1 /* Alert.swift in Sources */,
 				97EA1953260DEC5700D08BAC /* ProfileHeaderCollectionReusableView.swift in Sources */,
 				97DB1B9925EDEC41008955BC /* OnboardingViewController.swift in Sources */,
+				97DBBB0E264379D20070A7FE /* VideoPollViewController.swift in Sources */,
 				977F239F25F3365A002145BB /* UserPost.swift in Sources */,
 				97BC9EE625F3750E004EDB60 /* StorageManager.swift in Sources */,
 				97DB1B9525EDEC41008955BC /* AppDelegate.swift in Sources */,
@@ -574,6 +597,7 @@
 				9716A0582630BA7000365AEE /* AlertCellType.swift in Sources */,
 				97BC9F0F25F42D26004EDB60 /* TabBarViewController.swift in Sources */,
 				97DB1B9725EDEC41008955BC /* SceneDelegate.swift in Sources */,
+				97DBBB10264379DC0070A7FE /* LinkPollViewController.swift in Sources */,
 				97A26BD5260745CA000C202F /* AuthButton.swift in Sources */,
 				973E0DDF26013CD1000B9BC5 /* EmailVerificationViewController.swift in Sources */,
 				974581E0261D43B900F2C5B1 /* EditProfileViewController.swift in Sources */,
