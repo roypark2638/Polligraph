@@ -1,109 +1,96 @@
 //
-//  NewPostViewController.swift
+//  CameraViewController.swift
 //  Polligraph
 //
-//  Created by Roy Park on 3/3/21.
+//  Created by Roy Park on 4/27/21.
 //
 
 import UIKit
 
-
 class NewPostViewController: UIViewController {
     
-    private let pageContainerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemBackground
-        return view
+    private let textButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Text Button"), for: .normal)
+        button.imageView?.clipsToBounds = true
+        button.imageView?.contentMode = .scaleAspectFit
+        return button
     }()
     
-    private let segmentControl = CustomSegmentedControl(
-        frame: .zero,
-        buttonTitles: ["Library", "Camera"]
-    )
+    private let photoButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Photo Button"), for: .normal)
+        button.imageView?.clipsToBounds = true
+        button.imageView?.contentMode = .scaleAspectFit
+        return button
+    }()
     
-    private var pageVC: NewPostPageViewController!
+    private let videoButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Video Button"), for: .normal)
+        button.imageView?.clipsToBounds = true
+        button.imageView?.contentMode = .scaleAspectFit
+        return button
+    }()
+    
+    private let linkButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Link Button"), for: .normal)
+        button.imageView?.clipsToBounds = true
+        button.imageView?.contentMode = .scaleAspectFit
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBar()
-
         view.backgroundColor = .systemBackground
-        view.addSubview(segmentControl)
-        view.addSubview(pageContainerView)
-        segmentControl.backgroundColor = .clear
-        segmentControl.delegate = self
-        
-        configureContainerView()
-        
-        pageVC = NewPostPageViewController()
-        addChild(pageVC)
-        pageVC.view.translatesAutoresizingMaskIntoConstraints = false
-        pageContainerView.addSubview(pageVC.view)
-        
-        NSLayoutConstraint.activate([
-            pageVC.view.topAnchor.constraint(equalTo: pageContainerView.topAnchor),
-            pageVC.view.bottomAnchor.constraint(equalTo: pageContainerView.bottomAnchor),
-            pageVC.view.leadingAnchor.constraint(equalTo: pageContainerView.leadingAnchor),
-            pageVC.view.trailingAnchor.constraint(equalTo: pageContainerView.trailingAnchor)
-        ])
-        pageVC.didMove(toParent: self)
+        title = "Create Poll"
+        addSubviews()
+        addButtonActions()
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        let imageSize = CGSize(width: 86, height: 122)
+        let padding = CGSize(width: 64, height: 67)
         
-        let segmentHeight: CGFloat = 84
-
-        
-        segmentControl.frame = CGRect(
-            x: 0,
-            y: view.bottom - segmentHeight,
-            width: view.width,
-            height: segmentHeight
+        textButton.frame = CGRect(
+            x: (view.width - padding.width)/2 - imageSize.width,
+            y: view.center.y - imageSize.height - padding.height/2,
+            width: imageSize.width,
+            height: imageSize.height
         )
         
-        NSLayoutConstraint.activate([
-            pageContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            pageContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            pageContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            pageContainerView.bottomAnchor.constraint(equalTo: segmentControl.topAnchor)
-        ])
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
-    private func configureContainerView() {
-        
-    }
-    
-    private func configureNavigationBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .cancel,
-            target: self,
-            action: #selector(didTapClose)
+        photoButton.frame = CGRect(
+            x: (view.width + padding.width)/2,
+            y: view.center.y - imageSize.height - padding.height/2,
+            width: imageSize.width,
+            height: imageSize.height
         )
         
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
+        videoButton.frame = CGRect(
+            x: (view.width - padding.width)/2 - imageSize.width,
+            y: view.center.y + padding.height/2,
+            width: imageSize.width,
+            height: imageSize.height
+        )
+        
+        linkButton.frame = CGRect(
+            x: (view.width + padding.width)/2,
+            y: view.center.y + padding.height/2,
+            width: imageSize.width,
+            height: imageSize.height
+        )
     }
     
-    @objc private func didTapClose() {
-        dismiss(animated: true, completion: nil)
+    private func addSubviews() {
+        view.addSubview(textButton)
+        view.addSubview(linkButton)
+        view.addSubview(photoButton)
+        view.addSubview(videoButton)
     }
-
-}
-
-
-extension NewPostViewController: CustomSegmentedControlDelegate {
-    func customSegmentedControlDidTapButton(_ control: CustomSegmentedControl, sender: UIButton) {
-        guard let title = sender.titleLabel?.text else { return }
-        if title == NewPostPages.library.identifier {
-            NotificationCenter.default.post(name: NSNotification.Name("newPage"), object: NewPostPages.library)
-        }
-        else if title == NewPostPages.camera.identifier {
-            NotificationCenter.default.post(name: NSNotification.Name("newPage"), object: NewPostPages.camera)
-        }
+    
+    private func addButtonActions() {
+        
     }
 }
