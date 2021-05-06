@@ -125,3 +125,36 @@ extension String {
         return DateFormatter.defaultFormatter.string(from: date)
     }
 }
+
+// Allow us to cleanly take dictionary to in from different object that conforms to the Codable.
+extension Decodable {
+    init?(with dictionary: [String: Any]) {
+        // convert to the data
+        guard let data = try? JSONSerialization.data(
+                withJSONObject: dictionary,
+                options: .prettyPrinted
+        ) else {
+            return nil
+        }
+        guard let result = try? JSONDecoder().decode(Self.self, from: data) else {
+            return nil
+        }
+        
+        self = result
+    }
+}
+
+extension Encodable {
+    // You can now map stuff from the database directly into model instead of doing an unnecessary step
+    func asDictionary() -> [String: Any]? {
+        guard let data = try? JSONEncoder().encode(self) else { return nil }
+        guard let json = try? JSONSerialization.jsonObject(
+                with: data,
+                options: .allowFragments
+        ) as? [String: Any] else {
+            return nil
+        }
+        return json
+
+    }
+}
