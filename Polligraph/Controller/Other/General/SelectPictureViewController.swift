@@ -1,5 +1,5 @@
 //
-//  EditProfilePictureViewController.swift
+//  SelectPictureViewController.swift
 //  Polligraph
 //
 //  Created by Roy Park on 4/27/21.
@@ -8,7 +8,7 @@
 import UIKit
 
 
-class EditProfilePictureViewController: UIViewController {
+class SelectPictureViewController: UIViewController {
     
     private let pageContainerView: UIView = {
         let view = UIView()
@@ -107,7 +107,7 @@ class EditProfilePictureViewController: UIViewController {
 }
 
 
-extension EditProfilePictureViewController: CustomSegmentedControlDelegate {
+extension SelectPictureViewController: CustomSegmentedControlDelegate {
     func customSegmentedControlDidTapButton(_ control: CustomSegmentedControl, sender: UIButton) {
         guard let title = sender.titleLabel?.text else { return }
         if title == NewPostPages.library.identifier {

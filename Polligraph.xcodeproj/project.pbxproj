@@ -53,7 +53,7 @@
 		97C76D052638B3CF00946EC7 /* NewPostPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C76D042638B3CF00946EC7 /* NewPostPageViewController.swift */; };
 		97C76D072638B51D00946EC7 /* PhotoLibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C76D062638B51D00946EC7 /* PhotoLibraryViewController.swift */; };
 		97C76D092638B52300946EC7 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C76D082638B52300946EC7 /* NewPostViewController.swift */; };
-		97C76D0B2638CB6300946EC7 /* EditProfilePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C76D0A2638CB6300946EC7 /* EditProfilePictureViewController.swift */; };
+		97C76D0B2638CB6300946EC7 /* SelectPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C76D0A2638CB6300946EC7 /* SelectPictureViewController.swift */; };
 		97C76D0D2638CEB600946EC7 /* NewPostPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C76D0C2638CEB600946EC7 /* NewPostPages.swift */; };
 		97C76D0F2638DB4900946EC7 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C76D0E2638DB4900946EC7 /* PhotoCollectionViewCell.swift */; };
 		97C76D112638EEC200946EC7 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C76D102638EEC200946EC7 /* Post.swift */; };
@@ -67,6 +67,9 @@
 		97DBBB0C264379CC0070A7FE /* PhotoPollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DBBB0B264379CC0070A7FE /* PhotoPollViewController.swift */; };
 		97DBBB0E264379D20070A7FE /* VideoPollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DBBB0D264379D20070A7FE /* VideoPollViewController.swift */; };
 		97DBBB10264379DC0070A7FE /* LinkPollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DBBB0F264379DC0070A7FE /* LinkPollViewController.swift */; };
+		97DBBB1226437B8B0070A7FE /* TextCountLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DBBB1126437B8B0070A7FE /* TextCountLabel.swift */; };
+		97DBBB1426437CCD0070A7FE /* NewPostTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DBBB1326437CCD0070A7FE /* NewPostTitleLabel.swift */; };
+		97DBBB1A26438D160070A7FE /* NewPostTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DBBB1926438D160070A7FE /* NewPostTextView.swift */; };
 		97EA192C260C423900D08BAC /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA192B260C423900D08BAC /* ForgotPasswordViewController.swift */; };
 		97EA1953260DEC5700D08BAC /* ProfileHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA1952260DEC5700D08BAC /* ProfileHeaderCollectionReusableView.swift */; };
 		97EA1958260DED2700D08BAC /* ProfileTabsCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA1957260DED2700D08BAC /* ProfileTabsCollectionReusableView.swift */; };
@@ -122,7 +125,7 @@
 		97C76D042638B3CF00946EC7 /* NewPostPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostPageViewController.swift; sourceTree = "<group>"; };
 		97C76D062638B51D00946EC7 /* PhotoLibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryViewController.swift; sourceTree = "<group>"; };
 		97C76D082638B52300946EC7 /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
-		97C76D0A2638CB6300946EC7 /* EditProfilePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePictureViewController.swift; sourceTree = "<group>"; };
+		97C76D0A2638CB6300946EC7 /* SelectPictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPictureViewController.swift; sourceTree = "<group>"; };
 		97C76D0C2638CEB600946EC7 /* NewPostPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostPages.swift; sourceTree = "<group>"; };
 		97C76D0E2638DB4900946EC7 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		97C76D102638EEC200946EC7 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -138,6 +141,9 @@
 		97DBBB0B264379CC0070A7FE /* PhotoPollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPollViewController.swift; sourceTree = "<group>"; };
 		97DBBB0D264379D20070A7FE /* VideoPollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPollViewController.swift; sourceTree = "<group>"; };
 		97DBBB0F264379DC0070A7FE /* LinkPollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkPollViewController.swift; sourceTree = "<group>"; };
+		97DBBB1126437B8B0070A7FE /* TextCountLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCountLabel.swift; sourceTree = "<group>"; };
+		97DBBB1326437CCD0070A7FE /* NewPostTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostTitleLabel.swift; sourceTree = "<group>"; };
+		97DBBB1926438D160070A7FE /* NewPostTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostTextView.swift; sourceTree = "<group>"; };
 		97EA192B260C423900D08BAC /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		97EA1952260DEC5700D08BAC /* ProfileHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		97EA1957260DED2700D08BAC /* ProfileTabsCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabsCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -292,6 +298,9 @@
 				97A26BD0260745BF000C202F /* TextField.swift */,
 				97A26BD4260745CA000C202F /* AuthButton.swift */,
 				9716A03C262F807E00365AEE /* CustomSegmentedControl.swift */,
+				97DBBB1126437B8B0070A7FE /* TextCountLabel.swift */,
+				97DBBB1326437CCD0070A7FE /* NewPostTitleLabel.swift */,
+				97DBBB1926438D160070A7FE /* NewPostTextView.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -315,7 +324,7 @@
 				979E08A225EF92AE00609D4C /* PollPostViewController.swift */,
 				977F238E25F33613002145BB /* SettingsViewController.swift */,
 				974581DF261D43B900F2C5B1 /* EditProfileViewController.swift */,
-				97C76D0A2638CB6300946EC7 /* EditProfilePictureViewController.swift */,
+				97C76D0A2638CB6300946EC7 /* SelectPictureViewController.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -574,8 +583,10 @@
 				979E085E25EF535000609D4C /* RegistrationViewController.swift in Sources */,
 				97C76D0F2638DB4900946EC7 /* PhotoCollectionViewCell.swift in Sources */,
 				977F239625F33636002145BB /* AuthManager.swift in Sources */,
+				97DBBB1226437B8B0070A7FE /* TextCountLabel.swift in Sources */,
 				979E089225EF906E00609D4C /* ProfileViewController.swift in Sources */,
 				97C76D072638B51D00946EC7 /* PhotoLibraryViewController.swift in Sources */,
+				97DBBB1A26438D160070A7FE /* NewPostTextView.swift in Sources */,
 				97A26BD1260745BF000C202F /* TextField.swift in Sources */,
 				979E087625EF8BCD00609D4C /* HomeViewController.swift in Sources */,
 				974581F2261F0D9200F2C5B1 /* AlertUserFollowTableViewCell.swift in Sources */,
@@ -609,8 +620,9 @@
 				9707A80F25F1C5C80099089A /* TabBarDelegate.swift in Sources */,
 				977F239C25F33645002145BB /* HapticsManager.swift in Sources */,
 				977F23A225F33680002145BB /* PollPostList.swift in Sources */,
+				97DBBB1426437CCD0070A7FE /* NewPostTitleLabel.swift in Sources */,
 				97C76D112638EEC200946EC7 /* Post.swift in Sources */,
-				97C76D0B2638CB6300946EC7 /* EditProfilePictureViewController.swift in Sources */,
+				97C76D0B2638CB6300946EC7 /* SelectPictureViewController.swift in Sources */,
 				979E083925EF26C700609D4C /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
