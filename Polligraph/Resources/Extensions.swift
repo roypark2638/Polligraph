@@ -220,7 +220,7 @@ extension UITextView: UITextViewDelegate {
     /// Resize the placeholder UILabel to make sure it's in the same position as the UITextView text
     private func resizePlaceholder() {
         if let placeholderLabel = self.viewWithTag(100) as! UILabel? {
-            let labelX: CGFloat = 3
+            let labelX: CGFloat = 5
             let labelY = (self.textContainerInset.top-2)
             let labelWidth = placeholderLabel.width
             let labelHeight = placeholderLabel.height
@@ -254,3 +254,15 @@ extension UITextView: UITextViewDelegate {
     
 }
 
+// MARK: - UITextView extension
+extension UITextView {
+
+    func centerVerticalText() {
+        self.textAlignment = .center
+        let fitSize = CGSize(width: bounds.width, height: CGFloat.greatestFiniteMagnitude)
+        let size = sizeThatFits(fitSize)
+        let calculate = (bounds.size.height - size.height * zoomScale) / 2
+        let offset = max(1, calculate)
+        contentOffset.y = -offset
+    }
+}
