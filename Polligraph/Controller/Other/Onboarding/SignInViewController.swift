@@ -102,6 +102,7 @@ class SignInViewController: UIViewController {
         setupButtonActions()
         configureField()
         addSubviews()
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -228,11 +229,11 @@ class SignInViewController: UIViewController {
     }
     
     private func createBackButton() -> UIButton {
-        let backButtonImage = UIImage(systemName: "Back Arrow")
+        let backButtonImage = UIImage(named: "X Icon")
         let backButton = UIButton(type: .custom)
         backButton.setImage(backButtonImage, for: .normal)
         backButton.tintColor = .label
-        backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(didTapClose), for: .touchUpInside)
         return backButton
     }
     
@@ -446,7 +447,7 @@ class SignInViewController: UIViewController {
 //        }
 //    }
     
-    @objc private func backAction() {
+    @objc private func didTapClose() {
         dismiss(animated: true, completion: nil)
     }
     

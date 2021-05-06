@@ -73,7 +73,7 @@ class NewPostPageViewController: UIPageViewController {
             return PhotoLibraryViewController()
             
         case .camera:
-            return CameraViewController()
+            return NewPostViewController()
         }
     }
     
