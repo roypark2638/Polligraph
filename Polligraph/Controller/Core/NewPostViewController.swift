@@ -91,6 +91,41 @@ class NewPostViewController: UIViewController {
     }
     
     private func addButtonActions() {
-        
+        textButton.addTarget(self,
+                             action: #selector(didTapText),
+                             for: .touchUpInside)
+        linkButton.addTarget(self,
+                             action: #selector(didTapLink),
+                             for: .touchUpInside)
+        photoButton.addTarget(self,
+                             action: #selector(didTapPhoto),
+                             for: .touchUpInside)
+        videoButton.addTarget(self,
+                             action: #selector(didTapVideo),
+                             for: .touchUpInside)
+    }
+    
+    @objc private func didTapText() {
+        let vc = TextPollViewController()
+        navigationController?.navigationBar.tintColor = .label
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func didTapLink() {
+        let vc = LinkPollViewController()
+        navigationController?.navigationBar.tintColor = .label
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func didTapPhoto() {
+        let vc = PhotoPollViewController()
+        navigationController?.navigationBar.tintColor = .label
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func didTapVideo() {
+        let vc = VideoPollViewController()
+        navigationController?.navigationBar.tintColor = .label
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
