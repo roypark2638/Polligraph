@@ -35,7 +35,7 @@ class TabBarDelegate: NSObject, UITabBarControllerDelegate{
         
         if controllerIndex == 2 {
             let newPostStoryboard = UIStoryboard(name: "NewPost", bundle: nil)
-            let newPostViewController = newPostStoryboard.instantiateViewController(identifier: "NewPost") as! NewPostViewController
+            let newPostViewController = newPostStoryboard.instantiateViewController(identifier: "NewPost") as! CameraViewController
             
             let navController = UINavigationController(rootViewController: newPostViewController)
             
