@@ -23,10 +23,56 @@ final public class DatabaseManager {
     
     enum DatabaseError: Error {
         case insertingError
+        case gettingPosts
     }
     
     //MARK:- Public
     
+ 
+    public func getAlerts(completion: @escaping ([Alert]) -> Void) {
+        completion(Alert.mockData())
+    }
+    
+    
+    public func markAlertAsHidden(alertID: String, completion: @escaping (Bool) -> Void) {
+        completion(true)
+    }
+    
+    public func getPosts(
+        for username: String,
+        completion: @escaping (Result<[Post], Error>) -> Void
+    ) {
+        let path = "users/\(username.lowercased())/posts"
+        let reference = database.child(path).observeSingleEvent(of: .value) { snapshot in
+            guard let postsDictionary = snapshot.value as? [[String: String]] else {
+                completion(.failure(DatabaseError.gettingPosts))
+                return
+            }
+
+//            let posts: [Post] = postsDictionary.compactMap({
+//                let post = Post(
+//                    id: $0["id"] ?? "\(username)_\(UUID().uuidString)" ,
+//                    caption: $0["caption"] ?? "",
+//                    postedDate: $0["postedDate"] ?? String.date(with: Date()),
+//                    postURLString: $0["postURLString"] ?? "postURLString",
+//                    likers: $0["likers"]
+//                )
+//            })
+        }
+    }
+
+    
+//    public func posts(
+//        for username: String,
+//        completion: @escaping (Result<[Post], Error>) -> Void
+//    ) {
+//        let reference = database.child("users/\(username)").
+//    }
+}
+
+// MARK: - Account Management
+
+extension DatabaseManager {
     /// this function will check underlying database for us
     /// no reason for auth manager to be aware of how that works
     /// simply ask dataManager, if auth manager can create an account with these parameters
@@ -38,12 +84,11 @@ final public class DatabaseManager {
     public func canCreateNewUser(with email: String, username: String, completion: @escaping (Bool) -> Void) {
 //        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
         database.child("email").observeSingleEvent(of: .value) { (snapshot) in
-            guard snapshot.value as? [String: Any] == nil else {
+            guard !snapshot.exists() else {
                 completion(false)
                 return
             }
             completion(true)
-            
         }
         
     }
@@ -107,6 +152,7 @@ final public class DatabaseManager {
         }
     }
     
+    
     public func getUsername(for email: String, completion: @escaping (String?) -> Void) {
         database.child("users").observeSingleEvent(of: .value) { (snapshot) in
             guard let users = snapshot.value as? [String: [String: Any]] else {
@@ -122,15 +168,4 @@ final public class DatabaseManager {
             }
         }
     }
-    
- 
-    public func getAlerts(completion: @escaping ([Alert]) -> Void) {
-        completion(Alert.mockData())
-    }
-    
-    
-    public func markAlertAsHidden(alertID: String, completion: @escaping (Bool) -> Void) {
-        completion(true)
-    }
 }
-
