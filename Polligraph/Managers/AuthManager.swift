@@ -215,7 +215,11 @@ public class AuthManager{
     /// - parameters
     ///     completion: Async callback to check if Firebase successfully sign out the user
     public func signOutUser(completion: (Bool) -> Void) {
+        // Sign out Facebook
         FBSDKLoginKit.LoginManager().logOut()
+        
+        // Sign out Google
+        GIDSignIn.sharedInstance()?.signOut()
         
         do {
             try Auth.auth().signOut()
