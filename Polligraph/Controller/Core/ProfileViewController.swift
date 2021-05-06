@@ -10,6 +10,15 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     // MARK: - Properties
+    var headerViewModel = ProfileHeaderViewModel(
+        profileImageURL: nil,
+        followerCount: 110_000,
+        pollsCount: 920,
+        buttonType: .edit,
+        bio: "Please follow if you want to up to date news on politics!",
+        username: "roypark2638",
+        name: "RoyPark"
+    )
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -31,6 +40,10 @@ class ProfileViewController: UIViewController {
     }()
     
     private var user: User
+    
+//    private var headerViewModel: ProfileHeaderViewModel?
+    
+    private var posts: [Post] = []
         
     
     init(user: User) {
@@ -57,6 +70,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(collectionView)
         configureNavigationBar()
         configureCollectionView()
+        fetchProfileInfo()
     }
     
     override func viewDidLayoutSubviews() {
@@ -65,6 +79,25 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - Methods
+    
+    private func fetchProfileInfo() {
+        let username = user.username
+//        let group = DispatchGroup()
+        
+        // Fetch Posts
+//        group.enter()
+        DatabaseManager.shared.getPosts(for: username) { result in
+            switch result {
+            
+            case .success(let posts):
+                print("success\n\n")
+                break
+            case .failure(_):
+                print("Failed\n\n")
+                break
+            }
+        }
+    }
     
     private func configureCollectionView() {
         // layout allows us the name implies to control things about how the collection view is laid out
@@ -166,8 +199,9 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
         ) as! ProfileHeaderCollectionReusableView
         
         profileHeader.delegate = self
-        let viewModel = ProfileHeaderViewModel(profileImageURL: nil, isFollowing: nil, followerCount: 110_000, pollsCount: 92_000)
-        profileHeader.configure(with: viewModel)
+
+//        let viewModel = ProfileHeaderViewModel(profileImageURL: nil , followerCount: 110_000, pollsCount: 92_000)
+        profileHeader.configure(with: headerViewModel)
         
         
         return profileHeader
@@ -176,9 +210,28 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
+        var height: CGFloat = 157
+        // convert string into NSString
+        
+        if let bioString = headerViewModel.bio as? NSString,
+           let font = UIFont(name: "Roboto-regular", size: 16)
+            {
+            let bioRect = bioString.boundingRect(
+                with: CGSize(width: view.width, height: 1000),
+                options: .usesLineFragmentOrigin,
+                attributes: [
+                    .font : font,
+                    .kern : NSNumber(value: 0.5)
+                ],
+                context: nil
+            )
+            height += bioRect.height
+        }
+        
         if section == 0 {
+            
             return CGSize(width: collectionView.width,
-                          height: collectionView.height/4 + 20)
+                          height: height)
         }
         return CGSize(width: collectionView.width, height: 51)
     }
@@ -190,37 +243,64 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
 extension ProfileViewController: ProfileHeaderCollectionReusableViewDelegate {
     func profileHeaderCollectionReusableView(_ header: ProfileHeaderCollectionReusableView, didTapPollsButtonWith viewModel: ProfileHeaderViewModel) {
         collectionView.scrollToItem(at: IndexPath(row: 0, section: 1), at: .top, animated: true)
-        
+    }
+    
+    func profileHeaderCollectionReusableView(_ header: ProfileHeaderCollectionReusableView, didTapEditProfileButtonWith viewModel: ProfileHeaderViewModel) {
+        let vc = EditProfileViewController()
+        vc.completion = { [weak self] in
+            // refetch header info
+//            self?.headerViewModel = nil
+            self?.fetchProfileInfo()
+        }
+        let navVC = UINavigationController(rootViewController: vc)
+        present(navVC, animated: true, completion: nil)
+    }
+    
+    func profileHeaderCollectionReusableView(_ header: ProfileHeaderCollectionReusableView, didTapFollowButtonWith viewModel: ProfileHeaderViewModel) {
         
     }
     
-    func profileHeaderCollectionReusableView(
-        _ header: ProfileHeaderCollectionReusableView,
-        didTapPrimaryButtonWith viewModel: ProfileHeaderViewModel
-    ) {
-        guard let currentUsername = UserDefaults.standard.string(forKey: "username") else { return }
+    func profileHeaderCollectionReusableView(_ header: ProfileHeaderCollectionReusableView, didTapUnfollowButtonWith viewModel: ProfileHeaderViewModel) {
         
-        if self.user.username.lowercased() == currentUsername.lowercased() {
-            // edit profile
-            let vc = EditProfileViewController()
-            let nav = UINavigationController(rootViewController: vc)
-//            nav.navigationItem.backButtonTitle = ""
-//            nav.navigationBar.backIndicatorImage = UIImage(named: "Back Arrow")
-//            nav.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "Back Arrow")
-            nav.navigationBar.isTranslucent = false
-            nav.navigationBar.backgroundColor = .clear
-            nav.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            nav.navigationBar.shadowImage = UIImage()
-            
-            nav.modalPresentationStyle = .fullScreen
-            nav.navigationBar.tintColor = .label
-            present(nav, animated: true, completion: nil)
-//            navigationController?.pushViewController(vc, animated: true)
-        }
-        else {
-            // follow or unfollow current users profile that we are viewing
-        }
     }
     
     
 }
+
+//extension ProfileViewController: ProfileHeaderCollectionReusableViewDelegate {
+//    func profileHeaderCollectionReusableView(_ header: ProfileHeaderCollectionReusableView, didTapPollsButtonWith viewModel: ProfileHeaderViewModel) {
+//        collectionView.scrollToItem(at: IndexPath(row: 0, section: 1), at: .top, animated: true)
+//
+//
+//    }
+//
+//    func profileHeaderCollectionReusableView(
+//        _ header: ProfileHeaderCollectionReusableView,
+//        didTapPrimaryButtonWith viewModel: ProfileHeaderViewModel
+//    ) {
+//        guard let currentUsername = UserDefaults.standard.string(forKey: "username") else { return }
+//
+//        if self.user.username.lowercased() == currentUsername.lowercased() {
+//            // edit profile
+//            let vc = EditProfileViewController()
+//            let nav = UINavigationController(rootViewController: vc)
+////            nav.navigationItem.backButtonTitle = ""
+////            nav.navigationBar.backIndicatorImage = UIImage(named: "Back Arrow")
+////            nav.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "Back Arrow")
+//            nav.navigationBar.isTranslucent = false
+//            nav.navigationBar.backgroundColor = .clear
+//            nav.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//            nav.navigationBar.shadowImage = UIImage()
+//
+//            nav.modalPresentationStyle = .fullScreen
+//            nav.navigationBar.tintColor = .label
+//            present(nav, animated: true, completion: nil)
+////            navigationController?.pushViewController(vc, animated: true)
+//        }
+//        else {
+//            // follow or unfollow current users profile that we are viewing
+//        }
+//    }
+//
+//
+//}
