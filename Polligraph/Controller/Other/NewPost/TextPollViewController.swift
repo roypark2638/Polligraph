@@ -130,7 +130,7 @@ class TextPollViewController: UIViewController {
             width: view.width-padding*2,
             height: 76
         )
-        firstPollTextView.centerVerticalText()
+//        firstPollTextView.centerVerticalText()
         firstPollTextView.layer.cornerRadius = 38
         
         firstPollCountLabel.sizeToFit()
@@ -147,7 +147,7 @@ class TextPollViewController: UIViewController {
             width: view.width-padding*2,
             height: 76
         )
-        secondPollTextView.centerVerticalText()
+//        secondPollTextView.centerVerticalText()
         secondPollTextView.layer.cornerRadius = 38
         
         secondPollCountLabel.sizeToFit()

@@ -12,6 +12,8 @@ class PhotoLibraryViewController: UIViewController {
     
     private var collectionView: UICollectionView?
     
+    private var data = Data()
+    
     private var assets = [PHAsset]()
     private var images = [UIImage?]()
 
@@ -81,6 +83,7 @@ class PhotoLibraryViewController: UIViewController {
             forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier
         )
         
+        collectionView.allowsSelection = true
         collectionView.delegate = self
         collectionView.dataSource = self
         view.addSubview(collectionView)
@@ -124,28 +127,62 @@ extension PhotoLibraryViewController: UICollectionViewDataSource, UICollectionVi
         return cell
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
-        guard let username = UserDefaults.standard.string(forKey: "username") else { return }
-        guard let image = images[indexPath.row] else { return }
+//        collectionView.deselectItem(at: indexPath, animated: true)
+        collectionView.allowsSelection = true
         
-        StorageManager.shared.uploadProfilePicture(
-            username: username,
-            data: image.pngData()) { [weak self] success in
-            if success {
-                // doing this on the background because fetchProfileInfo is on the main thread.
-                print("Successfully updated to the storage")
-                
-            }
-            else {
-                print("failed to upload the profile picture to the firebase storage ")
-            }
+        
+        guard let image = images[indexPath.row],
+              let data = image.pngData()
+              else { return }
+        self.data = data
+        
+        
+        if let cell = collectionView.cellForItem(at: indexPath) {
+//            let view = UIView()
+//            view.backgroundColor = .gray
+//            view.alpha = 0.5
+//            cell.addSubview(view)
+            
+                        let image = UIImageView(image: UIImage(named: "SelectionBackground"))
+                        image.alpha = 0.5
+                        cell.addSubview(image)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        collectionView.allowsSelection = true
+//        if let cell = collectionView.cellForItem(at: indexPath) {
+//            let view = UIView()
+            
+//            let view = UIView()
+//            view.backgroundColor = #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1)
+//            cell.addSubview(view)
+//            cell.contentView.backgroundColor = #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1)
+//            cell.contentView.backgroundColor = UIColor(red: 190, green: 190, blue: 190, alpha: 0.05)
+//            let image = UIImageView(image: UIImage(named: "SelectionBackground"))
+//            image.alpha = 0.5
+//            cell.addSubview(image)
+//        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+//        if let cell = collectionView.cellForItem(at: indexPath) {
+//            cell.contentView.backgroundColor = nil
+//        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = view.width * 0.32
         let height = view.height * 0.179910045
+        print("width and height \n:\n")
+        print(width)
+        print(height)
         return CGSize(width: width, height: height)
     }
     
@@ -160,4 +197,25 @@ extension PhotoLibraryViewController: UICollectionViewDataSource, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+}
+
+extension PhotoLibraryViewController: SelectPictureViewControllerDelegate {
+    func selectPictureViewControllerDidTapUpload(_ controller: SelectPictureViewController) {
+        guard let username = UserDefaults.standard.string(forKey: "username") else { return }
+    
+        StorageManager.shared.uploadProfilePicture(
+            username: username,
+            data: data) { result in
+            switch result {
+            // doing this on the background because fetchProfileInfo is on the main thread.
+            case .success(let imageStringURL):
+                UserDefaults.standard.set(imageStringURL, forKey: "profile_picture_url")
+                print(imageStringURL)
+            case .failure(let error):
+                print("failed to upload the profile picture to the firebase storage ")
+                print("StorageManager error: \(error)")
+            }
+        }
+    }
+    
 }

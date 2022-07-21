@@ -370,7 +370,7 @@ class SignInViewController: UIViewController {
                 
                 let facebookRequest = FBSDKLoginKit.GraphRequest(
                     graphPath: "me",
-                    parameters: ["fields": "email, name"],
+                    parameters: ["fields": "email, first_name, last_name, picture.type(large)"],
                     tokenString: token,
                     version: nil,
                     httpMethod: .get
@@ -383,27 +383,61 @@ class SignInViewController: UIViewController {
                         return
                     }
                     print("\(result)")
-                    guard let username = result["name"] as? String,
+                    guard let firstName = result["first_name"] as? String,
+                          let lastName = result["last_name"] as? String,
                           let email = result["email"] as? String,
-                          let id = result["id"] as? String else {
+                          let id = result["id"] as? String,
+                          let picture = result["picture"] as? [String: Any],
+                          let data = picture["data"] as? [String: Any],
+                          let pictureURL = data["url"] as? String else {
                         print("failed to get email and name from fb result")
                         return
                     }
-                    let nameComponents = username.components(separatedBy: " ")
-                    guard nameComponents.count == 2 else { return }
-                    
-                    let firstName = nameComponents[0]
-                    let lastName = nameComponents[1]
                     
                     let tempUsername = firstName + lastName + id
+                    print("\nTemp User Name : \(tempUsername)\n")
                     
                     DatabaseManager.shared.canCreateNewUser(with: email, username: tempUsername) { (success) in
                         if success {
                             // Yes, can create new user with the given info
-                            DatabaseManager.shared.insertNewUser(with: email, username: username) { (result) in
+                            DatabaseManager.shared.insertNewUser(with: email, username: tempUsername) { (result) in
                                 switch result {
                                 case .success:
                                     print("Successfully insert new user")
+                                    
+                                    UserDefaults.standard.setValue(tempUsername, forKey: "username")
+                                    
+                                    guard let url = URL(string: pictureURL) else { return }
+                                    print("Downloading data from facebook image")
+                                    
+                                    URLSession.shared.dataTask(with: url) { data, _, error in
+                                        guard let data = data else {
+                                            if let error = error {
+                                                print("Failed to get data from Facebook with an error: \(error)")
+                                            }
+                                            else {
+                                                print("Failed to get data from Facebook. There is no data")
+                                            }
+                                            return
+                                        }
+                                        
+                                        print("Got data from Facebook, uploading...")
+                                        
+                                        // upload image
+                                        StorageManager.shared.uploadProfilePicture(
+                                            username: tempUsername,
+                                            data: data) { result in
+                                            switch result {
+                                            case .success(let downloadURL):
+                                                UserDefaults.standard.set(downloadURL, forKey: "profile_picture_url")
+                                                print(downloadURL)
+                                            case .failure(let error):
+                                                print("Storage manager error: \(error)")
+                                                
+                                            }
+                                        }
+                                    }.resume()
+                                    
                                 case .failure(let error):
                                     print("Error with inserting new user to database. \(error.localizedDescription)")
                                 }
@@ -488,25 +522,86 @@ extension SignInViewController: GIDSignInDelegate {
             print(error.localizedDescription)
             return
         }
-        guard let authentication = user.authentication else { return }
-        let credential = GoogleAuthProvider.credential(
-            withIDToken: authentication.idToken,
-            accessToken: authentication.accessToken)
         
-        Auth.auth().signIn(with: credential) { [weak self] (authResult, error) in
-            guard authResult != nil, error == nil else {
-                // error
-                print("Error sign in")
-                return
-            }
-            print("Successfully login with Google")
-            DispatchQueue.main.async {
-                let vc = TabBarViewController()
-                vc.modalPresentationStyle = .fullScreen
-                self?.present(vc, animated: true, completion: nil)
-            }
-            
+        guard let email = user.profile.email,
+              let firstName = user.profile.givenName,
+              let lastName = user.profile.familyName,
+              let id = user.userID
+    
+        else {
+            print("Error: Google one of the user info couldn't get it")
+            return
         }
+        
+        print("Did Sign in with Google: \(String(describing: user))")
+        let tempUsername = firstName+lastName+id
+        print("\nGoogle temp Username: \(tempUsername)\n")
+        DatabaseManager.shared.canCreateNewUser(with: email, username: tempUsername) { success in
+            if success {
+                DatabaseManager.shared.insertNewUser(with: email, username: tempUsername) { result in
+                    switch result {
+                    case .success:
+                        guard let authentication = user.authentication else {
+                            print("Missing auth object off of google user")
+                            return
+                        }
+                        UserDefaults.standard.setValue(tempUsername, forKey: "username")
+                        if user.profile.hasImage {
+                            guard let url = user.profile.imageURL(withDimension: 200) else {
+                                return
+                            }
+                            
+                            URLSession.shared.dataTask(with: url) { data, _, error in
+                                guard let data = data else {
+                                    if let error = error {
+                                        print("Failed to get data from Google with an error \(error)")
+                                    }
+                                    else {
+                                        print("Failed to get data from Google. Error: There is no data!")
+                                    }
+                                    return
+                                }
+                                print("Got data from Google, uploading...")
+                                
+                                // upload image
+                                StorageManager.shared.uploadProfilePicture(
+                                    username: tempUsername,
+                                    data: data) { result in
+                                    switch result {
+                                    case .success(let downloadURL):
+                                        UserDefaults.standard.set(downloadURL, forKey: "profile_picture_url")
+                                    case .failure(let error):
+                                        print("Storage manager error: \(error)")
+                                    }
+                                }
+                            }.resume()
+                        }
+                        let credential = GoogleAuthProvider.credential(
+                            withIDToken: authentication.idToken,
+                            accessToken: authentication.accessToken)
+                        
+                        Auth.auth().signIn(with: credential) { [weak self] (authResult, error) in
+                            guard authResult != nil, error == nil else {
+                                // error
+                                print("Error sign in")
+                                return
+                            }
+                            print("Successfully login with Google")
+                            DispatchQueue.main.async {
+                                let vc = TabBarViewController()
+                                vc.modalPresentationStyle = .fullScreen
+                                self?.present(vc, animated: true, completion: nil)
+                            }
+                            
+                        }
+                    case .failure(let error):
+                        print("Seems like the same email exists \(error)")
+                    }
+                }
+            }
+        }
+        
+
     }
 }
 

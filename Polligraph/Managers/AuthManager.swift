@@ -86,40 +86,6 @@ public class AuthManager{
         }
     }
     
-//    public func insertUserIntoDatabase(username: String, email: String, completion: @escaping (Bool) -> Void) {
-//        /*
-//         - Check if username is available
-//         - Check if email is available
-//         */
-//        DatabaseManager.shared.canCreateNewUser(with: email, username: username) { (canCreate) in
-//            if canCreate {
-//                /*
-//                 - Create account in Firebase
-//                 - Insert account to database
-//                 */
-//                    // Successfully created an account, insert into database
-//                    DatabaseManager.shared.insertNewUser(with: email, username: username) { (inserted) in
-//                        // success to insert into database
-//                        if inserted {
-//                            completion(true)
-//                            return
-//                        }
-//                        // failed to insert into database
-//                        else {
-//                            completion(false)
-//                            return
-//                        }
-//                    }
-//                }
-//
-//            else {
-//                // either username or email does not exist
-//                completion(false)
-//            }
-//        }
-//    }
-    
-    
     /// Send a email verification to the user
     /// - Parameter
     /// completion: async callback to send the email to the user

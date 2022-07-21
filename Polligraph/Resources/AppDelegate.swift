@@ -15,16 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    func application(
-        _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
-    ) -> Bool {
-        
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-//        GIDSignIn.sharedInstance().delegate = self
         let window = UIWindow(frame: UIScreen.main.bounds)
         
         if !AuthManager.shared.isSignedIn() || !AuthManager.shared.isVerified() {

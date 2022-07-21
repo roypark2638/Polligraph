@@ -6,10 +6,15 @@
 //
 
 import UIKit
-
+protocol SelectPictureViewControllerDelegate: AnyObject {
+    func selectPictureViewControllerDidTapUpload(_ controller: SelectPictureViewController)
+}
 
 class SelectPictureViewController: UIViewController {
+    public var completion: (() -> Void)?
     
+    weak var delegate: SelectPictureViewControllerDelegate?
+        
     private let pageContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -100,7 +105,10 @@ class SelectPictureViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc private func didTapUpload() {
+    @objc public func didTapUpload() {
+        delegate?.selectPictureViewControllerDidTapUpload(self)
+        let profileStringURL = UserDefaults.standard.string(forKey: "profile_picture_url")
+        
         dismiss(animated: true, completion: nil)
     }
 

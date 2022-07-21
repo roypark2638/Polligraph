@@ -56,14 +56,11 @@ class AlertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-//        tableView.rowHeight = UITableView.automaticDimension
-//        tableView.estimatedRowHeight = 300
+        
         addSubviews()
         fetchAlertData()
         tableView.delegate = self
         tableView.dataSource = self
-//        updateUI()
-        
     }
     
     override func viewDidLayoutSubviews() {

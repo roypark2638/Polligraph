@@ -11,13 +11,15 @@ class EditProfileViewController: UIViewController {
     
     // MARK:- Properties
     
-    private let profileImageButton: UIButton = {
-        let button = UIButton()
-        button.clipsToBounds = true
-        button.layer.masksToBounds = true
-        button.contentMode = .scaleAspectFill
-        button.setImage(UIImage(named: "Profile Image"), for: .normal)
-        return button
+    public var completion: (() -> Void)?
+    
+    private let profileImageView: UIImageView = {
+        let view = UIImageView()
+        view.clipsToBounds = true
+        view.layer.masksToBounds = true
+        view.contentMode = .scaleAspectFill
+        view.image = UIImage(named: "Profile Image")
+        return view
     }()
     
     private let plusButton: UIButton = {
@@ -77,11 +79,9 @@ class EditProfileViewController: UIViewController {
     
     private let usernameTextField = TextField(type: .other, title: nil)
     private let displayNameTextField = TextField(type: .other, title: nil)
-    private let bioTextField = TextField(type: .other, title: nil)
     private let bioTextView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .secondarySystemBackground
-//        placeholder = type.title
         textView.layer.cornerRadius = 20.0
         textView.layer.masksToBounds = true
         textView.isEditable = true
@@ -93,8 +93,6 @@ class EditProfileViewController: UIViewController {
         return textView
     }()
     
-    public var completion: (() -> Void)?
-
     
     // MARK:- LifeCycle
     
@@ -106,6 +104,23 @@ class EditProfileViewController: UIViewController {
         configureNavigationBar()
         configureButtons()
         addSubviews()
+        
+        usernameTextField.delegate = self
+        displayNameTextField.delegate = self
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapChangeImage))
+        profileImageView.isUserInteractionEnabled = true
+        profileImageView.addGestureRecognizer(tap)
+        
+        guard let username = UserDefaults.standard.string(forKey: "username")?.lowercased() else { return }
+        DatabaseManager.shared.getUserInfo(username: username) { [weak self] userInfo in
+            print(userInfo)
+//            DispatchQueue.main.async {
+//                if let userInfo = userInfo {
+//
+//                }
+//            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -116,12 +131,11 @@ class EditProfileViewController: UIViewController {
     // MARK: - Methods
     
     private func configureButtons() {
-        profileImageButton.addTarget(self, action: #selector(didTapChangeImage), for: .touchUpInside)
         plusButton.addTarget(self, action: #selector(didTapChangeImage), for: .touchUpInside)
     }
     
     private func addSubviews() {
-        view.addSubview(profileImageButton)
+        view.addSubview(profileImageView)
         view.addSubview(plusButton)
         view.addSubview(usernameLabel)
         view.addSubview(usernameTextField)
@@ -137,7 +151,7 @@ class EditProfileViewController: UIViewController {
     private func configureLayouts() {
         let profileImageSize = CGFloat(110)
         
-        profileImageButton.frame = CGRect(
+        profileImageView.frame = CGRect(
             x: (view.width - profileImageSize)/2,
             y: view.safeAreaInsets.top + 16,
             width: profileImageSize,
@@ -146,15 +160,15 @@ class EditProfileViewController: UIViewController {
         let plusButtonSize = CGFloat(27)
         
         plusButton.frame = CGRect(
-            x: profileImageButton.right - plusButtonSize - 5,
-            y: profileImageButton.bottom - plusButtonSize,
+            x: profileImageView.right - plusButtonSize - 5,
+            y: profileImageView.bottom - plusButtonSize,
             width: plusButtonSize,
             height: plusButtonSize
         )
         usernameLabel.sizeToFit()
         usernameLabel.frame = CGRect(
             x: 24,
-            y: profileImageButton.bottom + 32,
+            y: profileImageView.bottom + 32,
             width: usernameLabel.width,
             height: 20
         )
@@ -223,6 +237,8 @@ class EditProfileViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
+        navigationController?.navigationBar.tintColor = .label
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Save",
             style: .done,
@@ -242,7 +258,23 @@ class EditProfileViewController: UIViewController {
     // MARK: - Objc
     
     @objc private func didTapSave() {
+        let username = usernameTextField.text ?? ""
+        let bio = bioTextView.text ?? ""
+        let displayName = displayNameTextField.text ?? ""
+        guard let image = profileImageView.image, // always have an image with default view
+              let data = image.pngData()
+        else { return }
         
+        let newInfo = UserInfo(username: username, displayName: displayName, bio: bio)
+        
+        DatabaseManager.shared.setUserInfo(userInfo: newInfo) { [weak self] success in
+            DispatchQueue.main.async {
+                if success {
+                    self?.completion?() // refresh the profile
+                    self?.didTapBackArrow()
+                }
+            }
+        }
     }
 
     @objc private func didTapBackArrow() {
@@ -253,6 +285,18 @@ class EditProfileViewController: UIViewController {
         let vc = SelectPictureViewController()
         let nav = UINavigationController(rootViewController: vc)
         present(nav, animated: true)
+    }
+
+}
+
+
+extension EditProfileViewController: UITextFieldDelegate {
+
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        let maxIntCount = 30
+
+        guard let textCount = textField.text?.count else { return  }
+        usernameCountLabel.text = String(maxIntCount - textCount)
     }
 
 }

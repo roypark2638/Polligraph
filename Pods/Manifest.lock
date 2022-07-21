@@ -102,6 +102,9 @@ PODS:
   - GTMSessionFetcher/Core (1.5.0)
   - GTMSessionFetcher/Full (1.5.0):
     - GTMSessionFetcher/Core (= 1.5.0)
+  - IGListDiffKit (4.0.0)
+  - IGListKit (4.0.0):
+    - IGListDiffKit (= 4.0.0)
   - leveldb-library (1.22)
   - nanopb (2.30906.0):
     - nanopb/decode (= 2.30906.0)
@@ -121,6 +124,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - GoogleSignIn
+  - IGListKit (~> 4.0.0)
   - SDWebImage
 
 SPEC REPOS:
@@ -143,6 +147,8 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMAppAuth
     - GTMSessionFetcher
+    - IGListDiffKit
+    - IGListKit
     - leveldb-library
     - nanopb
     - PromisesObjC
@@ -167,11 +173,13 @@ SPEC CHECKSUMS:
   GoogleUtilities: 3dc4ff0d5e4840e2fa8eef0889620e8c33d4218c
   GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
+  IGListDiffKit: 665d6cf43ce726e676013db9c7d6c4294259b6b2
+  IGListKit: fd5a5d21935298f5849fa49d426843cff97b77c7
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
 
-PODFILE CHECKSUM: fd130d495d469be585cfc9cf1626f27683112255
+PODFILE CHECKSUM: ad748c5f1011b17ac93e734039c44c46048d0ee8
 
 COCOAPODS: 1.10.0

@@ -34,26 +34,6 @@ class OnboardingViewController: UIViewController {
     private let createAccountButton = AuthButton(type: .black, title: "Create an Account")
     private let signInButton = AuthButton(type: .secondary, title: "Sign In")
     
-//    private let createAccountButton: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("Create an Account", for: .normal)
-//        button.setTitleColor(.systemBackground, for: .normal)
-//        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
-//        button.backgroundColor = .label
-//        button.layer.cornerRadius = Constants.cornerRadius
-//        return button
-//    }()
-//
-//    private let signInButton: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("Sign In", for: .normal)
-//        button.setTitleColor(.black , for: .normal)
-//        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
-//        button.backgroundColor = .secondarySystemBackground
-//        button.layer.cornerRadius = Constants.cornerRadius
-//        return button
-//    }()
-    
     // MARK: - LifeCycle
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,7 +45,6 @@ class OnboardingViewController: UIViewController {
         view.backgroundColor = .systemBackground
         setupButtonActions()
         addSubviews()
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -157,19 +136,3 @@ class OnboardingViewController: UIViewController {
     }
 
 }
-
-//// MARK: - UIView Extension
-//
-//
-//extension UIView {
-//    func addConstrains(withFormat: String, views: UIView...) {
-//        var viewsDictionary = [String: UIView]()
-//        for (index, view) in views.enumerated() {
-//            let key = "v\(index)"
-//            viewsDictionary[key] = view
-//            view.translatesAutoresizingMaskIntoConstraints = false
-//        }
-//        
-//        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: withFormat, options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: viewsDictionary))
-//    }
-//}

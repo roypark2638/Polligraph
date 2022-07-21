@@ -23,15 +23,6 @@ class EmailVerificationViewController: UIViewController {
         label.sizeToFit()
         return label
     }()
-    
-//    private let mailView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "Mail UI")
-//        imageView.clipsToBounds = true
-//        imageView.contentMode = .scaleAspectFit
-//        imageView.layer.masksToBounds = true
-//        return imageView
-//    }()
 
     private let mailView: UIView = {
         let mail = UIView()

@@ -10,15 +10,12 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     // MARK: - Properties
-    var headerViewModel = ProfileHeaderViewModel(
-        profileImageURL: nil,
-        followerCount: 110_000,
-        pollsCount: 920,
-        buttonType: .edit,
-        bio: "Please follow if you want to up to date news on politics!",
-        username: "roypark2638",
-        name: "RoyPark"
-    )
+    
+    var headerViewModel: ProfileHeaderViewModel?
+    
+    private var isCurrentUser: Bool {
+        return user.username.lowercased() == UserDefaults.standard.string(forKey: "username")?.lowercased() ?? ""
+    }
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -40,9 +37,7 @@ class ProfileViewController: UIViewController {
     }()
     
     private var user: User
-    
-//    private var headerViewModel: ProfileHeaderViewModel?
-    
+        
     private var posts: [Post] = []
         
     
@@ -82,21 +77,83 @@ class ProfileViewController: UIViewController {
     
     private func fetchProfileInfo() {
         let username = user.username
-//        let group = DispatchGroup()
+        let group = DispatchGroup()
         
         // Fetch Posts
-//        group.enter()
-        DatabaseManager.shared.getPosts(for: username) { result in
+        group.enter()
+        DatabaseManager.shared.getPosts(for: username) { [weak self] result in
+            defer {
+                group.leave()
+            }
             switch result {
             
             case .success(let posts):
                 print("success\n\n")
+                self?.posts = posts
                 break
-            case .failure(_):
-                print("Failed\n\n")
+            case .failure(let error):
+                
+                print("Failed with getting Posts with an error: \(error) \n\n")
                 break
             }
         }
+        
+        // Fetch Profile Header Info
+
+        var profilePictureURL: URL?
+        var followerCount = 0
+        var pollsCount = 0
+        var buttonType: ProfileButtonType = .edit
+        var bio: String?
+        var displayName: String?
+        
+        // To-do later
+        // Counts (Post, followers)
+        // create getUserCounts in DatabaseManager
+        
+        // Bio, name
+        DatabaseManager.shared.getUserInfo(username: user.username) { userInfo in
+            displayName = userInfo?.displayName
+            bio = userInfo?.bio
+        }
+        
+        // Profile picture url
+        group.enter()
+        StorageManager.shared.getProfilePictureURL(for: user.username) { url in
+            if url == nil {
+                print("There is no profile picture for this user")
+            }
+            defer {
+                group.leave()
+            }
+            profilePictureURL = url
+        }
+        
+        // if profile is not for current user, get follow state
+        if !isCurrentUser {
+            // get follow state
+            group.enter()
+            DatabaseManager.shared.isFollowing(
+                targetUsername: user.username) { isFollowing in
+                defer {
+                    group.leave()
+                }
+                buttonType = .follow(isFollowing: isFollowing)
+            }
+        }
+        
+        group.notify(queue: .main) {
+            self.headerViewModel = ProfileHeaderViewModel(
+                profileImageURL: profilePictureURL,
+                followerCount: 100,
+                pollsCount: 1000,
+                buttonType: buttonType,
+                bio: bio,
+                displayName: displayName
+            )
+            self.collectionView.reloadData()
+        }
+        
     }
     
     private func configureCollectionView() {
@@ -201,7 +258,10 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
         profileHeader.delegate = self
 
 //        let viewModel = ProfileHeaderViewModel(profileImageURL: nil , followerCount: 110_000, pollsCount: 92_000)
-        profileHeader.configure(with: headerViewModel)
+        if let viewModel = headerViewModel {
+            profileHeader.configure(with: viewModel)
+        }
+//        profileHeader.configure(with: headerViewModel)
         
         
         return profileHeader
@@ -212,6 +272,7 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
         var height: CGFloat = 157
         // convert string into NSString
+        guard let headerViewModel = headerViewModel else { return CGSize(width: collectionView.width, height: collectionView.width) }
         
         if let bioString = headerViewModel.bio as? NSString,
            let font = UIFont(name: "Roboto-regular", size: 16)
@@ -249,7 +310,7 @@ extension ProfileViewController: ProfileHeaderCollectionReusableViewDelegate {
         let vc = EditProfileViewController()
         vc.completion = { [weak self] in
             // refetch header info
-//            self?.headerViewModel = nil
+            self?.headerViewModel = nil
             self?.fetchProfileInfo()
         }
         let navVC = UINavigationController(rootViewController: vc)
@@ -266,41 +327,3 @@ extension ProfileViewController: ProfileHeaderCollectionReusableViewDelegate {
     
     
 }
-
-//extension ProfileViewController: ProfileHeaderCollectionReusableViewDelegate {
-//    func profileHeaderCollectionReusableView(_ header: ProfileHeaderCollectionReusableView, didTapPollsButtonWith viewModel: ProfileHeaderViewModel) {
-//        collectionView.scrollToItem(at: IndexPath(row: 0, section: 1), at: .top, animated: true)
-//
-//
-//    }
-//
-//    func profileHeaderCollectionReusableView(
-//        _ header: ProfileHeaderCollectionReusableView,
-//        didTapPrimaryButtonWith viewModel: ProfileHeaderViewModel
-//    ) {
-//        guard let currentUsername = UserDefaults.standard.string(forKey: "username") else { return }
-//
-//        if self.user.username.lowercased() == currentUsername.lowercased() {
-//            // edit profile
-//            let vc = EditProfileViewController()
-//            let nav = UINavigationController(rootViewController: vc)
-////            nav.navigationItem.backButtonTitle = ""
-////            nav.navigationBar.backIndicatorImage = UIImage(named: "Back Arrow")
-////            nav.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "Back Arrow")
-//            nav.navigationBar.isTranslucent = false
-//            nav.navigationBar.backgroundColor = .clear
-//            nav.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//            nav.navigationBar.shadowImage = UIImage()
-//
-//            nav.modalPresentationStyle = .fullScreen
-//            nav.navigationBar.tintColor = .label
-//            present(nav, animated: true, completion: nil)
-////            navigationController?.pushViewController(vc, animated: true)
-//        }
-//        else {
-//            // follow or unfollow current users profile that we are viewing
-//        }
-//    }
-//
-//
-//}

@@ -72,29 +72,3 @@ public class Alert {
         return alerts
     }
 }
-//    static func mockData() -> [Alert] {
-//        let first = Array(0...5).compactMap({
-//            Alert(text: "username started following you \($0)",
-//                         type: .userFollow(username: "hard code username"),
-//                         date: Date()
-//            )
-//        })
-//
-//        let second = Array(0...5).compactMap({
-//            Alert(text: "username replied to your comment on title of the post: \($0)",
-//                         type: .postComment(postName: "Post Name!"),
-//                         date: Date()
-//            )
-//        })
-//
-//        let third = Array(0...5).compactMap({
-//            Alert(text: "username liked your comment on title of the post \($0)",
-//                         type: .postCommentLike(postName: "Comment Like"),
-//                         date: Date()
-//            )
-//        })
-//
-//        return first + second + third
-//
-//    }
-//    }

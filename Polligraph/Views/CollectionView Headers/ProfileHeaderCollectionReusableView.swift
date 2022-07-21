@@ -170,6 +170,8 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
             width: profileSize,
             height: profileSize
         ).integral
+        profileImageView.layer.cornerRadius = profileSize/2
+        
                                 
         followersLabel.sizeToFit()
         followersLabel.frame = CGRect(

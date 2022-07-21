@@ -18,8 +18,7 @@ struct ProfileHeaderViewModel {
     let pollsCount: Int
     let buttonType: ProfileButtonType
     let bio: String?
-    let username: String
-    let name: String?
+    let displayName: String?
 }
 
 

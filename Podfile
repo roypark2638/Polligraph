@@ -15,4 +15,5 @@ pod 'FBSDKLoginKit'
 pod 'Appirater'
 pod 'SDWebImage'
 
+pod 'IGListKit', '~> 4.0.0'
 end

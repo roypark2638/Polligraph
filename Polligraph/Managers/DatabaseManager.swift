@@ -42,22 +42,27 @@ final public class DatabaseManager {
         for username: String,
         completion: @escaping (Result<[Post], Error>) -> Void
     ) {
-        let path = "users/\(username.lowercased())/posts"
+        let path = "users/\(username)/posts"
         let reference = database.child(path).observeSingleEvent(of: .value) { snapshot in
-            guard let postsDictionary = snapshot.value as? [[String: String]] else {
+            guard let postsDictionary = snapshot.value as? [[String: Any]] else {
                 completion(.failure(DatabaseError.gettingPosts))
                 return
             }
-
-//            let posts: [Post] = postsDictionary.compactMap({
-//                let post = Post(
-//                    id: $0["id"] ?? "\(username)_\(UUID().uuidString)" ,
-//                    caption: $0["caption"] ?? "",
-//                    postedDate: $0["postedDate"] ?? String.date(with: Date()),
-//                    postURLString: $0["postURLString"] ?? "postURLString",
-//                    likers: $0["likers"]
-//                )
-//            })
+            print("\n\n")
+            print(postsDictionary)
+            print("\n\n")
+            let posts: [Post] = postsDictionary.compactMap({
+                let post: Post = Post(
+                    id: $0["id"] as? String ?? "\(username)_\(UUID().uuidString)" ,
+                    caption: $0["caption"] as? String ?? "",
+                    postedDate: $0["postedDate"] as? String ?? String.date(with: Date()),
+                    postURLString: $0["postURLString"] as? String ?? "postURLString",
+                    likers: $0["likers"] as? [String] ?? [""]
+                )
+            
+                return post
+            })
+            print("Printing posts \n \(posts) \n")
         }
     }
 
@@ -90,9 +95,7 @@ extension DatabaseManager {
             }
             completion(true)
         }
-        
     }
-        
     
     /// We are not going to save the user password here. It's considered extremely bad practice
     /// Firebase will take care of storing the user password for us
@@ -152,6 +155,12 @@ extension DatabaseManager {
         }
     }
     
+}
+
+
+// MARK: - Get User Info
+
+extension DatabaseManager {
     
     public func getUsername(for email: String, completion: @escaping (String?) -> Void) {
         database.child("users").observeSingleEvent(of: .value) { (snapshot) in
@@ -166,6 +175,68 @@ extension DatabaseManager {
                     return
                 }
             }
+        }
+    }
+    
+    public func getUserInfo(
+        username: String,
+        completion: @escaping (UserInfo?) -> Void
+    ) {
+        let path = "users/\(username)/information"
+        database.child(path).observeSingleEvent(of: .value) { snapshot in
+            guard let userInfoDictionary = snapshot.value as? [String: Any] else {
+                completion(nil)
+                return
+            }
+            print(userInfoDictionary)
+            guard let username = userInfoDictionary["username"] as? String,
+                  let bio = userInfoDictionary["username"] as? String,
+                  let displayName = userInfoDictionary["display_name"] as? String else {
+                print("Failed to convert userInfoDic from getUserInfo")
+                completion(nil)
+                return
+            }
+            let userInfo = UserInfo(username: username, displayName: displayName, bio: bio)
+            completion(userInfo)
+//            completion(userInfo)
+//
+//            let models: [UserInfo] = information.compactMap({
+//                let displayName = $0["displayName"] ?? ""
+//                let userInfo = UserInfo(username: username, displayName: <#T##String#>, bio: <#T##String#>)
+//            })
+            
+        }
+    }
+    
+    public func setUserInfo(
+        userInfo: UserInfo,
+        completion: @escaping (Bool) -> Void
+    ) {
+        guard let data = userInfo.asDictionary() else {
+            completion(false)
+            return
+        }
+//        let username = UserDefaults.standard.
+        
+        let path = "users/\(userInfo.username)/information"
+        
+        print("the user info: \(userInfo)")
+        print("The path : \(path)")
+        
+        database.child(path).setValue(data) { error, ref in
+            completion(error == nil)
+        }
+    }
+    
+    public func isFollowing(targetUsername: String, completion: @escaping (Bool) -> Void) {
+        guard let currentUsername = UserDefaults.standard.string(forKey: "username")?.lowercased() else {
+            completion(false)
+            return
+        }
+        let path = "users/\(targetUsername)/followers/\(currentUsername)"
+        database.child(path).observeSingleEvent(of: .value) { snapshot in
+            // if user exist, then return true, otherwise return false
+            completion(snapshot.exists())
         }
     }
 }

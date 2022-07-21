@@ -12,7 +12,6 @@ class TabBarViewController: UITabBarController {
     
     private var onboardingPresented = false
 
-//    private var tabBarDelegate = TabBarDelegate()
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -22,7 +21,6 @@ class TabBarViewController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        delegate = self
         
         // Check user auth status
         if !onboardingPresented {
@@ -61,7 +59,6 @@ class TabBarViewController: UITabBarController {
                 username: UserDefaults.standard.string(forKey: "username") ?? "me",
                 bio: "Please follow if you want up to date news on politics!",
                 name: (first: "roy", last: "park"),
-//                birthDate: nil,
                 gender: .female,
                 counts: UserCount(followers: 105, following: 105, posts: 105)
             )
@@ -108,11 +105,7 @@ class TabBarViewController: UITabBarController {
         
         tabBar.unselectedItemTintColor = .black
         UITabBar.appearance().tintColor = .label
-//        let appearance = tabBar.standardAppearance
-//        appearance.shadowImage = nil
-//        appearance.shadowColor = nil
-//        tabBar.standardAppearance = appearance
-        
+
         tabBar.shadowImage = UIImage()
         tabBar.backgroundImage = UIImage()
         tabBar.isTranslucent = false
@@ -139,32 +132,3 @@ class TabBarViewController: UITabBarController {
     }
 
 }
-
-
-//extension TabBarViewController: UITabBarControllerDelegate {
-//    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-//
-//        let selectedViewController = tabBarController.selectedViewController
-//
-//        guard let _selectedViewController = selectedViewController else {
-//            return false
-//        }
-//
-//        if viewController == _selectedViewController {
-//            return false
-//        }
-//
-//        guard let controllerIndex = tabBarController.viewControllers?.firstIndex(of: viewController) else {
-//            return true
-//        }
-//
-//        if controllerIndex == 2 {
-//            let newPostVC = NewPostViewController()
-//
-//            let newPostNav = UINavigationController(rootViewController: newPostVC)
-//            _selectedViewController.present(newPostNav, animated: true, completion: nil)
-//            return false
-//        }
-//        return true
-//    }
-//}

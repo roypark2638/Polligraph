@@ -23,12 +23,8 @@
 		974581F6261F0DA300F2C5B1 /* AlertPostCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974581F5261F0DA300F2C5B1 /* AlertPostCommentTableViewCell.swift */; };
 		974581F9261F0DAC00F2C5B1 /* AlertPostCommentLikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974581F8261F0DAC00F2C5B1 /* AlertPostCommentLikeTableViewCell.swift */; };
 		977F238F25F33613002145BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F238E25F33613002145BB /* SettingsViewController.swift */; };
-		977F239325F33628002145BB /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239225F33628002145BB /* AuthViewController.swift */; };
 		977F239625F33636002145BB /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239525F33636002145BB /* AuthManager.swift */; };
-		977F239925F3363E002145BB /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239825F3363E002145BB /* APICaller.swift */; };
-		977F239C25F33645002145BB /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239B25F33645002145BB /* HapticsManager.swift */; };
 		977F239F25F3365A002145BB /* UserPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F239E25F3365A002145BB /* UserPost.swift */; };
-		977F23A225F33680002145BB /* PollPostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F23A125F33680002145BB /* PollPostList.swift */; };
 		9791A70D25F96A4C0088BDAC /* SettingsCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9791A70C25F96A4C0088BDAC /* SettingsCellModel.swift */; };
 		9791A71925F9E30C0088BDAC /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9791A71825F9E30C0088BDAC /* Roboto-Bold.ttf */; };
 		9791A71D25F9E3240088BDAC /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9791A71B25F9E3240088BDAC /* Roboto-Medium.ttf */; };
@@ -44,7 +40,6 @@
 		979E08A325EF92AE00609D4C /* PollPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979E08A225EF92AE00609D4C /* PollPostViewController.swift */; };
 		97A26BD1260745BF000C202F /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A26BD0260745BF000C202F /* TextField.swift */; };
 		97A26BD5260745CA000C202F /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A26BD4260745CA000C202F /* AuthButton.swift */; };
-		97A7EF4225FB37B6006B842B /* FacebookSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A7EF4125FB37B6006B842B /* FacebookSignIn.swift */; };
 		97A7EF4525FB37BE006B842B /* AppleSignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A7EF4425FB37BE006B842B /* AppleSignInManager.swift */; };
 		97BC9EE625F3750E004EDB60 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BC9EE525F3750E004EDB60 /* StorageManager.swift */; };
 		97BC9EE925F37541004EDB60 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BC9EE825F37541004EDB60 /* DatabaseManager.swift */; };
@@ -70,6 +65,7 @@
 		97DBBB1226437B8B0070A7FE /* TextCountLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DBBB1126437B8B0070A7FE /* TextCountLabel.swift */; };
 		97DBBB1426437CCD0070A7FE /* NewPostTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DBBB1326437CCD0070A7FE /* NewPostTitleLabel.swift */; };
 		97DBBB1A26438D160070A7FE /* NewPostTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DBBB1926438D160070A7FE /* NewPostTextView.swift */; };
+		97DBBB1E2644FC720070A7FE /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DBBB1D2644FC720070A7FE /* UserInfo.swift */; };
 		97EA192C260C423900D08BAC /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA192B260C423900D08BAC /* ForgotPasswordViewController.swift */; };
 		97EA1953260DEC5700D08BAC /* ProfileHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA1952260DEC5700D08BAC /* ProfileHeaderCollectionReusableView.swift */; };
 		97EA1958260DED2700D08BAC /* ProfileTabsCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA1957260DED2700D08BAC /* ProfileTabsCollectionReusableView.swift */; };
@@ -94,12 +90,8 @@
 		974581F5261F0DA300F2C5B1 /* AlertPostCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPostCommentTableViewCell.swift; sourceTree = "<group>"; };
 		974581F8261F0DAC00F2C5B1 /* AlertPostCommentLikeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPostCommentLikeTableViewCell.swift; sourceTree = "<group>"; };
 		977F238E25F33613002145BB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		977F239225F33628002145BB /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		977F239525F33636002145BB /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
-		977F239825F3363E002145BB /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
-		977F239B25F33645002145BB /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		977F239E25F3365A002145BB /* UserPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPost.swift; sourceTree = "<group>"; };
-		977F23A125F33680002145BB /* PollPostList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollPostList.swift; sourceTree = "<group>"; };
 		9791A70C25F96A4C0088BDAC /* SettingsCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellModel.swift; sourceTree = "<group>"; };
 		9791A71825F9E30C0088BDAC /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		9791A71B25F9E3240088BDAC /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
@@ -115,7 +107,6 @@
 		979E08A225EF92AE00609D4C /* PollPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollPostViewController.swift; sourceTree = "<group>"; };
 		97A26BD0260745BF000C202F /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		97A26BD4260745CA000C202F /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
-		97A7EF4125FB37B6006B842B /* FacebookSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookSignIn.swift; sourceTree = "<group>"; };
 		97A7EF4425FB37BE006B842B /* AppleSignInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInManager.swift; sourceTree = "<group>"; };
 		97A7EF8025FB5DDB006B842B /* Polligraph.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Polligraph.entitlements; sourceTree = "<group>"; };
 		97BC9EE525F3750E004EDB60 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
@@ -144,6 +135,7 @@
 		97DBBB1126437B8B0070A7FE /* TextCountLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCountLabel.swift; sourceTree = "<group>"; };
 		97DBBB1326437CCD0070A7FE /* NewPostTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostTitleLabel.swift; sourceTree = "<group>"; };
 		97DBBB1926438D160070A7FE /* NewPostTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostTextView.swift; sourceTree = "<group>"; };
+		97DBBB1D2644FC720070A7FE /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		97EA192B260C423900D08BAC /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		97EA1952260DEC5700D08BAC /* ProfileHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		97EA1957260DED2700D08BAC /* ProfileTabsCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabsCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -227,11 +219,8 @@
 			isa = PBXGroup;
 			children = (
 				977F239525F33636002145BB /* AuthManager.swift */,
-				977F239825F3363E002145BB /* APICaller.swift */,
-				977F239B25F33645002145BB /* HapticsManager.swift */,
 				97BC9EE525F3750E004EDB60 /* StorageManager.swift */,
 				97BC9EE825F37541004EDB60 /* DatabaseManager.swift */,
-				97A7EF4125FB37B6006B842B /* FacebookSignIn.swift */,
 				97A7EF4425FB37BE006B842B /* AppleSignInManager.swift */,
 			);
 			path = Managers;
@@ -308,7 +297,6 @@
 		97BC9EEC25F375AD004EDB60 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				977F239225F33628002145BB /* AuthViewController.swift */,
 				97DB1B9825EDEC41008955BC /* OnboardingViewController.swift */,
 				979E085A25EF533F00609D4C /* SignInViewController.swift */,
 				979E085D25EF535000609D4C /* RegistrationViewController.swift */,
@@ -369,12 +357,12 @@
 			isa = PBXGroup;
 			children = (
 				977F239E25F3365A002145BB /* UserPost.swift */,
-				977F23A125F33680002145BB /* PollPostList.swift */,
 				9791A70C25F96A4C0088BDAC /* SettingsCellModel.swift */,
 				974581EA261EACF800F2C5B1 /* Alert.swift */,
 				9716A0572630BA7000365AEE /* AlertCellType.swift */,
 				97C76D0C2638CEB600946EC7 /* NewPostPages.swift */,
 				97C76D102638EEC200946EC7 /* Post.swift */,
+				97DBBB1D2644FC720070A7FE /* UserInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -575,10 +563,9 @@
 				97DBBB0A264379C40070A7FE /* TextPollViewController.swift in Sources */,
 				979E088F25EF906400609D4C /* SearchViewController.swift in Sources */,
 				97EA195B260DED8900D08BAC /* PostCollectionViewCell.swift in Sources */,
+				97DBBB1E2644FC720070A7FE /* UserInfo.swift in Sources */,
 				979E085B25EF533F00609D4C /* SignInViewController.swift in Sources */,
-				977F239325F33628002145BB /* AuthViewController.swift in Sources */,
 				97BC9EE925F37541004EDB60 /* DatabaseManager.swift in Sources */,
-				97A7EF4225FB37B6006B842B /* FacebookSignIn.swift in Sources */,
 				97DBBB0C264379CC0070A7FE /* PhotoPollViewController.swift in Sources */,
 				979E085E25EF535000609D4C /* RegistrationViewController.swift in Sources */,
 				97C76D0F2638DB4900946EC7 /* PhotoCollectionViewCell.swift in Sources */,
@@ -604,7 +591,6 @@
 				97DB1B9525EDEC41008955BC /* AppDelegate.swift in Sources */,
 				97C76D0D2638CEB600946EC7 /* NewPostPages.swift in Sources */,
 				9716A02D262E92CF00365AEE /* InboxViewController.swift in Sources */,
-				977F239925F3363E002145BB /* APICaller.swift in Sources */,
 				9716A0582630BA7000365AEE /* AlertCellType.swift in Sources */,
 				97BC9F0F25F42D26004EDB60 /* TabBarViewController.swift in Sources */,
 				97DB1B9725EDEC41008955BC /* SceneDelegate.swift in Sources */,
@@ -618,8 +604,6 @@
 				979E08A325EF92AE00609D4C /* PollPostViewController.swift in Sources */,
 				97BC9EF325F37A6F004EDB60 /* Extensions.swift in Sources */,
 				9707A80F25F1C5C80099089A /* TabBarDelegate.swift in Sources */,
-				977F239C25F33645002145BB /* HapticsManager.swift in Sources */,
-				977F23A225F33680002145BB /* PollPostList.swift in Sources */,
 				97DBBB1426437CCD0070A7FE /* NewPostTitleLabel.swift in Sources */,
 				97C76D112638EEC200946EC7 /* Post.swift in Sources */,
 				97C76D0B2638CB6300946EC7 /* SelectPictureViewController.swift in Sources */,

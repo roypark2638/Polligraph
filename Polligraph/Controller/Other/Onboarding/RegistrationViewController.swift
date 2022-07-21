@@ -65,14 +65,6 @@ class RegistrationViewController: UIViewController {
         let attributedString4 = NSMutableAttributedString(string: text4, attributes: text4Attribute as [NSAttributedString.Key : Any])
         let attributedString5 = NSMutableAttributedString(string: text5, attributes: text5Attribute as [NSAttributedString.Key : Any])
         
-//        attributedString2.addAttribute(.link, value: "https://www.google.com", range: NSMakeRange(0, attributedString2.length))
-//        attributedString4.addAttribute(.link, value: "https://www.google.com", range: NSMakeRange(0, attributedString4.length))
-//
-//        attributedString2.accessibilityRespondsToUserInteraction = true
-//        let term = UITapGestureRecognizer(target: self, action: #selector(didTouchTerms))
-//        attributedString4.accessibilityRespondsToUserInteraction = true
-//        let privacy = UITapGestureRecognizer(target: self, action: #selector(didTouchPrivacy))
-        
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 3
         
@@ -90,8 +82,6 @@ class RegistrationViewController: UIViewController {
         label.textColor = .label
         return label
     }()
-    
-//    private let acceptLabelButton = AuthButton(type: .plain, title: "By signing up, you agree to our Terms of Service and acknowledge that you have read our Privacy Policy to learn how we collect, use and share your data.")
     
     private let createAccount = AuthButton(type: .black, title: "Create an Account")
     
